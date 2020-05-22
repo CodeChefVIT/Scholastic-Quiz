@@ -6,7 +6,8 @@ function Navbar() {
 	return (
 		<AppBar position="static" className="navbar">
 			<Toolbar>
-				<Typography variant="h6">SCHOLASTIC</Typography>
+				<Typography variant="h6" className="nav-logo"> SCHOLASTIC | </Typography>
+				<Typography varirant="h6" className="nav-head">The Hunger Games Quiz</Typography>
 			</Toolbar>
 		</AppBar>
 	);
