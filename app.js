@@ -1,14 +1,14 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
-const routes = require('./routers/questions') 
+const Questionrouter = require('./routers/questions') 
 const cors = require('cors') 
 
 require('dotenv').config()
 
 app.use(cors()) 
 app.use(express.json()) 
-app.use(routes) 
+app.use(Questionrouter) 
 
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
