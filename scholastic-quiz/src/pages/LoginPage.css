@@ -1,0 +1,20 @@
+.login-page {
+	height: 80vh;
+}
+.login-form {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+}
+
+.form {
+	width: 100%;
+	text-align: center;
+}
+
+.form-input {
+	margin: 10px 0 !important;
+	width: 50% !important;
+}

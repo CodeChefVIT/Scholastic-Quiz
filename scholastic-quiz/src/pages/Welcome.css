@@ -22,6 +22,9 @@
 }
 
 @media screen and (max-width:520px) {
+	.welcome-screen {
+		margin-top: 15vh;
+	}
 	.quiz-image {
 		max-width: 350px;
 	}
