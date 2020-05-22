@@ -26,7 +26,6 @@ function App() {
           <Admin />
         </Route>
       </Switch>
-
     </Router>
   );
 }

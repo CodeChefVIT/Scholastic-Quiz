@@ -5,7 +5,6 @@ import './Navbar.css';
 
 function Navbar() {
 	return (
-		
 			<div className="root">
 				<AppBar position="static" className="navbar">
 					<Toolbar>

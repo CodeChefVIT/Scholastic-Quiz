@@ -1,0 +1,34 @@
+.welcome-screen {
+	margin-top: 5%;
+}
+
+.heading-section {
+	display: flex;
+	justify-content: center;
+}
+
+.quiz-image {
+	max-width: 500px;
+}
+
+.pin-section {
+	display: flex;
+	justify-content: flex-end !important;
+}
+
+.pin-image {
+	width: 300px;
+	margin-right: 10%;
+}
+
+@media screen and (max-width:520px) {
+	.quiz-image {
+		max-width: 350px;
+	}
+}
+
+@media screen and (max-width:360px) {
+	.quiz-image {
+		max-width: 300px;
+	}
+}
