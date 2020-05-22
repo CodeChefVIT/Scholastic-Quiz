@@ -31,6 +31,11 @@
 	background-color: rgb(201, 130, 0) !important;
 }
 
+.link {
+	text-decoration: none;
+	color: white;
+}
+
 @media screen and (max-width: 400px) {
 	.nav-logo {
 		font-size: 1rem !important;
