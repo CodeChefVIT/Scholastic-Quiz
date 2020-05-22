@@ -14,7 +14,7 @@ router.get('/questions',verify, async (req, res) => {
 })
 
 // get one quiz question
-router.get('/questions/:id', async (req, res) => {
+router.get('/questions/:id',verify, async (req, res) => {
     try {
         const _id = req.params.id 
 
@@ -30,7 +30,7 @@ router.get('/questions/:id', async (req, res) => {
 })
 
 // create one quiz question
-router.post('/questions', async (req, res) => {
+router.post('/questions',verify, async (req, res) => {
     try {
         const { description } = req.body
         const { alternatives } = req.body
@@ -47,7 +47,7 @@ router.post('/questions', async (req, res) => {
 })
 
 // update one quiz question
-router.put('/questions/:id', async (req, res) => {
+router.put('/questions/:id',verify, async (req, res) => {
     try {
         const _id = req.params.id 
         const { description, alternatives } = req.body
@@ -72,7 +72,7 @@ router.put('/questions/:id', async (req, res) => {
 })
 
 // delete one quiz question
-router.delete('/questions/:id', async (req, res) => {
+router.delete('/questions/:id',verify, async (req, res) => {
     try {
         const _id = req.params.id 
 
