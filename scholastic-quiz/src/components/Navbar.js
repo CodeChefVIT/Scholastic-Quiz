@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {AppBar, Typography, Toolbar, Button} from "@material-ui/core";
-import {Redirect} from 'react-router';
+import {Redirect, useLocation} from 'react-router';
 import './Navbar.css';
 
 function Navbar() {
 	const [redirect, setRedirect] = useState(false);
+	const location = useLocation().pathname;
 
 	const handleClick = () => {
-		if(!redirect) setRedirect(true);
+		if(location !== "/login") setRedirect(true);
 	}
 
 	return (
