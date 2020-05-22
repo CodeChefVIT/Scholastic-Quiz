@@ -1,9 +1,13 @@
 const express = require('express')
 const router = express.Router()
 const Question = require("../models/questions")
+var middleware=require("../middleware")
+var flash=require('flash')
 
+
+ 
 // get all quiz questions
-router.get('/questions', async (req, res) => {
+router.get('/questions',isLoggedIn, async (req, res) => {
     try {
         const questions = await Question.find()
         return res.status(200).json(questions)
@@ -29,7 +33,7 @@ router.get('/questions/:id', async (req, res) => {
 })
 
 // create one quiz question
-router.post('/questions', async (req, res) => {
+router.post('/questions',isLoggedIn,isAdmin, async (req, res) => {
     try {
         const { description } = req.body
         const { alternatives } = req.body
@@ -83,7 +87,7 @@ router.delete('/questions/:id', async (req, res) => {
             return res.status(204).json()
         }
     } catch (error) {
-        return res.status(500).json({"error":error})
+        return res.status(500).json({"error":error})    
     }
 })
 
@@ -91,6 +95,27 @@ router.delete('/questions/:id', async (req, res) => {
 router.get('/', (req, res) => {
     res.send('H3ll0 W0RlD')
 })
-
+///////////////////////////////////////
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+        res.send("1")
+    }
+    else{
+        res.send("0");
+    }
+    
+   
+    
+}
+function isAdmin(req, res, next) {
+  if(req.user.isAdmin) {
+    next();
+    res.send("1");
+  } else {
+    res.send("0");
+    
+  }
+}
 
 module.exports = router

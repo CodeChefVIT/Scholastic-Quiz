@@ -1,4 +1,4 @@
-var question= require('../models/question')
+var question= require('../models/questions')
 module.exports = {
     isLoggedIn: function(req, res, next){
         if(req.isAuthenticated()){

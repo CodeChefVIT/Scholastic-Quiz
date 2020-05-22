@@ -8,18 +8,23 @@ var User = require("../models/user");
 
 //handle sign up logic
 router.post("/register", function(req, res){
-    var newUser = new User({username: req.body.username});
-    if(req.body.adminCode === process.env.ADMIN_CODE) {
+    var username=req.params.username;
+    var password=req.params.password;
+    ////////////////////////////////////////////////////////////////
+    var newUser = new User({username: req.query.username});
+    if(req.query.adminCode === process.env.ADMIN_CODE) {
       newUser.isAdmin = true;
     }
-    User.register(newUser, req.body.password, function(err, user){
+    User.register(newUser,req.query.password, function(err, user){
         if(err){
             console.log(err);
         }
+        else{
         passport.authenticate("local")(req, res, function(){
-           req.flash("success", "Successfully Signed Up! " + req.body.username);
-        });
-    });console.log("newUser");
+           console.log("success Successfully Signed Up! " + req.query.username);
+        }
+    )};
+    });console.log(newUser);
 });
 
 
