@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
-const routes = require('./routers/questions') 
+const Questionrouter = require('./routers/questions') 
 const cors = require('cors') 
 const passport =require('passport')
 const User= require('./models/user')
@@ -11,7 +11,7 @@ require('dotenv').config()
 
 app.use(cors()) 
 app.use(express.json()) 
-app.use(routes) 
+app.use(Questionrouter) 
 
 app.use(passport.initialize());
 app.use(passport.session());
