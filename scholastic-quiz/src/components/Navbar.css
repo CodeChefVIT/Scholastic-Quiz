@@ -17,6 +17,10 @@
 	white-space: nowrap;
 }
 
+.nav-logo .link {
+	color: red;
+}
+
 .nav-head {
 	font-family: 'Montserrat', sans-serif !important;
 	font-weight: normal !important;
@@ -25,6 +29,7 @@
 
 .login {
 	background-color: orange !important;
+	font-weight: bold !important;
 }
 
 .login:hover {

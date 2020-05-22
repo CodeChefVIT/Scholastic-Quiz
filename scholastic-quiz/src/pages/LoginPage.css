@@ -14,11 +14,21 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	flex-direction: column;
+	
 }
 
 .form {
+	margin-top: 5%;
 	width: 100%;
 	text-align: center;
+}
+
+.login-head {
+	font-family: 'Montserrat', sans-serif !important;
+	font-weight: bold !important;
+	color: orange!important;
 }
 
 .form-input {
