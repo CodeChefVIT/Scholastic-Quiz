@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import {Container, Grid, Hidden} from '@material-ui/core';
+import {Container, Grid, Hidden, Button} from '@material-ui/core';
 import './Welcome.css';
+import PlayMenuBar from '../components/PlayMenuBar';
 
 function Welcome() {
 	const [isLoggedIn, setLoggedIn] = useState(false);
@@ -18,6 +19,8 @@ function Welcome() {
 						</Grid>
 					</Hidden>
 				</Grid>
+				<PlayMenuBar />
+				
 			</div>
 		</Container>
 	)
