@@ -1,7 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
 
+.root {
+	width: 100%;
+	flex-grow: 1;
+}
+
 .navbar {
 	background-color: black !important;
+	display: flex !important;
 }
 
 .nav-logo {
@@ -14,7 +20,15 @@
 .nav-head {
 	font-family: 'Montserrat', sans-serif !important;
 	font-weight: normal !important;
-	width: 300px;
+	flex-grow: 1;
+}
+
+.login {
+	background-color: orange !important;
+}
+
+.login:hover {
+	background-color: rgb(201, 130, 0) !important;
 }
 
 @media screen and (max-width: 400px) {
