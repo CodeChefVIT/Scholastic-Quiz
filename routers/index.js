@@ -17,9 +17,9 @@ router.post("/register", function(req, res){
             console.log(err);
         }
         passport.authenticate("local")(req, res, function(){
-           req.flash("success", "Successfully Signed Up! Nice to meet you " + req.body.username);
+           req.flash("success", "Successfully Signed Up! " + req.body.username);
         });
-    });
+    });console.log("newUser");
 });
 
 
@@ -30,13 +30,14 @@ router.post("/login", passport.authenticate("local",
         failureRedirect: "/login",
         failureFlash: true,
         successFlash: 'Welcome to the quiz!'
-    }), function(req, res){
+    }), function(req, res){ res.send(1);
 });
 
 // logout route
 router.get("/logout", function(req, res){
    req.logout();
    req.flash("success", "See you later!");
+   res.send(1);
 });
 
 

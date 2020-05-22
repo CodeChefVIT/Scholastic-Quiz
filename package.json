@@ -7,14 +7,11 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-<<<<<<< HEAD
     "flash": "^1.1.0",
     "mongoose": "^5.9.15",
     "passport": "^0.4.1"
-=======
     "heroku": "^7.41.1",
     "mongoose": "^5.9.15"
->>>>>>> 7ca700f12c8abfc297edeb7162abe89b70edff33
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
