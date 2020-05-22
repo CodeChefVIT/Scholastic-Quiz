@@ -27,3 +27,42 @@
 .signup-button {
 	background-color: red !important;
 }
+
+.play-menu {
+	margin-top: 5%;
+	text-align: center;
+}
+
+.quiz-button {
+	color: white !important;
+	background-color: transparent !important;
+	width: 70%;
+	transform: skew(-30deg);
+
+	border: 3px solid orange !important;
+}
+
+.quiz-button:hover {
+	background-color: orange !important;
+	transform: scale(1.2) skew(-30deg);
+}
+
+.button-text {
+	transform: skew(30deg);
+	margin: 0;
+	font-family: "Montserrat", sans-serif;
+	font-size: 1.1rem;
+	font-weight: bolder;
+	letter-spacing: 3px;
+}
+
+.onetime-warning {
+	font-family: "Montserrat", sans-serif !important;
+	margin-top: 5% !important;
+}
+
+@media screen and (max-width: 520px) {
+	.play-menu {
+		margin-top: 5%;
+	}
+}

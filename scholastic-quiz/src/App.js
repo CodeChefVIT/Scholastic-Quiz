@@ -6,6 +6,7 @@ import Welcome from './pages/Welcome';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import Admin from './pages/Admin';
+import Quiz from './pages/Quiz';
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
         </Route>
         <Route exact path="/admin">
           <Admin />
+        </Route>
+        <Route exact path="/quiz">
+          <Quiz />
         </Route>
       </Switch>
     </Router>
