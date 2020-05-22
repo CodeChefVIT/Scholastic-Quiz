@@ -7,7 +7,9 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.9.15"
+    "flash": "^1.1.0",
+    "mongoose": "^5.9.15",
+    "passport": "^0.4.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
