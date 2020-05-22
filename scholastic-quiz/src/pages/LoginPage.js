@@ -5,7 +5,7 @@ import { Container, TextField, withStyles, withTheme } from "@material-ui/core";
 const Text = withStyles({
 	root: {
 		'& label': {
-			color: 'white',
+			color: 'black',
 		},
 		'& label.Mui-focused': {
 			color: 'orange',
@@ -14,12 +14,12 @@ const Text = withStyles({
 			borderBottomColor: 'orange',
 		},
 		'& .MuiInputBase-input': {
-			color: 'white',
+			color: 'black',
 		},
 		'& .MuiOutlinedInput-root': {
 			'& fieldset': {
-			  borderColor: 'rgba(255,255,255, 0.3)',
-			  color: 'white',
+			  borderColor: 'rgba(0,0,0, 0.3)',
+			  color: 'black',
 			},
 			'&:hover fieldset': {
 			  borderColor: 'orange',

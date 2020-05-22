@@ -1,12 +1,19 @@
 .login-page {
-	height: 80vh;
-}
-.login-form {
+	height: calc(100vh - 64px);
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	overflow: hidden;
+}
+.login-form {
 	height: 100%;
-	width: 100%;
+	background-color: white;
+	margin: 0 25%;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .form {
@@ -16,5 +23,20 @@
 
 .form-input {
 	margin: 10px 0 !important;
-	width: 50% !important;
+	width: 80% !important;
+}
+
+@media screen and (max-width: 520px) {
+	.MuiContainer-root {
+		padding: 0 !important;
+	}
+	.login-form {
+		margin: 0 0;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.login-page {
+		height: calc(100vh - 56px);
+	}
 }
