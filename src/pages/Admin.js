@@ -1,9 +1,9 @@
 import React from 'react';
 import './Admin.css'
 import {
-	Button, TextField, Dialog,
-	DialogActions, DialogContent,
-	DialogTitle, Radio, RadioGroup,
+	Button, Dialog, DialogActions,
+	DialogContent, DialogTitle, 
+	Radio, RadioGroup,
 	FormControlLabel, FormControl,
 	FormLabel, Grid
 } from '@material-ui/core';
@@ -35,12 +35,12 @@ function Admin() {
 			<div style={{ display: 'flex', height: 'calc(100vh - 116px)', justifyContent: 'center', alignItems: 'center' }}>
 				<Grid container spacing={3} style={{ width: '90%' }}>
 					<Grid item xs={12} sm={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-						<Button  className="login-btn" variant="outlined" className="btn-red" onClick={handleClickOpen}>
+						<Button variant="outlined" className="btn-red" onClick={handleClickOpen}>
 							Add new question
 						</Button>
 					</Grid>
 					<Grid item xs={12} sm={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-						<Button className="btn" variant="outlined" className="btn-blue" onClick={handleClickOpenSub}>
+						<Button variant="outlined" className="btn-blue" onClick={handleClickOpenSub}>
 							Show Submissions
 						</Button>
 					</Grid>
@@ -136,10 +136,10 @@ function Admin() {
 				</Button>
 				</DialogActions>
 			</Dialog>
-			<Dialog PaperProps={{ style: { backgroundColor: '#2d2d2d', color: '#cfcfcf' } }} open={openSub} onClose={handleClose} aria-labelledby="sub-dialog-title">
+			<Dialog PaperProps={{ style: { backgroundColor: '#2d2d2d', color: '#cfcfcf', minWidth: '60%' } }} open={openSub} onClose={handleClose} aria-labelledby="sub-dialog-title">
 				<DialogTitle id="sub-dialog-title">Submissions</DialogTitle>
 				<DialogContent>
-
+					<h2>No submissions yet...</h2>
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={handleClose}  className="btn-orange">

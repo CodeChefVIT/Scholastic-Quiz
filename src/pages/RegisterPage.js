@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import './RegisterPage.css';
-import { Container, TextField, withStyles, Typography, Button } from "@material-ui/core";
+import { Container, Typography, Button } from "@material-ui/core";
 import TextInput from "../components/TextInput";
 
 
 function RegisterPage() {
-	const [name, changeName] = useState("");
-	const [email, changeEmail] = useState("");
+	const [, changeName] = useState("");
+	const [, changeEmail] = useState("");
 
 	const handleNameChange = (event) => {
 		changeName(event.target.value);
@@ -23,7 +23,7 @@ function RegisterPage() {
 	return (
 		<Container className="login-page">
 			<div className="login-form">
-				<img src="hg-pin.png" className="signup-img"></img>
+				<img src="hg-pin.png" className="signup-img" alt="Mokingjay Pin"></img>
 				<Typography variant="h3" color="primary" className="login-head signup-text">Join the force!</Typography><br />
 				<form className="form">
 				<TextInput

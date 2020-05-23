@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import './LoginPage.css';
-import { Container, TextField, withStyles, Typography, Button } from "@material-ui/core";
+import { Container, Typography, Button } from "@material-ui/core";
 import {Link} from "react-router-dom";
 import TextInput from "../components/TextInput";
 
 
 function LoginPage() {
-	const [email, changeEmail] = useState("");
+	const [, changeEmail] = useState("");
 
 	const handleEmailChange = (event) => {
 		changeEmail(event.target.value);

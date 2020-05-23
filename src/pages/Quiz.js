@@ -54,12 +54,12 @@ function Quiz() {
 	}
 
 	const tick = () => {
+		var st = seconds;
 		var sr = seconds;
 		if(sr > 0){
-			var st = sr - 1;
+			st--;
 		}
 		else{
-			var st = sr;
 			timesUp();
 		}
 		seconds = st;
