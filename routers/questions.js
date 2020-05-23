@@ -70,6 +70,7 @@ router.put('/questions/:id',verify,adminAccess, async (req, res) => {
         }else{
             question.description = description
             question.alternatives = alternatives
+            question.correct_answer = correct_answer
             await question.save()
             return res.status(200).json(question)
         }
@@ -95,63 +96,24 @@ router.delete('/questions/:id',verify,adminAccess, async (req, res) => {
     }
 })
 
-router.post('/answer/:id/:option',verify,async (req,res)=>{
-    const user=req.user
-    var option=req.params.option
-    MongoClient.connect(process.env.DATABASE_URL, function(err, db) {
-        var a="what is the result of 2+4";
-        if (err) throw err;
-        var dbo = db.db("main");
+router.put('/answer',verify,async (req,res)=>{
+    try{
+        const option = req.query.option
+        const _id = req.query.id
+        var user = req.user.user
+        console.log(user)
+        let question  = await Question.findOne({_id})
+        console.log(question)
 
- var ObjectId = require('mongodb').ObjectId; 
- var id = req.params.id;       
- var o_id = new ObjectId(id);
- ///// this is a test 
-
- dbo.collection("questions").findOne({'description': a}, function(error,doc) {
- if (error) {
-   callback(error);
- } else {
-    console.log(doc)
- }
-});
-
-
-
-
-
- /////
-console.log(o_id)
-
-         var query = { '_id': o_id   
-                    };
-        dbo.collection("questions").find(query).toArray(function(err, result) {
-          if (err) throw err;
-          else{
-           if(result.correct_answer===option){
-               user.user.score=user.user.score+1;
-           }
-            res.send(result);
+        if(question.correct_answer==option){
+            user.score +=1
         }
-          console.log(user.user.score);
-        console.log(result);
-          db.close();
-        });
-      });
-
-    // if(option === question.correct_answer){
-    //     user.score +=1;
-    //     console.log(user.score)
-    // }
-    // user.score = user.score
-
-    // try{
-    //     res.status(200).send(user.score)
-    // }catch(err){
-    //     res.status(400).send(err)
-    // }
-    
- 
+        console.log(user.score)
+        await user.save()
+        res.send(user)
+    }catch(err){
+        res.sendStatus(500)
+    }
 })
 
 // this one is just a test
