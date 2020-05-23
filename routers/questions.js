@@ -38,10 +38,12 @@ router.post('/questions',verify,adminAccess, async (req, res) => {
     try {
         const { description } = req.body
         const { alternatives } = req.body
+        const {correct_answer} = req.body
 
         const question = await Question.create({
             description,
-            alternatives
+            alternatives,
+            correct_answer
         })
 
         return res.status(201).json(question)
@@ -54,14 +56,15 @@ router.post('/questions',verify,adminAccess, async (req, res) => {
 router.put('/questions/:id',verify,adminAccess, async (req, res) => {
     try {
         const _id = req.params.id 
-        const { description, alternatives } = req.body
+        const { description, alternatives,correct_answer } = req.body
 
         let question = await Question.findOne({_id})
 
         if(!question){
             question = await Question.create({
                 description,
-                alternatives
+                alternatives,
+                correct_answer
             })    
             return res.status(201).json(question)
         }else{
