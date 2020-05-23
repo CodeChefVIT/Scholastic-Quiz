@@ -2,6 +2,9 @@ const express = require('express')
 const router = express.Router()
 const Question = require("../models/questions")
 const verify = require('./middleware')
+var mongoose=require('mongoose')
+var MongoClient = require('mongodb').MongoClient;
+
 const adminAccess = require('./adminMiddleware')
 
 // get all quiz questions
@@ -90,14 +93,16 @@ router.delete('/questions/:id',verify,adminAccess, async (req, res) => {
     }
 })
 
-router.post('/answer/:id/:option',async (req,res)=>{
+router.post('/answer/:id/:option',verify,async (req,res)=>{
     const user=req.user
     option=req.params.option
-    MongoClient.connect(DATABASE_URL, function(err, db) {
+    MongoClient.connect(process.env.DATABASE_URL, function(err, db) {
+        var a="what is the result of 2+4";
         if (err) throw err;
         var dbo = db.db("main");
-        var query = { _id: req.params.id,       //id for question
-                        //id for the option
+         var query = { //_id: req.params.id,   //id for question
+                        description:a          
+            //id for the option
                     };
         dbo.collection("questions").find(query).toArray(function(err, result) {
           if (err) throw err;
@@ -107,8 +112,8 @@ router.post('/answer/:id/:option',async (req,res)=>{
            }
             res.send(result);
         }
-          console.log(user.score);
-          res.send(result);
+          console.log(user.user.score);
+        console.log(result);
           db.close();
         });
       });
