@@ -4,7 +4,6 @@ const Question = require("../models/questions")
 const verify = require('./middleware')
 var mongoose=require('mongoose')
 var MongoClient = require('mongodb').MongoClient;
-
 const adminAccess = require('./adminMiddleware')
 
 // get all quiz questions
@@ -93,30 +92,46 @@ router.delete('/questions/:id',verify,adminAccess, async (req, res) => {
     }
 })
 
-router.post('/answer/:id/:option',async (req,res)=>{
+router.post('/answer',verify,async (req,res)=>{
     const user=req.user
-    option=req.params.option
-    MongoClient.connect(process.env.DATABASE_URL, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db("main");
-        var query = { _id: req.params.id,       //id for question
-                        //id for the option
-                    };
-        dbo.collection("questions").find(query).toArray(function(err, result) {
-          if (err) throw err;
-          else{
-           if(result.correct_answer===option){
-               user.score=user.score+1;
-           }
-            res.send(result);
-        }
-          console.log(user.score);
-          res.send(result);
-          db.close();
-        });
-      });
+    option=req.query.option
+    _id = req.query.id
 
-    console.log("get");
+    var question = await Question.findOne({_id})
+
+    if(option === question.correct_answer){
+        user.score +=1;
+        console.log(user.score)
+    }
+    user.score = user.score
+
+    try{
+        res.status(200).send(user.score)
+    }catch(err){
+        res.status(400).send(err)
+    }
+    
+    // MongoClient.connect(process.env.DATABASE_URL, function(err, db) {
+    //     if (err) throw err;
+    //     var dbo = db.db("main");
+    //     var query = { _id: req.params.id,       //id for question
+    //                     //id for the option
+    //                 };
+    //     dbo.collection("questions").find(query).toArray(function(err, result) {
+    //       if (err) throw err;
+    //       else{
+    //        if(result.correct_answer===option){
+    //            user.score=user.score+1;
+    //        }
+    //         res.send(result);
+    //     }
+    //       console.log(user.score);
+    //       res.send(result);
+    //       db.close();
+    //     });
+    //   });
+
+    // console.log("get");
 })
 
 // this one is just a test
