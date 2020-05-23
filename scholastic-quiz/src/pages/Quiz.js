@@ -19,8 +19,8 @@ function Quiz() {
 	  if(currentStep !==1){
 		return (
 		  <button 
-		  className="quiz-button" onClick={_prev}>
-		  Previous
+		  className="quiz-btn prev-button" onClick={_prev}>
+		  <p>Previous</p>
 		  </button>
 		)
 	  }
@@ -31,15 +31,15 @@ function Quiz() {
 	  if(currentStep < 15){
 		return (
 		  <button 
-			className="quiz-button" onClick={_next}>
-		  Next
+			className="quiz-btn next-button" onClick={_next}>
+		  <p>Next</p>
 		  </button>        
 		)
 	  } else if(currentStep === 15){
 		return (
 			<button 
-			  className="quiz-button"  onClick={handleSubmit}>
-			Submit
+			  className="quiz-btn submit-button"  onClick={handleSubmit}>
+			<p>Submit</p>
 			</button>        
 		  )
 	  }
