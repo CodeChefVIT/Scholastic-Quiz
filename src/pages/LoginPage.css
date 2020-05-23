@@ -35,7 +35,7 @@
 	width: 80% !important;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 768px) {
 	.MuiContainer-root {
 		padding: 0 !important;
 	}
@@ -71,6 +71,7 @@
 	text-align: center;
 	margin-top: 5%;
 	font-family: "Montserrat", sans-serif !important;
+	text-align: center !important;
 }
 
 .register-link:hover {

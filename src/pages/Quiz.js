@@ -57,7 +57,7 @@ function Quiz() {
 					<Grid item xs={6} style={{display: 'flex', justifyContent: 'center', width: '100%'}}>
 						{previousButton()}
 					</Grid>
-					<Grid item xs={6}style={{display: 'flex', justifyContent: 'center', width: '100%'}}>
+					<Grid item xs={6} style={{display: 'flex', justifyContent: 'center', width: '100%'}}>
 						{nextButton()}
 					</Grid>
 				</Grid>

@@ -1,26 +1,18 @@
-.welcome-page {
-	height: calc(100vh - 64px);
-
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.welcome-screen {
+	align-self: center !important;
+	min-width: 90% !important
 }
 
-@media screen and (max-width:600px) {
-	.welcome-page {
-		height: calc(100vh - 56px);
-	}
+.welcome-page {
+	height: calc(100vh - 64px) !important; 
+	display: flex !important; 
+	justify-content: center !important;
 }
 
 .heading-section {
 	display: flex;
 	justify-content: center;
-	align-items: center;
-}
-
-div .MuiGrid-root {
-	padding-right: 0 !important;
-	padding-left: 0 !important;
+	width: 90% !important;
 }
 
 .quiz-image {
@@ -38,9 +30,6 @@ div .MuiGrid-root {
 }
 
 @media screen and (max-width:520px) {
-	.welcome-screen {
-		padding-top: 15vh;
-	}
 	.quiz-image {
 		max-width: 350px;
 	}
@@ -48,6 +37,6 @@ div .MuiGrid-root {
 
 @media screen and (max-width:360px) {
 	.quiz-image {
-		max-width: 300px;
+		max-width: 85%;
 	}
 }
