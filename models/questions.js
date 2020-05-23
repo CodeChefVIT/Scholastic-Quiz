@@ -1,7 +1,10 @@
 const mongoose = require('mongoose')
 
 const questionSchema = new mongoose.Schema({
-    description: String,
+    description:{
+        type: String,
+        required:true
+    },
     alternatives: [
         {
             text: {
@@ -10,10 +13,7 @@ const questionSchema = new mongoose.Schema({
             },
         }
     ],
-    correct_answer:{
-        type : String,
-    
-    }
+    correct_answer:String
 })
 
 module.exports = mongoose.model('question', questionSchema)
