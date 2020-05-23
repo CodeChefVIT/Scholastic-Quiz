@@ -41,22 +41,23 @@ router.post('/register',async (req,res)=>{
     }
 })
 
-router.post('/login',async (req,res)=>{
-
+router.post('/login',async (req,res,next)=>{
+    
     //check if user exists
-    const user = await User.findOne({email:req.body.email})
+    const user = await User.findOne({email:req.query.email})
     if(!user) return res.status(404).send('Email or password is incorrect')
 
     //check password
-    const validPass = await bcrypt.compare(req.body.password,user.password)
+    const validPass = await bcrypt.compare(req.query.password,user.password)
     if(!validPass) return res.status(400).send('invalid pass')
-
+   
     //Create and assign JWT
 
     const token = JWT.sign({user},process.env.JWT_TOKEN)
     res.header('auth-token',token).send(token)
 
     res.send({_id:user._id,name:user.name,email:user.email})
+
 })
 
 module.exports = router
