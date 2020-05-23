@@ -31,7 +31,7 @@ function PlayMenuBar() {
 						<Link to="/quiz" className="link">
 							<Button size="large" className="quiz-button"><p class="button-text">Start Quiz</p></Button>
 						</Link>
-						<Typography variant="h6" className="onetime-warning">NOTE: You can only take the quiz ones!</Typography>
+						<Typography variant="h6" className="onetime-warning">NOTE: You can only take the quiz once!</Typography>
 					</div>
 				</Grid>
 			</Grid>
