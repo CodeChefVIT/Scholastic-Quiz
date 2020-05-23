@@ -13,6 +13,19 @@
 	letter-spacing: 2px;
 }
 
+.quiz-btn:focus{
+	outline: 0 !important;
+	background-color: orange !important;
+	transform: skew(-30deg);
+}
+
+@media only screen and (max-width: 400px){
+	.quiz-btn p {
+		font-size: 0.7rem;
+
+	}
+}
+
 .next-button {
 	transform: skew(-30deg) !important;
 }
