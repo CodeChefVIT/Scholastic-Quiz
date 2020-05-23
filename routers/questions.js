@@ -2,13 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Question = require("../models/questions")
 const verify = require('./middleware')
-<<<<<<< HEAD
-var mongoose=require('mongoose')
-var MongoClient = require('mongodb').MongoClient;
-DATABASE_URL= "mongodb+srv://jugalbhatt123:ccProject@cluster0-yb5lv.mongodb.net/Main?retryWrites=true&w=majority"
-=======
 const adminAccess = require('./adminMiddleware')
->>>>>>> e8e2e850cd60eec719073492e9b75ec4c2d38c94
 
 // get all quiz questions
 router.get('/questions',verify, async (req, res) => {
