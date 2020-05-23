@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Question = require("../models/questions")
 const verify = require('./middleware')
+const adminAccess = require('./adminMiddleware')
 
 // get all quiz questions
 router.get('/questions',verify, async (req, res) => {
@@ -31,7 +32,7 @@ router.get('/questions/:id',verify, async (req, res) => {
 })
 
 // create one quiz question
-router.post('/questions',verify, async (req, res) => {
+router.post('/questions',verify,adminAccess, async (req, res) => {
     try {
         const { description } = req.body
         const { alternatives } = req.body
@@ -48,7 +49,7 @@ router.post('/questions',verify, async (req, res) => {
 })
 
 // update one quiz question
-router.put('/questions/:id',verify, async (req, res) => {
+router.put('/questions/:id',verify,adminAccess, async (req, res) => {
     try {
         const _id = req.params.id 
         const { description, alternatives } = req.body
@@ -73,7 +74,7 @@ router.put('/questions/:id',verify, async (req, res) => {
 })
 
 // delete one quiz question
-router.delete('/questions/:id',verify, async (req, res) => {
+router.delete('/questions/:id',verify,adminAccess, async (req, res) => {
     try {
         const _id = req.params.id 
 
@@ -93,6 +94,8 @@ router.delete('/questions/:id',verify, async (req, res) => {
 router.get('/', (req, res) => {
     res.send('H3ll0 W0RlD')
 })
+
+
 
 
 module.exports = router
