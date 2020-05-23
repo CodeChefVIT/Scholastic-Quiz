@@ -79,6 +79,9 @@ function LoginPage() {
 					changeName(response.data.name);
 					setLoggedIn(true);
 					setDidLogin(true);
+
+					localStorage.setItem('userLoggedIn', true);
+					localStorage.setItem('name', response.data.name);
 				}
 			} catch(error) {
 				console.log(error);

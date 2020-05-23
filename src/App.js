@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Navbar from './components/Navbar'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -15,6 +15,19 @@ function App() {
 	const [authToken, setAuthToken] = useState(null);
 	const [isLoggedIn, setLoggedIn] = useState(false);
 	const [name, changeName] = useState(null);
+
+	useEffect(() => {
+		const userLoggedIn = localStorage.getItem('userLoggedIn');
+		if(userLoggedIn === null) {
+			localStorage.setItem('userLoggedIn', false);
+		} else {
+			if(userLoggedIn === "true") {
+				const localName = localStorage.getItem('name');
+				setLoggedIn(true);
+				changeName(localName);
+			}
+		}
+	}, []);
 
 	let info = {
 		name:name,
