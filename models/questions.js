@@ -10,9 +10,13 @@ const questionSchema = new mongoose.Schema({
             text: {
                 type: String,
                 required: true
-               }       }
+               }       
+        }
     ],
-    correct_answer:String,
+    correct_answer:{
+        type: String,
+        required:true
+    }
     
 })
 
