@@ -94,20 +94,39 @@ router.delete('/questions/:id',verify,adminAccess, async (req, res) => {
 
 router.post('/answer/:id/:option',verify,async (req,res)=>{
     const user=req.user
-    option=req.params.option
+    var option=req.params.option
     MongoClient.connect(process.env.DATABASE_URL, function(err, db) {
         var a="what is the result of 2+4";
         if (err) throw err;
         var dbo = db.db("main");
-         var query = { //_id: req.params.id,   //id for question
-                        description:a          
-            //id for the option
+
+ var ObjectId = require('mongodb').ObjectId; 
+ var id = req.params.id;       
+ var o_id = new ObjectId(id);
+ ///// this is a test 
+
+ dbo.collection("questions").findOne({'description': a}, function(error,doc) {
+ if (error) {
+   callback(error);
+ } else {
+    console.log(doc)
+ }
+});
+
+
+
+
+
+ /////
+console.log(o_id)
+
+         var query = { '_id': o_id   
                     };
         dbo.collection("questions").find(query).toArray(function(err, result) {
           if (err) throw err;
           else{
            if(result.correct_answer===option){
-               user.score=user.score+1;
+               user.user.score=user.user.score+1;
            }
             res.send(result);
         }

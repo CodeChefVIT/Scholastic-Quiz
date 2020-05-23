@@ -12,7 +12,8 @@ const questionSchema = new mongoose.Schema({
                 required: true
                }       }
     ],
-    correct_answer:String
+    correct_answer:String,
+    
 })
 
 module.exports = mongoose.model('question', questionSchema)
