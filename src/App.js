@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -9,35 +9,51 @@ import Admin from './pages/Admin';
 import Quiz from './pages/Quiz';
 import ErrorPage from './pages/ErrorPage';
 import AdminRegister from './pages/AdminRegister';
+import InfoContext from './context/InfoContext';
 
 function App() {
+	const [authToken, setAuthToken] = useState(null);
+	const [isLoggedIn, setLoggedIn] = useState(false);
+	const [name, changeName] = useState(null);
+
+	let info = {
+		name:name,
+		changeName: changeName,
+		authToken: authToken,
+		setAuthToken: setAuthToken,
+		isLoggedIn: isLoggedIn,
+		setLoggedIn: setLoggedIn
+	}
+
 	return (
-		<Router>
-			<Navbar />
-			<Switch>
-				<Route exact path="/">
-					<Welcome />
-				</Route>
-				<Route exact path="/login">
-					<LoginPage />
-				</Route>
-				<Route exact path="/register">
-					<RegisterPage />
-				</Route>
-				<Route exact path="/admin">
-					<Admin />
-				</Route>
-				<Route exact path="/quiz">
-					<Quiz />
-				</Route>
-				<Route exact path="/adminRegister">
-					<AdminRegister />
-				</Route>
-				<Route path='*'>
-					<ErrorPage />
-				</Route>
-			</Switch>
-		</Router>
+		<InfoContext.Provider value={info}>
+			<Router>
+				<Navbar />
+				<Switch>
+					<Route exact path="/">
+						<Welcome />
+					</Route>
+					<Route exact path="/login">
+						<LoginPage />
+					</Route>
+					<Route exact path="/register">
+						<RegisterPage />
+					</Route>
+					<Route exact path="/admin">
+						<Admin />
+					</Route>
+					<Route exact path="/quiz">
+						<Quiz />
+					</Route>
+					<Route exact path="/adminRegister">
+						<AdminRegister />
+					</Route>
+					<Route path='*'>
+						<ErrorPage />
+					</Route>
+				</Switch>
+			</Router>
+		</InfoContext.Provider>
 	);
 }
 

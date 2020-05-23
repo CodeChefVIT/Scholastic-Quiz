@@ -41,6 +41,12 @@
 	color: white;
 }
 
+.nav-user {
+	font-family: 'Montserrat', sans-serif !important;
+	font-size: 1rem !important;
+	margin: 0;
+}
+
 @media screen and (max-width: 400px) {
 	.nav-logo {
 		font-size: 1rem !important;
@@ -48,6 +54,10 @@
 	}
 
 	.nav-head {
+		font-size: 0.8rem !important;
+	}
+
+	.nav-user {
 		font-size: 0.8rem !important;
 	}
 }

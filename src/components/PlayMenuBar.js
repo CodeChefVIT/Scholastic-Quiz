@@ -1,10 +1,11 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import {Grid, Button, Typography} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import './PlayMenuBar.css';
+import InfoContext from '../context/InfoContext';
 
 function PlayMenuBar() {
-	const [isLoggedIn, setLoggedIn] = useState(true);
+	const {isLoggedIn} = useContext(InfoContext);
 
 	if(!isLoggedIn) {
 		return (
@@ -29,7 +30,7 @@ function PlayMenuBar() {
 				<Grid item xs={12} md={6}>
 					<div className="play-menu">
 						<Link to="/quiz" className="link">
-							<Button size="large" className="quiz-button"><p class="button-text">Start Quiz</p></Button>
+							<Button size="large" className="quiz-button"><p className="button-text">Start Quiz</p></Button>
 						</Link>
 						<Typography variant="h6" className="onetime-warning">NOTE: You can only take the quiz once!</Typography>
 					</div>

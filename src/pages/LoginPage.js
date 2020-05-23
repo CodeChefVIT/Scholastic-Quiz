@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './LoginPage.css';
 import { Container, Typography, Button } from "@material-ui/core";
+import {Alert} from "@material-ui/lab";
 import {Link} from "react-router-dom";
 import TextInput from "../components/TextInput";
 import * as EmailValidator from 'email-validator';
+import InfoContext from '../context/InfoContext';
+import axios from "axios";
 
 
 function LoginPage() {
@@ -13,6 +16,9 @@ function LoginPage() {
 	const [password, changePassword] = useState("");
 	const [passwordError, setPasswordError] = useState("");
 	const [passwordChanged, setPasswordChanged] = useState(false);
+	const [didLogin, setDidLogin] = useState(false);
+
+	const {isLoggedIn, setLoggedIn, changeName} = useContext(InfoContext);
 
 	const mailErrorText = "Email cannot be empty";
 	const passwordErrorText = "Password cannot be empty";
@@ -35,7 +41,7 @@ function LoginPage() {
 		else setPasswordError("");
 	}, [email, password]);
 
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
 
 		setEmailChanged(true);
@@ -59,7 +65,24 @@ function LoginPage() {
 		}
 
 		if(!errors && emailError.length === 0 && passwordError.length === 0) {
-			alert("Logging in!");
+			let url = `https://scholastic-quiz-app.herokuapp.com/api/user/login?
+						email=${email}&password=${password}`;
+			
+			let response = null;
+			try {
+				await axios.post(url).then(res => {
+					response = res;
+				});
+
+				if(response.status === 200) {
+					console.log(response);
+					changeName(response.data.name);
+					setLoggedIn(true);
+					setDidLogin(true);
+				}
+			} catch(error) {
+				console.log(error);
+			}
 		}
 	}
 
@@ -67,6 +90,7 @@ function LoginPage() {
 		<Container className="login-page">
 			<div className="login-form">
 				<Typography variant="h3" color="primary" className="login-head">Login Now!</Typography><br />
+				{didLogin === true? <Alert severity="success" color="warning">Succesfully Logged In!</Alert>: null}
 				<form className="form">
 					<TextInput
 						error={emailChanged? (emailError.length === 0? false: true): false}
