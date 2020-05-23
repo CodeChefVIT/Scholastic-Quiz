@@ -4,7 +4,6 @@ const Question = require("../models/questions")
 const verify = require('./middleware')
 var mongoose=require('mongoose')
 var MongoClient = require('mongodb').MongoClient;
-
 const adminAccess = require('./adminMiddleware')
 
 // get all quiz questions
@@ -118,7 +117,19 @@ router.post('/answer/:id/:option',verify,async (req,res)=>{
         });
       });
 
-    console.log("get");
+    // if(option === question.correct_answer){
+    //     user.score +=1;
+    //     console.log(user.score)
+    // }
+    // user.score = user.score
+
+    // try{
+    //     res.status(200).send(user.score)
+    // }catch(err){
+    //     res.status(400).send(err)
+    // }
+    
+ 
 })
 
 // this one is just a test
