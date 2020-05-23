@@ -1,8 +1,45 @@
-.btn {
-    /* width: 100% !important; */
-    /* margin: 10px 10px !important; */
-    background-color: rgba(109, 168, 236, 0.7) !important;
-    color: #fff !important;
+
+
+.btn-red {
+	min-width: 120px;
+    color: white !important;
+	border: 2px solid red !important;
+	margin-top: 5% !important;
+	font-family: "Montserrat", sans-serif !important;
+	font-weight: bold !important;
+	letter-spacing: 3px !important;
+}
+
+.btn-red:hover {
+	background-color: red !important;
+}
+
+.btn-blue {
+	min-width: 120px;
+    color: white !important;
+	border: 2px solid rgb(32, 121, 204) !important;
+	margin-top: 5% !important;
+	font-family: "Montserrat", sans-serif !important;
+	font-weight: bold !important;
+	letter-spacing: 3px !important;
+}
+
+.btn-blue:hover {
+	background-color: rgb(32, 121, 204) !important;
+}
+
+.btn-orange {
+	min-width: 120px;
+    color: white !important;
+	border: 2px solid orange !important;
+	margin-top: 5% !important;
+	font-family: "Montserrat", sans-serif !important;
+	font-weight: bold !important;
+	letter-spacing: 3px !important;
+}
+
+.btn-orange:hover {
+	background-color: orange !important;
 }
 
 .bg{

@@ -7,6 +7,7 @@ import {
 	FormControlLabel, FormControl,
 	FormLabel, Grid
 } from '@material-ui/core';
+import TextInput from "../components/TextInput";
 
 function Admin() {
 	const [open, setOpen] = React.useState(false);
@@ -34,14 +35,14 @@ function Admin() {
 			<div style={{ display: 'flex', height: 'calc(100vh - 116px)', justifyContent: 'center', alignItems: 'center' }}>
 				<Grid container spacing={3} style={{ width: '90%' }}>
 					<Grid item xs={12} sm={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-						<Button className="btn" variant="outlined" color="primary" onClick={handleClickOpen}>
+						<Button  className="login-btn" variant="outlined" className="btn-red" onClick={handleClickOpen}>
 							Add new question
-					</Button>
+						</Button>
 					</Grid>
 					<Grid item xs={12} sm={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-						<Button className="btn" variant="outlined" color="primary" onClick={handleClickOpenSub}>
+						<Button className="btn" variant="outlined" className="btn-blue" onClick={handleClickOpenSub}>
 							Show Submissions
-					</Button>
+						</Button>
 					</Grid>
 				</Grid>
 
@@ -50,7 +51,7 @@ function Admin() {
 			<Dialog PaperProps={{ style: { backgroundColor: '#2d2d2d', color: '#cfcfcf' } }} open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
 				<DialogTitle id="form-dialog-title">Add Question</DialogTitle>
 				<DialogContent>
-					<TextField
+					<TextInput
 						autoFocus
 						InputProps={{
 							style: {
@@ -62,8 +63,9 @@ function Admin() {
 						label="Question"
 						type="text"
 						fullWidth
+						variant="outlined"
 					/>
-					<TextField
+					<TextInput
 						InputProps={{
 							style: {
 								color: "#cdcdcd"
@@ -74,8 +76,9 @@ function Admin() {
 						label="Option 1"
 						type="text"
 						fullWidth
+						variant="outlined"
 					/>
-					<TextField
+					<TextInput
 						InputProps={{
 							style: {
 								color: "#cdcdcd"
@@ -86,8 +89,9 @@ function Admin() {
 						label="Option 2"
 						type="text"
 						fullWidth
+						variant="outlined"
 					/>
-					<TextField
+					<TextInput
 						InputProps={{
 							style: {
 								color: "#cdcdcd"
@@ -98,8 +102,9 @@ function Admin() {
 						label="Option 3"
 						type="text"
 						fullWidth
+						variant="outlined"
 					/>
-					<TextField
+					<TextInput
 						InputProps={{
 							style: {
 								color: "#cdcdcd"
@@ -110,22 +115,23 @@ function Admin() {
 						label="Option 4"
 						type="text"
 						fullWidth
+						variant="outlined"
 					/>
 					<FormControl component="fieldset">
-						<FormLabel style={{ color: '#3e4da4', paddingTop: 20 }} component="legend">Correct Option</FormLabel>
+						<FormLabel style={{ color: '#ffa400', paddingTop: 20 }} component="legend">Correct Option</FormLabel>
 						<RadioGroup aria-label="correct-choice" value={value} onChange={handleChange}>
-							<FormControlLabel value="op1" control={<Radio />} label="Option 1" />
-							<FormControlLabel value="op2" control={<Radio />} label="Option 2" />
-							<FormControlLabel value="op3" control={<Radio />} label="Option 3" />
-							<FormControlLabel value="op4" control={<Radio />} label="Option 4" />
+							<FormControlLabel value="op1" control={<Radio style={{color: '#ffa400'}} />} label="Option 1" />
+							<FormControlLabel value="op2" control={<Radio style={{color: '#ffa400'}} />} label="Option 2" />
+							<FormControlLabel value="op3" control={<Radio style={{color: '#ffa400'}} />} label="Option 3" />
+							<FormControlLabel value="op4" control={<Radio style={{color: '#ffa400'}} />} label="Option 4" />
 						</RadioGroup>
 					</FormControl>
 				</DialogContent>
 				<DialogActions>
-					<Button onClick={handleClose} color="primary">
+					<Button onClick={handleClose} className="btn-orange">
 						Cancel
 				</Button>
-					<Button onClick={handleClose} color="primary">
+					<Button onClick={handleClose} className="btn-orange">
 						Submit
 				</Button>
 				</DialogActions>
@@ -136,12 +142,12 @@ function Admin() {
 
 				</DialogContent>
 				<DialogActions>
-					<Button onClick={handleClose} color="primary">
+					<Button onClick={handleClose}  className="btn-orange">
 						Cancel
-				</Button>
-					<Button onClick={handleClose} color="primary">
+					</Button>
+					<Button onClick={handleClose} className="btn-orange">
 						Submit
-				</Button>
+					</Button>
 				</DialogActions>
 			</Dialog>
 
