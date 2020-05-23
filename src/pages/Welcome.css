@@ -1,10 +1,26 @@
-.welcome-screen {
-	margin-top: 5%;
+.welcome-page {
+	height: calc(100vh - 64px);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+@media screen and (max-width:600px) {
+	.welcome-page {
+		height: calc(100vh - 56px);
+	}
 }
 
 .heading-section {
 	display: flex;
 	justify-content: center;
+	align-items: center;
+}
+
+div .MuiGrid-root {
+	padding-right: 0 !important;
+	padding-left: 0 !important;
 }
 
 .quiz-image {
@@ -23,7 +39,7 @@
 
 @media screen and (max-width:520px) {
 	.welcome-screen {
-		margin-top: 15vh;
+		padding-top: 15vh;
 	}
 	.quiz-image {
 		max-width: 350px;
