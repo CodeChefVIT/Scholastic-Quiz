@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import './PlayMenuBar.css';
 
 function PlayMenuBar() {
-	const [isLoggedIn, setLoggedIn] = useState(false);
+	const [isLoggedIn, setLoggedIn] = useState(true);
 
 	if(!isLoggedIn) {
 		return (

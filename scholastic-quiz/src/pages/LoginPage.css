@@ -76,3 +76,9 @@
 .register-link:hover {
 	text-decoration: underline;
 }
+
+@media screen and (max-width: 480px) {
+	.register-link {
+		font-size: 0.8rem;
+	}
+}

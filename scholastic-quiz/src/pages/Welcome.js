@@ -4,8 +4,6 @@ import './Welcome.css';
 import PlayMenuBar from '../components/PlayMenuBar';
 
 function Welcome() {
-	const [isLoggedIn, setLoggedIn] = useState(false);
-
 	return (
 		<Container>
 			<div className="welcome-screen">

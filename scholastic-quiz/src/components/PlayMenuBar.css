@@ -64,4 +64,8 @@
 	.play-menu {
 		margin-top: 5%;
 	}
+
+	.onetime-warning {
+		font-size: 1rem !important;
+	}
 }
