@@ -51,6 +51,10 @@ function RegisterPage() {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
+		setNameChanged(true);
+		setPasswordChanged(true);
+		setEmailChanged(true);
+
 		let errors = false;
 
 		if(name === "") {
@@ -121,7 +125,7 @@ function RegisterPage() {
 					<br />
 					<TextInput
 						error={passwordChanged? (passwordError.length === 0? false: true): false}
-						helperText={passwordChanged? (passwordError.length === 0? passwordError: null): null}
+						helperText={passwordChanged? (passwordError.length === 0? null: passwordError): null}
 						id="password"
 						type="password"
 						label="Password"
