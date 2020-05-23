@@ -5,13 +5,15 @@ import TextInput from "../components/TextInput";
 import * as EmailValidator from "email-validator";
 
 
-function RegisterPage() {
+function AdminRegister() {
 	const [name, changeName] = useState(" ");
 	const [nameError, setNameError] = useState("");
 	const [email, changeEmail] = useState(" ");
 	const [emailError, setEmailError] = useState("");
 	const [password, changePassword] = useState(" ");
 	const [passwordError, setPasswordError] = useState("");
+	const [adminCode, setAdminCode] = useState(" ");
+	const [adminCodeError, setAdminCodeError] = useState("");
 
 	const emptyText = (type) =>  `${type} cannot be empty`;
 
@@ -27,6 +29,10 @@ function RegisterPage() {
 		changePassword(event.target.value);
 	}
 
+	const handleAdminCode = (event) => {
+		setAdminCode(event.target.value);
+	}
+
 	useEffect(() => {
 		if(name.length === 0) setNameError(emptyText("Name"));
 		else setNameError("");
@@ -37,7 +43,10 @@ function RegisterPage() {
 		if(password.length === 0) setPasswordError(emptyText("Password"));
 		else setPasswordError("");
 
-	}, [name, email, password]);
+		if(adminCode.length == 0) setAdminCodeError(emptyText("Admin code"));
+		else setAdminCodeError("");
+
+	}, [name, email, password, adminCode]);
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -57,6 +66,11 @@ function RegisterPage() {
 		}
 		if(password === " ") {
 			setPasswordError(emptyText("Password"));
+			errors = true;
+		}
+
+		if(adminCode === " ") {
+			setAdminCodeError(emptyText("Admin code"));
 			errors = true;
 		}
 
@@ -99,6 +113,15 @@ function RegisterPage() {
 						className="form-input"
 						variant="outlined"
 						onChange={handlePasswordChange}></TextInput>
+					<TextInput
+						error={adminCodeError.length === 0? false: true}
+						helperText={adminCodeError}
+						id="adminCode"
+						type="text"
+						label="Admin Code"
+						className="form-input"
+						variant="outlined"
+						onChange={handleAdminCode}></TextInput>
 				</form>
 				<Button className="login-btn" onClick={handleSubmit}>Sign Up</Button>
 			</div>
@@ -106,4 +129,4 @@ function RegisterPage() {
 	)
 }
 
-export default RegisterPage;
+export default AdminRegister;

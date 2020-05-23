@@ -23,5 +23,6 @@
 
 	.signup-text {
 		font-size: 2rem !important;
+		margin-bottom: -5% !important;
 	}
 }

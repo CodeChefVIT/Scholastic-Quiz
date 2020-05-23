@@ -8,6 +8,7 @@ import RegisterPage from './pages/RegisterPage';
 import Admin from './pages/Admin';
 import Quiz from './pages/Quiz';
 import ErrorPage from './pages/ErrorPage';
+import AdminRegister from './pages/AdminRegister';
 
 function App() {
   return (
@@ -29,6 +30,9 @@ function App() {
         </Route>
         <Route exact path="/quiz">
           <Quiz />
+        </Route>
+        <Route exact path="/adminRegister">
+          <AdminRegister />
         </Route>
         <Route path='*'>
           <ErrorPage />

@@ -9,7 +9,9 @@ function Quiz() {
 	const [times, settimes] = React.useState(false);
 	const [min, setMin] = React.useState('15');
 	const [sec, setSec] = React.useState('00');
+
 	let seconds = 900; //15 min === 900 seconds  Total time in seconds
+
 	const handleSubmit = event => {
 		setsubmit(true);
 	}	
@@ -79,7 +81,7 @@ function Quiz() {
 	}
 
 	React.useEffect(() => {
-		setInterval(() => tick(),1000);
+		setInterval(() => tick(), 1000);
 	},[])
 
 	return (
@@ -88,7 +90,7 @@ function Quiz() {
 				<Grid item xs={10} md={8} lg={7}  style={{display: 'flex', justifyContent: 'center', paddingTop: 0, color: '#ffa400', width: '100%'}}>
 					<h2 style={{margin: 0}}>Question {currentStep}</h2>
 				</Grid>
-				<Grid item xs={10} md={8} lg={7}  style={{display: 'flex', justifyContent: 'center', paddingTop: 0, color: '#ffa400', width: '100%'}}>
+				<Grid item xs={10} md={8} lg={7}  style={{display: 'flex', justifyContent: 'center', paddingTop: 0, color: 'red', width: '100%'}}>
 					<p style={{ textAlign: 'center', margin: 0 }}>Time Remaining <h2 style={{margin: 0}}>{min}:{sec}</h2></p>
 				</Grid>
 				<Step currentStep={currentStep} />
