@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Question = require("../models/questions")
 const verify = require('./middleware')
+const User = require('../models/User')
 var mongoose=require('mongoose')
 var MongoClient = require('mongodb').MongoClient;
 const adminAccess = require('./adminMiddleware')
@@ -97,7 +98,7 @@ router.delete('/questions/:id',verify,adminAccess, async (req, res) => {
 })
 
 router.put('/answer',verify,async (req,res)=>{
-    try{
+    
         const option = req.query.option
         const _id = req.query.id
         var user = req.user.user
@@ -108,17 +109,21 @@ router.put('/answer',verify,async (req,res)=>{
         if(question.correct_answer==option){
             user.score +=1
         }
-        console.log(user.score)
-        await user.save()
+        User.updateOne({_id:user._id},{$set:{score:user.score}}).then(result=>{
+            res.status(200).send(user)
+        }).catch(err=>{
+            res.sendStatus(500)
+        })    
+})
+
+// this one is just a test
+router.get('/profile/:id',async (req, res) => {
+    const user = await User.findOne({_id:req.params.id})
+    try{
         res.send(user)
     }catch(err){
         res.sendStatus(500)
     }
-})
-
-// this one is just a test
-router.get('/', (req, res) => {
-    res.send('H3ll0 W0RlD')
 })
 
 
