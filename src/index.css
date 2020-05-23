@@ -1,3 +1,7 @@
+html {
+  height: 100%;
+}
+
 body {
   margin: 0 !important;
   padding: 0 !important;
@@ -9,6 +13,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: rgb(31, 31, 31);
   color: white;
+
+  height: 100%;
 }
 
 code {

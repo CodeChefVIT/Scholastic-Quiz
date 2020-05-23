@@ -5,7 +5,7 @@ import PlayMenuBar from '../components/PlayMenuBar';
 
 function Welcome() {
 	return (
-		<Container style={{height: 'calc(100vh - 56px)', display: 'flex', justifyContent: 'center'}}>
+		<Container className="welcome-page">
 			<div className="welcome-screen">
 				<Grid container spacing={0}>
 					<Grid item xs={12} md={6} className="heading-section">
@@ -18,7 +18,7 @@ function Welcome() {
 					</Hidden>
 				</Grid>
 				<PlayMenuBar />
-				
+
 			</div>
 		</Container>
 	)

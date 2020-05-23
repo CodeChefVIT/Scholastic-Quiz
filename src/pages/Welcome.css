@@ -3,6 +3,12 @@
 	min-width: 90% !important
 }
 
+.welcome-page {
+	height: calc(100vh - 64px) !important; 
+	display: flex !important; 
+	justify-content: center !important;
+}
+
 .heading-section {
 	display: flex;
 	justify-content: center;
