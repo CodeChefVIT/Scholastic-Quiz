@@ -8,13 +8,12 @@ const questionSchema = new mongoose.Schema({
                 type: String,
                 required: true
             },
-            isCorrect: {
-                type: Boolean,
-                required: true,
-                default: false
-            }
         }
-    ]
+    ],
+    correct_answer:{
+        type : String,
+        required:true
+    }
 })
 
 module.exports = mongoose.model('question', questionSchema)
