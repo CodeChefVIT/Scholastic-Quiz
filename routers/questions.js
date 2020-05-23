@@ -2,13 +2,10 @@ const express = require('express')
 const router = express.Router()
 const Question = require("../models/questions")
 const verify = require('./middleware')
-<<<<<<< HEAD
 var mongoose=require('mongoose')
 var MongoClient = require('mongodb').MongoClient;
-DATABASE_URL= "mongodb+srv://jugalbhatt123:ccProject@cluster0-yb5lv.mongodb.net/Main?retryWrites=true&w=majority"
-=======
+
 const adminAccess = require('./adminMiddleware')
->>>>>>> e8e2e850cd60eec719073492e9b75ec4c2d38c94
 
 // get all quiz questions
 router.get('/questions',verify, async (req, res) => {
@@ -99,7 +96,7 @@ router.delete('/questions/:id',verify,adminAccess, async (req, res) => {
 router.post('/answer/:id/:option',async (req,res)=>{
     const user=req.user
     option=req.params.option
-    MongoClient.connect(DATABASE_URL, function(err, db) {
+    MongoClient.connect(process.env.DATABASE_URL, function(err, db) {
         if (err) throw err;
         var dbo = db.db("main");
         var query = { _id: req.params.id,       //id for question

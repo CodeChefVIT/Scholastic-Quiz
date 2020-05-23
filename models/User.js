@@ -20,15 +20,13 @@ const userSchema =new mongoose.Schema({
         type:Date,
         default: Date.now
     },
-<<<<<<< HEAD
     score:{
         type:Number,
         default:0
-=======
+    },
     isAdmin:{
         type:Boolean,
         default :false
->>>>>>> e8e2e850cd60eec719073492e9b75ec4c2d38c94
     }
 })
 
