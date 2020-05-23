@@ -11,35 +11,34 @@ import ErrorPage from './pages/ErrorPage';
 import AdminRegister from './pages/AdminRegister';
 
 function App() {
-  return (
-    
-    <Router>
-      <Navbar />
-      <Switch>
-        <Route exact path="/">
-          <Welcome />
-        </Route>
-        <Route exact path="/login">
-          <LoginPage />
-        </Route>
-        <Route exact path="/register">
-          <RegisterPage />
-        </Route>
-        <Route exact path="/admin">
-          <Admin />
-        </Route>
-        <Route exact path="/quiz">
-          <Quiz />
-        </Route>
-        <Route exact path="/adminRegister">
-          <AdminRegister />
-        </Route>
-        <Route path='*'>
-          <ErrorPage />
-        </Route>
-      </Switch>
-    </Router>
-  );
+	return (
+		<Router>
+			<Navbar />
+			<Switch>
+				<Route exact path="/">
+					<Welcome />
+				</Route>
+				<Route exact path="/login">
+					<LoginPage />
+				</Route>
+				<Route exact path="/register">
+					<RegisterPage />
+				</Route>
+				<Route exact path="/admin">
+					<Admin />
+				</Route>
+				<Route exact path="/quiz">
+					<Quiz />
+				</Route>
+				<Route exact path="/adminRegister">
+					<AdminRegister />
+				</Route>
+				<Route path='*'>
+					<ErrorPage />
+				</Route>
+			</Switch>
+		</Router>
+	);
 }
 
 export default App;

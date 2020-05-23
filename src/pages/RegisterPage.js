@@ -72,6 +72,9 @@ function RegisterPage() {
 		if(password === "") {
 			setPasswordError(emptyText("Password"));
 			errors = true;
+		} else if(password.length < 8) {
+			setPasswordError("Minimum length of password must be 8.");
+			errors = true;
 		}
 
 		if(!errors && emailError.length === 0 && passwordError.length === 0) {
@@ -79,19 +82,23 @@ function RegisterPage() {
 						name=${name}&email=${email}&password=${password}`;
 
 			let response = null;
-			await axios.post(url).then(res => {
-				response = res;
-			});
-
-			if(response.status === 200) {
-				changeEmail("");
-				setEmailChanged(false);
-				changeName("");
-				setNameChanged(false);
-				changePassword("");
-				setPasswordChanged(false);
-				setSignedUp(true);
-			}
+			try {
+				await axios.post(url).then(res => {
+					response = res;
+				});
+				
+				if(response.status === 200) {
+					changeEmail("");
+					setEmailChanged(false);
+					changeName("");
+					setNameChanged(false);
+					changePassword("");
+					setPasswordChanged(false);
+					setSignedUp(true);
+				} 
+			} catch(error) {
+				console.log(error);
+			}	
 		}
 	}
 

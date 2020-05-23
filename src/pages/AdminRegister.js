@@ -85,6 +85,9 @@ function AdminRegister() {
 		if (password === " ") {
 			setPasswordError(emptyText("Password"));
 			errors = true;
+		} else if(password.length < 8) {
+			setPasswordError("Minimum length of password must be 8.");
+			errors = true;
 		}
 
 		if (adminCode === " ") {
@@ -97,21 +100,24 @@ function AdminRegister() {
 			name=${name}&email=${email}&password=${password}&adminCode=${adminCode}`;
 
 			let response = null;
-			await axios.post(url).then(res => {
-				response = res;
-			});
-			
-			console.log(response);
-			if (response.status === 200) {
-				changeEmail("");
-				setEmailChanged(false);
-				changeName("");
-				setNameChanged(false);
-				changePassword("");
-				setPasswordChanged(false);
-				setAdminCode("");
-				setAdminCodeChanged(false);
-				setSignedUp(true);
+			try {
+				await axios.post(url).then(res => {
+					response = res;
+				});
+				
+				if (response.status === 200) {
+					changeEmail("");
+					setEmailChanged(false);
+					changeName("");
+					setNameChanged(false);
+					changePassword("");
+					setPasswordChanged(false);
+					setAdminCode("");
+					setAdminCodeChanged(false);
+					setSignedUp(true);
+				}
+			} catch(error) {
+				console.log(error);
 			}
 		}
 	}
