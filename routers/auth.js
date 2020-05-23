@@ -11,13 +11,11 @@ const JWT = require('jsonwebtoken')
 // })
 
 
+
+
 router.post('/register',async (req,res)=>{
-    
-    // const validation = schema.validate(req.body,schema)
 
-    // res.send(validation)
-    
-
+    var admin = false
     //check for  existing user
     const emailExist =await User.findOne({email:req.query.email})
     if(emailExist){
@@ -27,19 +25,27 @@ router.post('/register',async (req,res)=>{
     //hash the password
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(req.query.password,salt)
+    
+    //Check Admin Code
+    if(req.query.adminCode===process.env.ADMIN_CODE){
+        admin =true 
+    }
 
     const user = new User({
         name : req.query.name,
         email : req.query.email,
-        password: hashedPassword
+        password: hashedPassword,
+        isAdmin : admin
     })
     try{
         const savedUser = await user.save()
-        res.send({_id:user._id,name:user.name,email:user.email})
+        res.send({_id:user._id,name:user.name,email:user.email,isAdmin:user.isAdmin})
     }catch(err){
-        res.sendStatus(400)
+        res.status(400).send(err)
     }
 })
+
+
 
 router.post('/login',async (req,res,next)=>{
     
@@ -54,9 +60,9 @@ router.post('/login',async (req,res,next)=>{
     //Create and assign JWT
 
     const token = JWT.sign({user},process.env.JWT_TOKEN)
-    res.header('auth-token',token).send(token)
+    res.header('auth-token',token)
 
-    res.send({_id:user._id,name:user.name,email:user.email})
+    res.send({_id:user._id,name:user.name,email:user.email,isAdmin:user.isAdmin})
 
 })
 

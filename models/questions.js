@@ -11,7 +11,7 @@ const questionSchema = new mongoose.Schema({
     ],
     correct_answer:{
         type : String,
-        required:true
+    
     }
 })
 

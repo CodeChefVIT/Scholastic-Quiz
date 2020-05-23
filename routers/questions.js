@@ -2,14 +2,19 @@ const express = require('express')
 const router = express.Router()
 const Question = require("../models/questions")
 const verify = require('./middleware')
+<<<<<<< HEAD
 var mongoose=require('mongoose')
 var MongoClient = require('mongodb').MongoClient;
 DATABASE_URL= "mongodb+srv://jugalbhatt123:ccProject@cluster0-yb5lv.mongodb.net/Main?retryWrites=true&w=majority"
+=======
+const adminAccess = require('./adminMiddleware')
+>>>>>>> e8e2e850cd60eec719073492e9b75ec4c2d38c94
 
 // get all quiz questions
 router.get('/questions',verify, async (req, res) => {
     try {
         const questions = await Question.find()
+        console.log(req.user)
         return res.status(200).json(questions)
     } catch (error) {
         return res.status(500).json({"error":error})
@@ -33,7 +38,7 @@ router.get('/questions/:id',verify, async (req, res) => {
 })
 
 // create one quiz question
-router.post('/questions',verify, async (req, res) => {
+router.post('/questions',verify,adminAccess, async (req, res) => {
     try {
         const { description } = req.body
         const { alternatives } = req.body
@@ -50,7 +55,7 @@ router.post('/questions',verify, async (req, res) => {
 })
 
 // update one quiz question
-router.put('/questions/:id',verify, async (req, res) => {
+router.put('/questions/:id',verify,adminAccess, async (req, res) => {
     try {
         const _id = req.params.id 
         const { description, alternatives } = req.body
@@ -75,7 +80,7 @@ router.put('/questions/:id',verify, async (req, res) => {
 })
 
 // delete one quiz question
-router.delete('/questions/:id',verify, async (req, res) => {
+router.delete('/questions/:id',verify,adminAccess, async (req, res) => {
     try {
         const _id = req.params.id 
 
@@ -121,6 +126,8 @@ router.post('/answer/:id/:option',async (req,res)=>{
 router.get('/', (req, res) => {
     res.send('H3ll0 W0RlD')
 })
+
+
 
 
 module.exports = router
