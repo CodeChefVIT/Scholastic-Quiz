@@ -154,8 +154,9 @@ router.post('/forgot', (req, res) => {
                 from: `NodeAuthTuts`,
                 html: `
                   <h1>Hi,</h1>
-                  <h2>Here is your password reset key and dont forget your fucking password dummy we have to code 50 lines for this shit</h2>
-                  <h2><code contenteditable="false" style="font-weight:200;font-size:1.5rem;padding:5px 10px; background: #EEEEEE; border:0">${userData.passResetKey}</code></h4>
+                  <h2>This email contains a password reset key, which you will need to enter in order to reset the password, please do not share this key with anyone.</h2>
+                  <h2><code contenteditable="false" style="font-weight:200;font-size:1.5rem;padding:5px 10px; background: #EEEEEE; border:0">${userData.passResetKey}</code></h2>
+                  <h2>This password reset key is valid for the next 20 minutes</h2>
                   <p>Please ignore if you didn't try to reset your password on our platform</p>
                   `
               };
