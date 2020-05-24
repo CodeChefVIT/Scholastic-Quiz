@@ -7,10 +7,10 @@ function Quiz() {
 	const [currentStep, setStep] = React.useState(1);
 	const [submit, setsubmit] = React.useState(false);
 	const [times, settimes] = React.useState(false);
-	const [min, setMin] = React.useState('15');
+	const [min, setMin] = React.useState('20');
 	const [sec, setSec] = React.useState('00');
 
-	let seconds = 900; //15 min === 900 seconds  Total time in seconds
+	let seconds = 1200; //20 min === 1200 seconds  Total time in seconds
 
 	const handleSubmit = event => {
 		setsubmit(true);
@@ -85,20 +85,20 @@ function Quiz() {
 	},[])
 
 	return (
-		<div style={{display: 'flex', justifyContent: 'center', overflow: 'hidden'}}>
-			<Grid container xs={12} spacing={5} style={{display: 'flex', justifyContent: 'center', paddingTop: 50, width: '100%'}}>
-				<Grid item xs={10} md={8} lg={7}  style={{display: 'flex', justifyContent: 'center', paddingTop: 0, color: '#ffa400', width: '100%'}}>
+		<div className="quiz-page">
+			<Grid container xs={12} spacing={5} className="quiz-container">
+				<Grid item xs={10} md={8} lg={7} className="q-count" >
 					<h2 style={{margin: 0}}>Question {currentStep}</h2>
 				</Grid>
-				<Grid item xs={10} md={8} lg={7}  style={{display: 'flex', justifyContent: 'center', paddingTop: 0, color: 'red', width: '100%'}}>
-					<p style={{ textAlign: 'center', margin: 0 }}>Time Remaining <h2 style={{margin: 0}}>{min}:{sec}</h2></p>
+				<Grid item xs={10} md={8} lg={7} className="timer">
+					<p>Time Remaining <h2>{min}:{sec}</h2></p>
 				</Grid>
 				<Step currentStep={currentStep} />
-				<Grid item xs={10} md={8} lg={7}  style={{display: 'flex', justifyContent: 'center', paddingTop: 50, width: '100%'}}>
-					<Grid item xs={6} style={{display: 'flex', justifyContent: 'center', width: '100%'}}>
+				<Grid item xs={10} md={8} lg={7} className="button" >
+					<Grid item xs={6}  className="button">
 						{previousButton()}
 					</Grid>
-					<Grid item xs={6} style={{display: 'flex', justifyContent: 'center', width: '100%'}}>
+					<Grid item xs={6}  className="button">
 						{nextButton()}
 					</Grid>
 				</Grid>
