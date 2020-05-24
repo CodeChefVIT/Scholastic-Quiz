@@ -36,6 +36,17 @@
 	background-color: rgb(201, 130, 0) !important;
 }
 
+.logout-btn {
+	background-color: maroon !important;
+	color: white !important;
+	margin-left: 2% !important;
+	font-weight: bold !important;
+}
+
+.logout-btn:hover {
+	background-color: rgb(95, 0, 0) !important;
+}
+
 .link {
 	text-decoration: none;
 	color: white;

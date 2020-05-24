@@ -5,7 +5,13 @@ import './Navbar.css';
 import InfoContext from '../context/InfoContext';
 
 function Navbar() {
-	const {isLoggedIn, name} = useContext(InfoContext);
+	const {isLoggedIn, setLoggedIn, name} = useContext(InfoContext);
+
+	const handleLogout = () => {
+		localStorage.clear();
+		setLoggedIn(false);
+	}
+
 	return (
 			<div className="root">
 				<AppBar position="static" className="navbar">
@@ -16,7 +22,9 @@ function Navbar() {
 							<Link className="link" to="/login"><Button color="inherit" className="login">Login</Button></Link>
 							:
 							<Typography variant="h6" className="nav-user">Welcome, {name}</Typography>
+							
 						}
+						{isLoggedIn? <Button className="logout-btn" onClick={handleLogout}>Logout</Button>: null}
 					</Toolbar>
 				</AppBar>
 			</div>
