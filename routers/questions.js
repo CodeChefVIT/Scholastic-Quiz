@@ -168,7 +168,7 @@ router.post('/forgot', (req, res) => {
                 port: 465,
                 auth: {
                   user: 'nousernameidea0709@gmail.com', // your gmail address
-                  pass: '' // your gmail password
+                  pass: 'Shivammehta2001' // your gmail password
                 }
               });
               let mailOptions = {
