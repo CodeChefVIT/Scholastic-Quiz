@@ -127,14 +127,7 @@ router.put('/answer',verify,async (req,res)=>{
 })
 
 // this one is just a test
-router.get('/profile/me',verify,async (req, res) => {
-    const user = req.user.user
-    try{
-        res.send(user)
-    }catch(err){
-        res.sendStatus(500)
-    }
-})
+
 
 
 

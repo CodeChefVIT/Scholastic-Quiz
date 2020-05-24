@@ -59,7 +59,7 @@ router.post('/login',async (req,res,next)=>{
    
     //Create and assign JWT
 
-    const token = JWT.sign({user},process.env.JWT_TOKEN)
+    const token = JWT.sign({user},process.env.JWT_TOKEN,{expiresIn:'1d'})
     res.header('auth-token',token)
 
     res.send({_id:user._id,name:user.name,email:user.email,isAdmin:user.isAdmin,authToken:token})
