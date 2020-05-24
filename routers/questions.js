@@ -99,29 +99,36 @@ router.delete('/questions/:id',verify,adminAccess, async (req, res) => {
 
 router.put('/answer',verify,async (req,res)=>{
     
-        const option = req.query.option
-        const _id = req.query.id
+        const gg = req.body
         var user = req.user.user
-        
-        console.log(user.score)
-        let question  = await Question.findOne({_id})
-        
-    for(i=0;i<15;i++){
-        if(question.correct_answer==option){
-            user.score +=1
+        console.log(user)
+        for(i=0;i<gg.questions.length;i++){
+            var question = await  Question.findOne({_id:gg.questions[i].q_id})
+            if(question.correct_answer==gg.questions[i].option){
+                user.score+=1
+            }
         }
-    }
         console.log(user.score)
         User.updateOne({_id:user._id},{$set:{score:user.score}}).then(result=>{
             res.status(200).send(user)
         }).catch(err=>{
             res.sendStatus(500)
-        })    
+        })   
+    //     console.log(user.score)
+    //     let question  = await Question.findOne({_id})
+        
+    // for(i=0;i<15;i++){
+    //     if(question.correct_answer==option){
+    //         user.score +=1
+    //     }
+    // }
+    //     console.log(user.score)
+         
 })
 
 // this one is just a test
-router.get('/profile/:id',async (req, res) => {
-    const user = await User.findOne({_id:req.params.id})
+router.get('/profile/me',verify,async (req, res) => {
+    const user = req.user.user
     try{
         res.send(user)
     }catch(err){
