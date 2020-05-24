@@ -102,13 +102,16 @@ router.put('/answer',verify,async (req,res)=>{
         const option = req.query.option
         const _id = req.query.id
         var user = req.user.user
-        console.log(user)
+        
+        console.log(user.score)
         let question  = await Question.findOne({_id})
-        console.log(question)
-
+        
+    for(i=0;i<15;i++){
         if(question.correct_answer==option){
             user.score +=1
         }
+    }
+        console.log(user.score)
         User.updateOne({_id:user._id},{$set:{score:user.score}}).then(result=>{
             res.status(200).send(user)
         }).catch(err=>{

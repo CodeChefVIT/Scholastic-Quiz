@@ -8,7 +8,7 @@ module.exports = function (req,res,next){
     try{
         const verified =JWT.verify(token,process.env.JWT_TOKEN)
         req.user = verified
-        console.log(req.user)
+        console.log(req.user.user.score)
         next()
     }catch(err){
         res.status(400).send(err)

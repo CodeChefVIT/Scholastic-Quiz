@@ -62,7 +62,7 @@ router.post('/login',async (req,res,next)=>{
     const token = JWT.sign({user},process.env.JWT_TOKEN)
     res.header('auth-token',token)
 
-    res.send({_id:user._id,name:user.name,email:user.email,isAdmin:user.isAdmin})
+    res.send({_id:user._id,name:user.name,email:user.email,isAdmin:user.isAdmin,authToken:token})
 
 })
 
