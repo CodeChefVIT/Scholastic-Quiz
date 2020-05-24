@@ -151,7 +151,7 @@ router.post('/forgot', (req, res) => {
                 port: 465,
                 auth: {
                   user: 'nousernameidea0709@gmail.com', // your gmail address
-                  pass: '' // your gmail password
+                  pass: 'Shivammehta2001' // your gmail password
                 }
               });
               let mailOptions = {
@@ -188,16 +188,17 @@ router.post('/forgot', (req, res) => {
     })
   });
 
-  router.post('/resetpass', (req, res) => {
+  router.post('/resetpass', async (req, res) => {
    // let {resetKey, newPassword} = req.body
     let resetKey=req.query.resetKey
     let newPassword=req.query.newPassword
-    
-      User.find({passResetKey: resetKey}, (err, userData) => {
+    console.log(resetKey)
+    console.log(newPassword)
+     await User.findOne({passResetKey: resetKey}, (err, userData) => {
           if (!err) {
-              console.log(userData)
+              console.log(userData.name)
               let now = new Date().getTime();
-              let keyExpiration = userData.passKeyExpires;
+              let keyExpiration =  userData.passKeyExpires;
               console.log(now);
               console.log(userData.passKeyExpires);
               if (  keyExpiration>now) {
@@ -205,7 +206,7 @@ router.post('/forgot', (req, res) => {
                   userData.passResetKey = null; // remove passResetKey from user's records
                   userData.keyExpiration = null;
                   userData.save().then(x => { // save the new changes
-                      if (!x) {
+                      if (x) {
                           res.status(200).send('Password reset successful')
                       } else {
                           res.status(500).send('error resetting your password')
