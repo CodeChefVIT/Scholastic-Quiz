@@ -42,8 +42,6 @@ function Admin() {
 			setLoading(false);
 			return;
 		}
-
-		let data = "hello";
 		let url = `https://scholastic-quiz-app.herokuapp.com/checkAuth`;
 		let response = null;
 
@@ -132,8 +130,9 @@ function Admin() {
 		}
 	};
 
-	const handleSubmit = () => {
+	const handleSubmit = async() => {
 		let error = false;
+		let val = "none";
 		if(ques.length === 0){
 			setQuesError(errorText);
 			error = true;
@@ -157,10 +156,54 @@ function Admin() {
 		if(value === 'none'){
 			setValueError(errorText);
 			error = true;
+		}else if(value === 'op1'){
+			val = op1;
+		}else if(value === 'op2'){
+			val = op2;
+		}else if(value === 'op3'){
+			val = op3;
+		}else if(value === 'op4'){
+			val = op4;
 		}
 		if(!error){
-			//Submit question
-			setOpen(false);
+			// async() => {
+				let token = localStorage.getItem('authToken');
+				let url = `https://scholastic-quiz-app.herokuapp.com/questions`
+				let data = {
+					"description" : ques,
+					"correct_answer" : val,
+					"alternatives" : [
+						{
+							"text" : op1
+						},
+						{
+							"text" : op2
+						},
+						{
+							"text" : op3
+						},
+						{
+							"text" : op4
+						}
+					] 
+				}
+				let response = null;
+				try {
+					await axios.post(url,data,{
+						headers: {
+							"auth-token" : token
+						}}).then(res => {
+						response = res;
+					});
+					console.log(response);
+					if(response.status === 201) {
+						
+					}
+				} catch(error) {
+					console.log(error);
+				}
+				setOpen(false);
+			// }
 		}
 	};
 
