@@ -8,6 +8,7 @@ var MongoClient = require('mongodb').MongoClient;
 const adminAccess = require('./adminMiddleware')
 const shortid=require('shortid')
 const nodemailer=require('nodemailer')
+const bcrypt=require('bcryptjs')
 
 // get all quiz questions
 router.get('/questions',verify, async (req, res) => {
@@ -144,6 +145,7 @@ router.post('/forgot', (req, res) => {
       if (!err && userData!=null) {
         userData.passResetKey = shortid.generate();
         userData.passKeyExpires = new Date().getTime() + 20 * 60 * 1000 // pass reset key only valid for 20 minutes
+        console.log(userData.passKeyExpires)
         userData.save().then(x => {
             if (!err) {
               // configuring smtp transport machanism for password reset email
@@ -153,7 +155,7 @@ router.post('/forgot', (req, res) => {
                 service: "gmail",
                 port: 465,
                 auth: {
-                  user: '', // your gmail address
+                  user: 'nousernameidea0709@gmail.com', // your gmail address
                   pass: '' // your gmail password
                 }
               });
@@ -192,17 +194,23 @@ router.post('/forgot', (req, res) => {
   });
 
   router.post('/resetpass', (req, res) => {
-    let {resetKey, newPassword} = req.body
+   // let {resetKey, newPassword} = req.body
+    let resetKey=req.query.resetKey
+    let newPassword=req.query.newPassword
+    
       User.find({passResetKey: resetKey}, (err, userData) => {
           if (!err) {
+              console.log(userData)
               let now = new Date().getTime();
-              let keyExpiration = userDate.passKeyExpires;
-              if (keyExpiration > now) {
+              let keyExpiration = userData.passKeyExpires;
+              console.log(now);
+              console.log(userData.passKeyExpires);
+              if (  keyExpiration>now) {
           userData.password = bcrypt.hashSync(newPassword, 5);
                   userData.passResetKey = null; // remove passResetKey from user's records
                   userData.keyExpiration = null;
-                  userData.save().then(err => { // save the new changes
-                      if (!err) {
+                  userData.save().then(x => { // save the new changes
+                      if (!x) {
                           res.status(200).send('Password reset successful')
                       } else {
                           res.status(500).send('error resetting your password')
