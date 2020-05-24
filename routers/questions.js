@@ -25,7 +25,7 @@ router.get('/questions',verify, async (req, res) => {
 
 router.get('/viewSubmissions',verify,adminAccess, async (req, res) => {
     try {
-        const array =await User.find({isAdmin:false})
+        const array =await User.find({testGiven:true})
         console.log(array)
         return res.status(200).json(array)
     } catch (error) {
