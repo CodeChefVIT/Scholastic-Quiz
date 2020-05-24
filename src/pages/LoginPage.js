@@ -7,6 +7,7 @@ import TextInput from "../components/TextInput";
 import * as EmailValidator from 'email-validator';
 import InfoContext from '../context/InfoContext';
 import axios from "axios";
+import Loading from "./Loading";
 
 
 function LoginPage() {
@@ -18,7 +19,10 @@ function LoginPage() {
 	const [passwordChanged, setPasswordChanged] = useState(false);
 	const [didLogin, setDidLogin] = useState(false);
 
+	const [isLoading, setLoading] = useState(false);
+
 	const {isLoggedIn, setLoggedIn, changeName} = useContext(InfoContext);
+	
 
 	const mailErrorText = "Email cannot be empty";
 	const passwordErrorText = "Password cannot be empty";
@@ -65,6 +69,7 @@ function LoginPage() {
 		}
 
 		if(!errors && emailError.length === 0 && passwordError.length === 0) {
+			setLoading(true);
 			let url = `https://scholastic-quiz-app.herokuapp.com/api/user/login?
 						email=${email}&password=${password}`;
 			
@@ -87,9 +92,12 @@ function LoginPage() {
 				console.log(error);
 			}
 		}
+		setLoading(false);
 	}
 
 	return (
+		isLoading? <Loading />
+		:
 		<Container className="login-page">
 			<div className="login-form">
 				<Typography variant="h3" color="primary" className="login-head">Login Now!</Typography><br />

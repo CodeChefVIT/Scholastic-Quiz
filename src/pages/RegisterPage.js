@@ -5,6 +5,7 @@ import {Alert} from "@material-ui/lab";
 import TextInput from "../components/TextInput";
 import * as EmailValidator from "email-validator";
 import axios from 'axios';
+import Loading from "./Loading";
 
 
 function RegisterPage() {
@@ -19,6 +20,7 @@ function RegisterPage() {
 	const [passwordChanged, setPasswordChanged] = useState(false);
 
 	const [signedUp, setSignedUp] = useState(false);
+	const [isLoading, setLoading] = useState(false);
 
 	const emptyText = (type) =>  `${type} cannot be empty`;
 
@@ -78,6 +80,7 @@ function RegisterPage() {
 		}
 
 		if(!errors && emailError.length === 0 && passwordError.length === 0) {
+			setLoading(true);
 			let url = `https://scholastic-quiz-app.herokuapp.com/api/user/register?
 						name=${name}&email=${email}&password=${password}`;
 
@@ -100,9 +103,12 @@ function RegisterPage() {
 				console.log(error);
 			}	
 		}
+		setLoading(false);
 	}
 
 	return (
+		isLoading? <Loading />
+		:
 		<Container className="login-page">
 			<div className="login-form">
 				<img src="hg-pin.png" className="signup-img" alt="Mokingjay Pin"></img>
