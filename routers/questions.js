@@ -14,6 +14,8 @@ router.get('/questions',verify, async (req, res) => {
     try {
         const questions = await Question.find()
         console.log(req.user)
+        User.updateOne({_id:req.user.user._id},{$set:{testStarted:true}})
+        console.log(req.user.user)
         return res.status(200).json(questions)
     } catch (error) {
         return res.status(500).json({"error":error})
@@ -103,16 +105,19 @@ router.put('/answer',verify,async (req,res)=>{
     
         const gg = req.body
         var user = req.user.user
-        console.log(user)
+        console.log(user.testGiven)
+        console.log(user.score)
         for(i=0;i<gg.questions.length;i++){
             var question = await  Question.findOne({_id:gg.questions[i].q_id})
             if(question.correct_answer==gg.questions[i].option){
                 user.score+=1
             }
         }
-    
-        console.log(user.score)
-        User.updateOne({_id:user._id},{$set:{score:user.score}}).then(result=>{
+        
+        
+        User.updateOne({_id:user._id},{$set:{score:user.score,testGiven:true}}).then(result=>{
+            console.log(user.score)
+            console.log(user.testGiven)
             res.status(200).send(user)
         }).catch(err=>{
             res.sendStatus(500)
