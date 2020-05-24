@@ -39,7 +39,7 @@ router.post('/register',async (req,res)=>{
     })
     try{
         const savedUser = await user.save()
-        res.send({_id:user._id,name:user.name,email:user.email,isAdmin:user.isAdmin})
+        res.send({user,isAdmin:user.isAdmin})
     }catch(err){
         res.status(400).send(err)
     }
@@ -62,7 +62,7 @@ router.post('/login',async (req,res,next)=>{
     const token = JWT.sign({user},process.env.JWT_TOKEN,{expiresIn:'1d'})
     res.header('auth-token',token)
 
-    res.send({_id:user._id,name:user.name,email:user.email,isAdmin:user.isAdmin,authToken:token})
+    res.send({user,authToken:token})
 
 })
 
