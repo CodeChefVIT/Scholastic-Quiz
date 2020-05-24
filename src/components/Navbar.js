@@ -5,7 +5,7 @@ import './Navbar.css';
 import InfoContext from '../context/InfoContext';
 
 function Navbar() {
-	const {isLoggedIn, setLoggedIn, name} = useContext(InfoContext);
+	const {isLoggedIn, setLoggedIn, name, isAdmin} = useContext(InfoContext);
 
 	const handleLogout = () => {
 		localStorage.clear();

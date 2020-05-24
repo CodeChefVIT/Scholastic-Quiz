@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './RegisterPage.css';
 import { Container, Typography, Button, Checkbox, FormControlLabel } from "@material-ui/core";
 import {Alert} from "@material-ui/lab";
@@ -6,6 +6,7 @@ import TextInput from "../components/TextInput";
 import * as EmailValidator from "email-validator";
 import axios from 'axios';
 import Loading from "./Loading";
+import InfoContext from '../context/InfoContext';
 
 
 function RegisterPage() {

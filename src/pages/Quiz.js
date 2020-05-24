@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Question from "../components/Question"
 import { Grid, Snackbar } from '@material-ui/core'
 import './Quiz.css';
+import InfoContext from "../context/InfoContext";
 
 function Quiz() {
 	const [currentStep, setStep] = React.useState(1);

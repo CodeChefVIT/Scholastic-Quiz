@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Navbar from './components/Navbar'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Welcome from './pages/Welcome';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -15,6 +15,7 @@ function App() {
 	const [authToken, setAuthToken] = useState(null);
 	const [isLoggedIn, setLoggedIn] = useState(false);
 	const [name, changeName] = useState(null);
+	const [isAdmin, setAdmin] = useState(false);
 
 	useEffect(() => {
 		const userLoggedIn = localStorage.getItem('userLoggedIn');
@@ -27,6 +28,8 @@ function App() {
 				changeName(localName);
 			}
 		}
+
+		//TODO: validate authToken if a user is admin, name, email, etc and set these.
 	}, []);
 
 	let info = {
@@ -35,9 +38,11 @@ function App() {
 		authToken: authToken,
 		setAuthToken: setAuthToken,
 		isLoggedIn: isLoggedIn,
-		setLoggedIn: setLoggedIn
+		setLoggedIn: setLoggedIn,
+		isAdmin: isAdmin,
+		setAdmin: setAdmin,
 	}
-
+ 
 	return (
 		<InfoContext.Provider value={info}>
 			<Router>
@@ -45,9 +50,6 @@ function App() {
 				<Switch>
 					<Route exact path="/">
 						<Welcome />
-					</Route>
-					<Route exact path="/login">
-						<LoginPage />
 					</Route>
 					<Route exact path="/register">
 						<RegisterPage />
@@ -61,6 +63,9 @@ function App() {
 					<Route exact path="/adminRegister">
 						<AdminRegister />
 					</Route>
+					<Route exact path="/login">
+						<LoginPage />
+					</Route>
 					<Route path='*'>
 						<ErrorPage />
 					</Route>
@@ -68,6 +73,7 @@ function App() {
 			</Router>
 		</InfoContext.Provider>
 	);
+
 }
 
 export default App;

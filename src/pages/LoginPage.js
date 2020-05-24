@@ -21,8 +21,7 @@ function LoginPage() {
 
 	const [isLoading, setLoading] = useState(false);
 
-	const {isLoggedIn, setLoggedIn, changeName} = useContext(InfoContext);
-	
+	const {isLoggedIn, setLoggedIn, changeName, setAuthToken, setAdmin, isAdmin} = useContext(InfoContext);
 
 	const mailErrorText = "Email cannot be empty";
 	const passwordErrorText = "Password cannot be empty";
@@ -84,9 +83,15 @@ function LoginPage() {
 					changeName(response.data.name);
 					setLoggedIn(true);
 					setDidLogin(true);
+					setAuthToken(response.data.authToken);
 
+					if(response.data.isAdmin == true) {
+						setAdmin(true);
+					} 
+					
 					localStorage.setItem('userLoggedIn', true);
 					localStorage.setItem('name', response.data.name);
+
 				}
 			} catch(error) {
 				console.log(error);

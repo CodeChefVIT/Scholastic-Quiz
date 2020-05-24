@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Container, Grid, Hidden} from '@material-ui/core';
 import './Welcome.css';
 import PlayMenuBar from '../components/PlayMenuBar';
+import InfoContext from "../context/InfoContext";
 
 function Welcome() {
 	return (

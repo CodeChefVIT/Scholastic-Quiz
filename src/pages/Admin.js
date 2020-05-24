@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import './Admin.css'
 import {
 	Button, Dialog, DialogActions,
@@ -8,11 +8,14 @@ import {
 	FormLabel, Grid
 } from '@material-ui/core';
 import TextInput from "../components/TextInput";
+import InfoContext from "../context/InfoContext";
+import { Redirect } from 'react-router';
 
 function Admin() {
 	const [open, setOpen] = React.useState(false);
 	const [openSub, setOpenSub] = React.useState(false);
 	const [value, setValue] = React.useState('none');
+
 	const handleChange = (event) => {
 		setValue(event.target.value);
 	};
