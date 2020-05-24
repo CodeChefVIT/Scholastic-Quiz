@@ -120,7 +120,7 @@ router.put('/answer',verify,async (req,res)=>{
         console.log(user.score)
         for(i=0;i<gg.length;i++){
             var question = await  Question.findOne({_id:gg[i].q_id})
-            await User.updateOne({_id:user._id},{$push:{"responses.i" : gg[i]}})
+            await User.updateOne({_id:user._id},{$push:{"responses" : gg[i]}})
             if(question.correct_answer==gg[i].option){
                 user.score+=1
             }
