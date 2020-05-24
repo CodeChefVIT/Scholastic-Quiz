@@ -111,6 +111,7 @@ router.put('/answer',verify,async (req,res)=>{
                 user.score+=1
             }
         }
+    
         console.log(user.score)
         User.updateOne({_id:user._id},{$set:{score:user.score}}).then(result=>{
             res.status(200).send(user)
@@ -128,6 +129,9 @@ router.put('/answer',verify,async (req,res)=>{
     //     console.log(user.score)
          
 })
+
+
+
 
 router.post('/forgot', (req, res) => {
    // let {email} = req.body; // same as let email = req.body.email
@@ -215,7 +219,17 @@ router.post('/forgot', (req, res) => {
           }
       })
   })
-  
+
+
+  router.get('/checkAuth',verify,async (req,res)=>{
+      const user  = await req.user.user
+      try{
+          res.send(user)
+
+      }catch(err){
+          res.status(400).send(err)
+      }
+  })
   
 
 
