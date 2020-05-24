@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar'
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Welcome from './pages/Welcome';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -17,20 +17,6 @@ function App() {
 	const [name, changeName] = useState(null);
 	const [isAdmin, setAdmin] = useState(false);
 
-	useEffect(() => {
-		const userLoggedIn = localStorage.getItem('userLoggedIn');
-		if(userLoggedIn === null) {
-			localStorage.setItem('userLoggedIn', false);
-		} else {
-			if(userLoggedIn === "true") {
-				const localName = localStorage.getItem('name');
-				setLoggedIn(true);
-				changeName(localName);
-			}
-		}
-
-		//TODO: validate authToken if a user is admin, name, email, etc and set these.
-	}, []);
 
 	let info = {
 		name:name,

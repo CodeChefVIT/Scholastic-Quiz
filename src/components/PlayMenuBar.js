@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, {useContext} from "react";
 import {Grid, Button, Typography} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import './PlayMenuBar.css';

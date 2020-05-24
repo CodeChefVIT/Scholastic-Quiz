@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react';
-import './Admin.css'
+import React, {useEffect } from 'react';
+import './Admin.css';
 import {
 	Button, Dialog, DialogActions,
 	DialogContent, DialogTitle, 
@@ -43,10 +43,6 @@ function Admin() {
 			return;
 		}
 
-		let config = {
-			
-		}
-
 		let data = "hello";
 		let url = `https://scholastic-quiz-app.herokuapp.com/checkAuth`;
 		let response = null;
@@ -67,7 +63,7 @@ function Admin() {
 			console.log(error);
 			setAdmin(false);
 		}
-		
+
 		setLoading(false);
 	}
 

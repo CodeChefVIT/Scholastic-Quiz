@@ -1,11 +1,55 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Container, Grid, Hidden} from '@material-ui/core';
 import './Welcome.css';
 import PlayMenuBar from '../components/PlayMenuBar';
 import InfoContext from "../context/InfoContext";
+import axios from "axios";
+import Loading from "./Loading";
 
 function Welcome() {
+	const [loading, setLoading] = useState(true);
+	const {setLoggedIn, changeName, setAdmin} = useContext(InfoContext);
+
+	const authenticate = async () => {
+		let token = localStorage.getItem('authToken');
+		let url = `https://scholastic-quiz-app.herokuapp.com/checkAuth`;
+		let response = null;
+
+		try {
+			await axios.get(url, {
+				headers: {
+					"auth-token": token
+				}
+			}).then(res => {
+				response = res;
+			})
+
+			changeName(response.data.name);
+			setAdmin(response.data.isAdmin);
+			setLoggedIn(true);
+
+		} catch(error) {
+			console.log(error);
+			localStorage.clear()
+			setLoggedIn(false);
+		}
+
+		setLoading(false);
+	}
+
+	useEffect(() => {
+		const token = localStorage.getItem('authToken');
+		if(token === null) {
+			setLoggedIn(false);
+			setLoading(false);
+		} else {
+			authenticate();
+		}
+	}, []);
+
 	return (
+		loading ? <Loading />
+		:
 		<Container className="welcome-page">
 			<div className="welcome-screen">
 				<Grid container spacing={0}>
