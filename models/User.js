@@ -45,7 +45,10 @@ const userSchema =new mongoose.Schema({
     testGiven:{
         type:Boolean,
         default:false
-    }
+    },
+    responses:[
+
+    ]
 })
 
 

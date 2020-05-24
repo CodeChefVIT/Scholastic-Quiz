@@ -114,13 +114,14 @@ router.delete('/questions/:id',verify,adminAccess, async (req, res) => {
 
 router.put('/answer',verify,async (req,res)=>{
     
-        const gg = req.body
+        const gg = req.body.questions
         var user = req.user.user
         console.log(user.testGiven)
         console.log(user.score)
-        for(i=0;i<gg.questions.length;i++){
-            var question = await  Question.findOne({_id:gg.questions[i].q_id})
-            if(question.correct_answer==gg.questions[i].option){
+        for(i=0;i<gg.length;i++){
+            var question = await  Question.findOne({_id:gg[i].q_id})
+            await User.updateOne({_id:user._id},{$push:{"responses" : gg[i]}})
+            if(question.correct_answer==gg[i].option){
                 user.score+=1
             }
         }
