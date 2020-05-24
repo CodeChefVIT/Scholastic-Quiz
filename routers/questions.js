@@ -110,6 +110,7 @@ router.put('/answer',verify,async (req,res)=>{
                 user.score+=1
             }
         }
+    
         console.log(user.score)
         User.updateOne({_id:user._id},{$set:{score:user.score}}).then(result=>{
             res.status(200).send(user)
@@ -127,6 +128,9 @@ router.put('/answer',verify,async (req,res)=>{
     //     console.log(user.score)
          
 })
+
+
+
 
 router.post('/forgot', (req, res) => {
    // let {email} = req.body; // same as let email = req.body.email

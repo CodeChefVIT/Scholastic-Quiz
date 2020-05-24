@@ -24,6 +24,10 @@ const userSchema =new mongoose.Schema({
         type:Number,
         default:0
     },
+    testStarted:{
+        type : Boolean,
+        default :false
+    },
     isAdmin:{
         type:Boolean,
         default :false
@@ -38,6 +42,10 @@ const userSchema =new mongoose.Schema({
       type: Number,
       required: false
     },
+    testGiven:{
+        type:Boolean,
+        default:false
+    }
 })
 
 
