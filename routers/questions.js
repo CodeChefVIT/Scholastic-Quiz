@@ -15,7 +15,19 @@ router.get('/questions',verify, async (req, res) => {
     try {
         const questions = await Question.find()
         console.log(req.user)
+        await User.updateOne({_id:req.user.user._id},{$set:{testStarted:true}})
+        console.log(req.user.user)
         return res.status(200).json(questions)
+    } catch (error) {
+        return res.status(500).json({"error":error})
+    }
+})
+
+router.get('/viewSubmissions',verify,adminAccess, async (req, res) => {
+    try {
+        const array =await User.find({testGiven:true})
+        console.log(array)
+        return res.status(200).json(array)
     } catch (error) {
         return res.status(500).json({"error":error})
     }
@@ -104,20 +116,24 @@ router.put('/answer',verify,async (req,res)=>{
     
         const gg = req.body
         var user = req.user.user
-        console.log(user)
+        console.log(user.testGiven)
+        console.log(user.score)
         for(i=0;i<gg.questions.length;i++){
             var question = await  Question.findOne({_id:gg.questions[i].q_id})
             if(question.correct_answer==gg.questions[i].option){
                 user.score+=1
             }
         }
-    
-        console.log(user.score)
-        User.updateOne({_id:user._id},{$set:{score:user.score}}).then(result=>{
-            res.status(200).send(user)
-        }).catch(err=>{
-            res.sendStatus(500)
-        })   
+        
+        
+        await User.updateOne({_id:user._id},{$set:{score:user.score,testGiven:true}})
+        try{
+            const newUser = await User.findOne({_id:user._id})
+            console.log(newUser)
+            res.status(200).send(newUser)
+        }catch(err){
+            res.status(400).send(err)
+        }
     //     console.log(user.score)
     //     let question  = await Question.findOne({_id})
         
