@@ -33,6 +33,18 @@
 	text-align: center;
 }
 
+.admin-btn {
+	background-color: red !important;
+	color: white !important;
+	margin-bottom: 5% !important;
+
+	font-family: "Montserrat", sans-serif !important;
+	font-size: 0.8rem !important;
+	font-weight: bold !important;
+	letter-spacing: 2px !important;
+	width: 200px;
+}
+
 .quiz-button {
 	color: white !important;
 	background-color: transparent !important;

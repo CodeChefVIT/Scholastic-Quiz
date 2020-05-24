@@ -50,6 +50,20 @@
 	}
 }
 
+.forgot-section {
+	display: flex;
+	width: 80%;
+	margin-bottom: 5%;
+}
+
+.forgot-pass {
+	font-size: 0.8rem !important;
+}
+
+.forgot-pass:hover {
+	text-decoration: underline;
+}
+
 .login-btn {
 	width: 150px;
 	color: white !important;

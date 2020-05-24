@@ -22,7 +22,7 @@ function LoginPage() {
 
 	const [isLoading, setLoading] = useState(false);
 
-	const {isLoggedIn, setLoggedIn, changeName, setAuthToken, setAdmin, isAdmin} = useContext(InfoContext);
+	const {setLoggedIn, changeName, setAuthToken, setAdmin, isAdmin} = useContext(InfoContext);
 
 	const mailErrorText = "Email cannot be empty";
 	const passwordErrorText = "Password cannot be empty";
@@ -85,7 +85,7 @@ function LoginPage() {
 					setDidLogin(true);
 					setAuthToken(response.data.authToken);
 
-					if(response.data.isAdmin == true) {
+					if(response.data.isAdmin === true) {
 						setAdmin(true);
 					} 
 					
@@ -135,6 +135,9 @@ function LoginPage() {
 						value={password}
 						onChange={handlePasswordChange}></TextInput>
 				</form>
+				<div className="forgot-section">
+					<Link to="/" className="link forgot-pass">Forgot your password?</Link>
+				</div>
 				<Button className="login-btn" onClick={handleSubmit}>Login</Button>
 				<Link to="/register" className="link register-link">Don't have an account? Join the rebellion now!</Link>
 			</div>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {AppBar, Typography, Toolbar, Button} from "@material-ui/core";
 import { Link } from 'react-router-dom';
 import './Navbar.css';
@@ -6,6 +6,10 @@ import InfoContext from '../context/InfoContext';
 
 function Navbar() {
 	const {isLoggedIn, setLoggedIn, name} = useContext(InfoContext);
+
+	useEffect(() => {
+		console.log(isLoggedIn);
+	}, [isLoggedIn])
 
 	const handleLogout = () => {
 		localStorage.clear();

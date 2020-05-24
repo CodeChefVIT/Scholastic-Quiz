@@ -5,7 +5,7 @@ import './PlayMenuBar.css';
 import InfoContext from '../context/InfoContext';
 
 function PlayMenuBar() {
-	const {isLoggedIn} = useContext(InfoContext);
+	const {isLoggedIn, isAdmin} = useContext(InfoContext);
 
 	if(!isLoggedIn) {
 		return (
@@ -29,6 +29,9 @@ function PlayMenuBar() {
 			<Grid container spacing={0}>
 				<Grid item xs={12} md={6}>
 					<div className="play-menu">
+						{isAdmin? <Link to="/admin" className="link">
+							<Button size="small" className="admin-btn">Admin Panel</Button>
+						</Link>: null}<br />
 						<Link to="/quiz" className="link">
 							<Button size="large" className="quiz-button"><p className="button-text">Start Quiz</p></Button>
 						</Link>
