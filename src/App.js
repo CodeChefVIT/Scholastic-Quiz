@@ -10,6 +10,7 @@ import Quiz from './pages/Quiz';
 import ErrorPage from './pages/ErrorPage';
 import AdminRegister from './pages/AdminRegister';
 import InfoContext from './context/InfoContext';
+import ForgotPassword from './pages/ForgotPassword';
 
 function App() {
 	const [authToken, setAuthToken] = useState(null);
@@ -51,6 +52,9 @@ function App() {
 					</Route>
 					<Route exact path="/login">
 						<LoginPage />
+					</Route>
+					<Route exact path="/forgotPassword">
+						<ForgotPassword />
 					</Route>
 					<Route path='*'>
 						<ErrorPage />

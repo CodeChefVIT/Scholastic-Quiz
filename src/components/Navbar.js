@@ -7,10 +7,6 @@ import InfoContext from '../context/InfoContext';
 function Navbar() {
 	const {isLoggedIn, setLoggedIn, name} = useContext(InfoContext);
 
-	useEffect(() => {
-		console.log(isLoggedIn);
-	}, [isLoggedIn])
-
 	const handleLogout = () => {
 		localStorage.clear();
 		setLoggedIn(false);

@@ -1,11 +1,21 @@
-import React, {useContext} from "react";
-import {Grid, Button, Typography} from "@material-ui/core";
+import React, {useContext, useState} from "react";
+import {Grid, Button, Typography, Dialog, DialogTitle} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import './PlayMenuBar.css';
 import InfoContext from '../context/InfoContext';
 
 function PlayMenuBar() {
 	const {isLoggedIn, isAdmin} = useContext(InfoContext);
+
+	const[modalOpen, setModalOpen] = useState(false);
+
+	const onCloseHandle = () => {
+		setModalOpen(false);
+	}
+
+	const handleClick = () => {
+		setModalOpen(true);
+	}
 
 	if(!isLoggedIn) {
 		return (
@@ -26,19 +36,29 @@ function PlayMenuBar() {
 		);
 	} else if(isLoggedIn) {
 		return (
-			<Grid container spacing={0}>
-				<Grid item xs={12} md={6}>
-					<div className="play-menu">
-						{isAdmin? <Link to="/admin" className="link">
-							<Button size="small" className="admin-btn">Admin Panel</Button>
-						</Link>: null}<br />
-						<Link to="/quiz" className="link">
-							<Button size="large" className="quiz-button"><p className="button-text">Start Quiz</p></Button>
-						</Link>
-						<Typography variant="h6" className="onetime-warning">NOTE: You can only take the quiz once!</Typography>
-					</div>
+			<div>
+				<Grid container spacing={0}>
+					<Grid item xs={12} md={6}>
+						<div className="play-menu">
+							{isAdmin? <Link to="/admin" className="link">
+								<Button size="small" className="admin-btn">Admin Panel</Button>
+							</Link>: null}<br />
+							<Button size="large" className="quiz-button" onClick={handleClick}><p className="button-text">Start Quiz</p></Button>
+							<Typography variant="h6" className="onetime-warning">NOTE: You can only take the quiz once!</Typography>
+						</div>
+					</Grid>
 				</Grid>
-			</Grid>
+				<Dialog open={modalOpen} onClose={onCloseHandle} aria-labelledby="form-dialog-title"
+					PaperProps={{ style: { backgroundColor: '#2d2d2d', color: '#cfcfcf', minWidth: '50%' } }}
+					style={{width: '100%'}}>
+					<DialogTitle><p className="modal-head">Important Information</p></DialogTitle>
+					<div className="modal-info">
+						<Typography variant="h6" className="modal-text">1) You will be given 20 minutes for the whole quiz.</Typography>
+						<Typography variant="h6" className="modal-text">2) After starting the quiz, please do not refresh or close the website.
+												You won't be able to give the quiz again!</Typography>
+					</div>
+				</Dialog>
+			</div>
 		);
 	}
 }

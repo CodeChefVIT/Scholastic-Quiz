@@ -136,7 +136,7 @@ function LoginPage() {
 						onChange={handlePasswordChange}></TextInput>
 				</form>
 				<div className="forgot-section">
-					<Link to="/" className="link forgot-pass">Forgot your password?</Link>
+					<Link to="/forgotPassword" className="link forgot-pass">Forgot your password?</Link>
 				</div>
 				<Button className="login-btn" onClick={handleSubmit}>Login</Button>
 				<Link to="/register" className="link register-link">Don't have an account? Join the rebellion now!</Link>

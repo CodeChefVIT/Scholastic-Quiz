@@ -27,6 +27,16 @@
 	flex-grow: 1;
 }
 
+@media screen and (max-width:460px) {
+	.nav-head {
+		display: none;
+	}
+
+	.nav-logo {
+		width: 100%;
+	}
+}
+
 .login {
 	background-color: orange !important;
 	font-weight: bold !important;

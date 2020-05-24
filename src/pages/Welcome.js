@@ -27,9 +27,7 @@ function Welcome() {
 			changeName(response.data.name);
 			setAdmin(response.data.isAdmin);
 			setLoggedIn(true);
-
 		} catch(error) {
-			console.log(error);
 			localStorage.clear()
 			setLoggedIn(false);
 		}

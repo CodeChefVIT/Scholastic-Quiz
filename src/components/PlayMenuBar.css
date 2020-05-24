@@ -82,3 +82,17 @@
 		font-size: 1rem !important;
 	}
 }
+
+.modal-head {
+	font-family: "Montserrat", sans-serif !important;
+	font-size: 2rem !important;
+	margin: 0;
+}
+
+.modal-info {
+	padding: 5% !important;
+}
+
+.modal-text {
+	font-size: 1.1rem !important;
+}
