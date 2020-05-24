@@ -207,7 +207,17 @@ router.post('/forgot', (req, res) => {
           }
       })
   })
-  
+
+
+  router.get('/checkAuth',verify,async (req,res)=>{
+      const user  = await req.user.user
+      try{
+          res.send(user)
+
+      }catch(err){
+          res.status(400).send(err)
+      }
+  })
   
 
 
