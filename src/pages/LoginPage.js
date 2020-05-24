@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import './LoginPage.css';
 import { Container, Typography, Button } from "@material-ui/core";
 import {Alert} from "@material-ui/lab";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import TextInput from "../components/TextInput";
 import * as EmailValidator from 'email-validator';
 import InfoContext from '../context/InfoContext';
@@ -18,6 +18,7 @@ function LoginPage() {
 	const [passwordError, setPasswordError] = useState("");
 	const [passwordChanged, setPasswordChanged] = useState(false);
 	const [didLogin, setDidLogin] = useState(false);
+	const [redirect, setRedirect] = useState(false);
 
 	const [isLoading, setLoading] = useState(false);
 
@@ -91,7 +92,8 @@ function LoginPage() {
 					
 					localStorage.setItem('userLoggedIn', true);
 					localStorage.setItem('name', response.data.name);
-
+					
+					setTimeout(() => setRedirect(true),1500);
 				}
 			} catch(error) {
 				console.log(error);
@@ -100,6 +102,9 @@ function LoginPage() {
 		setLoading(false);
 	}
 
+	if(redirect === true){
+		return <Redirect to='/' />
+	}
 	return (
 		isLoading? <Loading />
 		:

@@ -15,9 +15,23 @@ function Admin() {
 	const [open, setOpen] = React.useState(false);
 	const [openSub, setOpenSub] = React.useState(false);
 	const [value, setValue] = React.useState('none');
+	const [valueError, setValueError] = React.useState('');
+	const [ques, setQues] = React.useState('');
+	const [quesError, setQuesError] = React.useState('');
+	const [op1, setOp1] = React.useState('');
+	const [op1Error, setOp1Error] = React.useState('');
+	const [op2, setOp2] = React.useState('');
+	const [op2Error, setOp2Error] = React.useState('');
+	const [op3, setOp3] = React.useState('');
+	const [op3Error, setOp3Error] = React.useState('');
+	const [op4, setOp4] = React.useState('');
+	const [op4Error, setOp4Error] = React.useState('');
+
+	const errorText = "This field cannot be empty";
 
 	const handleChange = (event) => {
 		setValue(event.target.value);
+		setValueError('');
 	};
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -28,6 +42,84 @@ function Admin() {
 	const handleClose = () => {
 		setOpen(false);
 		setOpenSub(false);
+	};
+
+	const handleQchange = (event) => {
+		var s = event.target.value;
+		setQues(s);
+		if(s.length === 0){
+			setQuesError(errorText);
+		}else{
+			setQuesError('');
+		}
+	};
+	const handle1change = (event) => {
+		var s = event.target.value;
+		setOp1(s);
+		if(s.length === 0){
+			setOp1Error(errorText);
+		}else{
+			setOp1Error('');
+		}
+	};
+	const handle2change = (event) => {
+		var s = event.target.value;
+		setOp2(s);
+		if(s.length === 0){
+			setOp2Error(errorText);
+		}else{
+			setOp2Error('');
+		}
+	};
+	const handle3change = (event) => {
+		var s = event.target.value;
+		setOp3(s);
+		if(s.length === 0){
+			setOp3Error(errorText);
+		}else{
+			setOp3Error('');
+		}
+	};
+	const handle4change = (event) => {
+		var s = event.target.value;
+		setOp4(s);
+		if(s.length === 0){
+			setOp4Error(errorText);
+		}else{
+			setOp4Error('');
+		}
+	};
+
+	const handleSubmit = () => {
+		let error = false;
+		if(ques.length === 0){
+			setQuesError(errorText);
+			error = true;
+		}
+		if(op1.length === 0){
+			setOp1Error(errorText);
+			error = true;
+		}
+		if(op2.length === 0){
+			setOp2Error(errorText);
+			error = true;
+		}
+		if(op3.length === 0){
+			setOp3Error(errorText);
+			error = true;
+		}
+		if(op4.length === 0){
+			setOp4Error(errorText);
+			error = true;
+		}
+		if(value === 'none'){
+			setValueError(errorText);
+			error = true;
+		}
+		if(!error){
+			//Submit question
+			setOpen(false);
+		}
 	};
 
 	return (
@@ -56,73 +148,65 @@ function Admin() {
 				<DialogContent>
 					<TextInput
 						autoFocus
-						InputProps={{
-							style: {
-								color: "#cdcdcd"
-							}
-						}}
+						error={quesError.length === 0? false: true}
+						helperText={quesError.length === 0? null: quesError}
 						margin="dense"
 						id="ques"
 						label="Question"
 						type="text"
 						fullWidth
 						variant="outlined"
+						value={ques}
+						onChange={handleQchange}
 					/>
 					<TextInput
-						InputProps={{
-							style: {
-								color: "#cdcdcd"
-							}
-						}}
+						error={op1Error.length === 0? false: true}
+						helperText={op1Error.length === 0? null: op1Error}
 						margin="dense"
 						id="op1"
 						label="Option 1"
 						type="text"
 						fullWidth
 						variant="outlined"
+						onChange={handle1change}
 					/>
 					<TextInput
-						InputProps={{
-							style: {
-								color: "#cdcdcd"
-							}
-						}}
+						error={op2Error.length === 0? false: true}
+						helperText={op2Error.length === 0? null: op2Error}
 						margin="dense"
 						id="op2"
 						label="Option 2"
 						type="text"
 						fullWidth
 						variant="outlined"
+						onChange={handle2change}
 					/>
 					<TextInput
-						InputProps={{
-							style: {
-								color: "#cdcdcd"
-							}
-						}}
+						error={op3Error.length === 0? false: true}
+						helperText={op3Error.length === 0? null: op3Error}
 						margin="dense"
 						id="op3"
 						label="Option 3"
 						type="text"
 						fullWidth
 						variant="outlined"
+						onChange={handle3change}
 					/>
 					<TextInput
-						InputProps={{
-							style: {
-								color: "#cdcdcd"
-							}
-						}}
+						error={op4Error.length === 0? false: true}
+						helperText={op4Error.length === 0? null: op4Error}
 						margin="dense"
 						id="op4"
 						label="Option 4"
 						type="text"
 						fullWidth
 						variant="outlined"
+						onChange={handle4change}
 					/>
 					<FormControl component="fieldset">
 						<FormLabel style={{ color: '#ffa400', paddingTop: 20 }} component="legend">Correct Option</FormLabel>
-						<RadioGroup aria-label="correct-choice" value={value} onChange={handleChange}>
+						<p style={{color: '#f44336', fontSize: 14, margin: 0}}>{valueError}</p>
+						<RadioGroup aria-label="correct-choice" value={value} onChange={handleChange} >
 							<FormControlLabel value="op1" control={<Radio style={{color: '#ffa400'}} />} label="Option 1" />
 							<FormControlLabel value="op2" control={<Radio style={{color: '#ffa400'}} />} label="Option 2" />
 							<FormControlLabel value="op3" control={<Radio style={{color: '#ffa400'}} />} label="Option 3" />
@@ -134,7 +218,7 @@ function Admin() {
 					<Button onClick={handleClose} className="btn-orange">
 						Cancel
 				</Button>
-					<Button onClick={handleClose} className="btn-orange">
+					<Button onClick={handleSubmit} className="btn-orange">
 						Submit
 				</Button>
 				</DialogActions>
