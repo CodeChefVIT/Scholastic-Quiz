@@ -92,7 +92,8 @@ function LoginPage() {
 					
 					localStorage.setItem('userLoggedIn', true);
 					localStorage.setItem('name', response.data.name);
-					
+					localStorage.setItem("authToken", response.data.authToken);
+
 					setTimeout(() => setRedirect(true),1500);
 				}
 			} catch(error) {
@@ -111,7 +112,7 @@ function LoginPage() {
 		<Container className="login-page">
 			<div className="login-form">
 				<Typography variant="h3" color="primary" className="login-head">Login Now!</Typography><br />
-				{didLogin === true? <Alert severity="success" color="warning">Succesfully Logged In!</Alert>: null}
+				{didLogin === true? <Alert severity="success" color="warning">Succesfully Logged In! Redirecting...</Alert>: null}
 				<form className="form">
 					<TextInput
 						error={emailChanged? (emailError.length === 0? false: true): false}
