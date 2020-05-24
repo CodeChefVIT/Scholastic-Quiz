@@ -27,7 +27,17 @@ const userSchema =new mongoose.Schema({
     isAdmin:{
         type:Boolean,
         default :false
-    }
+    },
+    passResetKey:String,
+    passKeyExpires:Number,
+    createdAt: {
+      type: Date,
+      required: false
+    },
+    updatedAt: {
+      type: Number,
+      required: false
+    },
 })
 
 
