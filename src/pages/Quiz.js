@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Question from "../components/Question"
-import { Grid, Snackbar, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Dialog, DialogTitle } from '@material-ui/core'
+import { Grid, Snackbar, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Dialog, DialogTitle,
+		Button } from '@material-ui/core'
 import './Quiz.css';
 import Loading from "./Loading";
 import axios from "axios";
-import {Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 function Quiz() {
 	const [currentStep, setStep] = useState(1);
@@ -23,6 +24,8 @@ function Quiz() {
 	const [testCompleted, setTestCompleted] = useState(false);
 	const [resultData, setResultData] = useState(null);
 
+	const [confirmModal, setConfirmModal] = useState(false);
+
 	let seconds = 1200; //20 min === 1200 seconds  Total time in seconds
 
 	const submitQuiz = async () => {
@@ -30,7 +33,7 @@ function Quiz() {
 		let url = `https://scholastic-quiz-app.herokuapp.com/answer`;
 		let token = localStorage.getItem('authToken');
 
-		if(token === null) {
+		if (token === null) {
 			setRedirect(true);
 		}
 
@@ -46,11 +49,19 @@ function Quiz() {
 			}).then(res => {
 				setResultData(res);
 			});
-		} catch(error) {
+		} catch (error) {
 			console.log(error);
 		}
 		setLoading(false);
 		setTestCompleted(true);
+	}
+
+	const onCloseHandle = () => {
+		setConfirmModal(false);
+	}
+
+	const handleSubmitBtn = () => {
+		setConfirmModal(true);
 	}
 
 	const handleSubmit = (event) => {
@@ -94,7 +105,7 @@ function Quiz() {
 		} else if (currentStep === 15) {
 			return (
 				<button
-					className="quiz-btn submit-button" onClick={handleSubmit}>
+					className="quiz-btn submit-button" onClick={handleSubmitBtn}>
 					<p>Submit</p>
 				</button>
 			)
@@ -129,7 +140,7 @@ function Quiz() {
 
 	const handleOptionChange = (event) => {
 		setCurrentAns(event.target.value);
-		
+
 		let newState = allChosenAns;
 		newState[currentQuestion].option = event.target.value;
 
@@ -165,7 +176,7 @@ function Quiz() {
 					answerData.push(ansObj);
 				})
 			});
-			
+
 			setQuestions(questionsData);
 			setAllAns(answerData);
 		} catch (error) {
@@ -177,22 +188,22 @@ function Quiz() {
 
 	useEffect(() => {
 		let token = localStorage.getItem('authToken');
-		if(token === null) {
+		if (token === null) {
 			setRedirect(true);
 		}
 		getQuestions();
 	}, [])
 
-	if(redirect) {
+	if (redirect) {
 		return (
 			<Redirect to="/" />
 		)
 	}
-	else if(testCompleted) {
+	else if (testCompleted) {
 		return (
-			<Redirect to="/marks"/>
+			<Redirect to="/marks" />
 		)
-	} 
+	}
 	else {
 		return (
 			loading ? <Loading />
@@ -226,6 +237,15 @@ function Quiz() {
 							</Grid>
 						</Grid>
 					</Grid>
+
+					<Dialog open={confirmModal} onClose={onCloseHandle} aria-labelledby="form-dialog-title"
+						PaperProps={{ style: { backgroundColor: '#2d2d2d', color: '#cfcfcf', minWidth: '10%' } }}>
+						<DialogTitle>Are you sure you want to submit the quiz?</DialogTitle>
+						<div className="btn-div">
+							<Button className="logout-btn m-right" onClick={handleSubmit}>Yes</Button>
+							<Button className="cancel-btn m-left" onClick={onCloseHandle}>No</Button>
+						</div>
+					</Dialog>
 				</div>
 		)
 	}
