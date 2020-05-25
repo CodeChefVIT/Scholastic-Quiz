@@ -127,6 +127,9 @@
 .view-marks-button {
 	margin-top: 5% !important;
 	background-color: blue !important;
+	font-family: "Montserrat", sans-serif !important;
+	font-weight: bold !important;
+	letter-spacing: 2px !important;
 }
 
 .view-marks-button:hover {
