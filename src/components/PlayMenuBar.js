@@ -1,12 +1,12 @@
-import React, {useContext, useState} from "react";
-import {Grid, Button, Typography, Dialog, DialogTitle} from "@material-ui/core";
-import {Link} from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Grid, Button, Typography, Dialog, DialogTitle } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import './PlayMenuBar.css';
 import InfoContext from '../context/InfoContext';
 
 function PlayMenuBar() {
-	const {isLoggedIn, isAdmin, testGiven} = useContext(InfoContext);
-	const[modalOpen, setModalOpen] = useState(false);
+	const { isLoggedIn, isAdmin, testGiven } = useContext(InfoContext);
+	const [modalOpen, setModalOpen] = useState(false);
 
 	const onCloseHandle = () => {
 		setModalOpen(false);
@@ -16,7 +16,7 @@ function PlayMenuBar() {
 		setModalOpen(true);
 	}
 
-	if(!isLoggedIn) {
+	if (!isLoggedIn) {
 		return (
 			<Grid container spacing={0}>
 				<Grid item xs={12} md={6} className="not-logged-menu">
@@ -33,12 +33,15 @@ function PlayMenuBar() {
 				</Grid>
 			</Grid>
 		);
-	} else if(testGiven) {
+	} else if (testGiven) {
 		return (
 			<div className="thanks">
 				<Grid container spacing={0}>
 					<Grid item xs={12} md={6}>
 						<div className="play-menu">
+							{isAdmin ? <Link to="/admin" className="link">
+								<Button size="small" className="admin-btn">Admin Panel</Button>
+							</Link> : null}
 							<Typography variant="h5" className="onetime-warning thank-text">Thanks for giving the test!</Typography>
 							<Link to="/marks" className="link">
 								<Button size="medium" className="view-marks-button"><p className="marks-btn-text">View Marks</p></Button>
@@ -49,16 +52,16 @@ function PlayMenuBar() {
 
 			</div>
 		)
-	} 
-	else if(isLoggedIn) {
+	}
+	else if (isLoggedIn) {
 		return (
 			<div>
 				<Grid container spacing={0}>
 					<Grid item xs={12} md={6}>
 						<div className="play-menu">
-							{isAdmin? <Link to="/admin" className="link">
+							{isAdmin ? <Link to="/admin" className="link">
 								<Button size="small" className="admin-btn">Admin Panel</Button>
-							</Link>: null}<br />
+							</Link> : null}<br />
 							<Button size="large" className="quiz-button" onClick={handleClick}><p className="button-text">Start Quiz</p></Button>
 							<Typography variant="h6" className="onetime-warning">NOTE: You can only take the quiz once!</Typography>
 						</div>
@@ -66,7 +69,7 @@ function PlayMenuBar() {
 				</Grid>
 				<Dialog open={modalOpen} onClose={onCloseHandle} aria-labelledby="form-dialog-title"
 					PaperProps={{ style: { backgroundColor: '#2d2d2d', color: '#cfcfcf', minWidth: '50%' } }}
-					style={{width: '100%'}}>
+					style={{ width: '100%' }}>
 					<DialogTitle><p className="modal-head">Important Information</p></DialogTitle>
 					<div className="modal-info">
 						<Typography variant="h6" className="modal-text">1) You will be given 20 minutes for the whole quiz.</Typography>
