@@ -82,12 +82,17 @@ function RegisterPage() {
 
 		if(!errors && emailError.length === 0 && passwordError.length === 0) {
 			setLoading(true);
-			let url = `https://scholastic-quiz-app.herokuapp.com/api/user/register?
-						name=${name}&email=${email}&password=${password}`;
+			let url = `https://scholastic-quiz-app.herokuapp.com/api/user/register`;
+			
+			let data = {
+				name: name,
+				email: email,
+				password: password
+			}
 
 			let response = null;
 			try {
-				await axios.post(url).then(res => {
+				await axios.post(url, data).then(res => {
 					response = res;
 				});
 				

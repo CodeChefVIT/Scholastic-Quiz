@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Question from "../components/Question"
-import { Grid, Snackbar, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@material-ui/core'
+import { Grid, Snackbar, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Dialog, DialogTitle } from '@material-ui/core'
 import './Quiz.css';
 import Loading from "./Loading";
 import axios from "axios";
