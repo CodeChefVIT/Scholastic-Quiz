@@ -100,3 +100,18 @@
 .bold {
 	font-weight: bolder !important;
 }
+
+.quiz-modal-btn {
+	margin-top: 5% !important;
+
+	background-color: orangered !important;
+	color: white !important;
+	font-family: "Montserrat", sans-serif !important;
+	font-weight: bold !important;
+
+	letter-spacing: 2px !important;
+}
+
+.quiz-modal-btn:hover {
+	background-color: rgb(196, 52, 0) !important;
+}

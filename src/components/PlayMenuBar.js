@@ -57,7 +57,11 @@ function PlayMenuBar() {
 						<Typography variant="h6" className="modal-text bold">2) After starting the quiz, please do not refresh or close the website.
 												You won't be able to give the quiz again!</Typography>
 						<Typography variant="h6" className="modal-text">3) This quiz can be given only once.</Typography>
-						<Typography variant="h6" className="modal-text">4) After submitting the quiz, you will be able to see your marks.</Typography>
+						<Typography variant="h6" className="modal-text">4) You will get 15 MCQs, with only one correct option.</Typography>
+						<Typography variant="h6" className="modal-text">5) After submitting the quiz, you will be able to see your marks.</Typography>
+						<Link to="/quiz" className="link">
+							<Button className="quiz-modal-btn">Let's Go!</Button>
+						</Link>
 					</div>
 				</Dialog>
 			</div>

@@ -58,7 +58,7 @@ function AdminRegister() {
 		if (password.length === 0) setPasswordError(emptyText("Password"));
 		else setPasswordError("");
 
-		if (adminCode.length == 0) setAdminCodeError(emptyText("Admin code"));
+		if (adminCode.length === 0) setAdminCodeError(emptyText("Admin code"));
 		else setAdminCodeError("");
 
 	}, [name, email, password, adminCode]);
