@@ -39,39 +39,39 @@ function Admin() {
 	const [page, setPage] = React.useState(0);
   	const [rowsPerPage, setRowsPerPage] = React.useState(5);
 	const columns = [
-		{ id: 'name', label: 'Name', minWidth: 10 },
-		{ id: 'email', label: 'E-mail', minWidth: 20 },
+		{ id: 'name', label: 'Name', minWidth: 100 },
+		{ id: 'email', label: 'E-mail', minWidth: 200 },
 		{ id: 'score', label: 'Score', minWidth: 10, align: 'right' },
-		{ id: 'q1', label: 'Ques1', minWidth: 20 },
-		{ id: 'a1', label: 'Ans1', minWidth: 10 },
-		{ id: 'q2', label: 'Ques2', minWidth: 20 },
-		{ id: 'a2', label: 'Ans2', minWidth: 10 },
-		{ id: 'q3', label: 'Ques3', minWidth: 20 },
-		{ id: 'a3', label: 'Ans3', minWidth: 10 },
-		{ id: 'q4', label: 'Ques4', minWidth: 20 },
-		{ id: 'a4', label: 'Ans4', minWidth: 10 },
-		{ id: 'q5', label: 'Ques5', minWidth: 20 },
-		{ id: 'a5', label: 'Ans5', minWidth: 10 },
-		{ id: 'q6', label: 'Ques6', minWidth: 20 },
-		{ id: 'a6', label: 'Ans6', minWidth: 10 },
-		{ id: 'q7', label: 'Ques7', minWidth: 20 },
-		{ id: 'a7', label: 'Ans7', minWidth: 10 },
-		{ id: 'q8', label: 'Ques8', minWidth: 20 },
-		{ id: 'a8', label: 'Ans8', minWidth: 10 },
-		{ id: 'q9', label: 'Ques9', minWidth: 20 },
-		{ id: 'a9', label: 'Ans9', minWidth: 10 },
-		{ id: 'q10', label: 'Ques10', minWidth: 20 },
-		{ id: 'a10', label: 'Ans10', minWidth: 10 },
-		{ id: 'q11', label: 'Ques11', minWidth: 20 },
-		{ id: 'a11', label: 'Ans11', minWidth: 10 },
-		{ id: 'q12', label: 'Ques12', minWidth: 20 },
-		{ id: 'a12', label: 'Ans12', minWidth: 10 },
-		{ id: 'q13', label: 'Ques13', minWidth: 20 },
-		{ id: 'a13', label: 'Ans13', minWidth: 10 },
-		{ id: 'q14', label: 'Ques14', minWidth: 20 },
-		{ id: 'a14', label: 'Ans14', minWidth: 10 },
-		{ id: 'q15', label: 'Ques15', minWidth: 20 },
-		{ id: 'a15', label: 'Ans15', minWidth: 10 },
+		{ id: 'q1', label: 'Ques1', minWidth: 200 },
+		{ id: 'a1', label: 'Ans1', minWidth: 50 },
+		{ id: 'q2', label: 'Ques2', minWidth: 200 },
+		{ id: 'a2', label: 'Ans2', minWidth: 50 },
+		{ id: 'q3', label: 'Ques3', minWidth: 200 },
+		{ id: 'a3', label: 'Ans3', minWidth: 50 },
+		{ id: 'q4', label: 'Ques4', minWidth: 200 },
+		{ id: 'a4', label: 'Ans4', minWidth: 50 },
+		{ id: 'q5', label: 'Ques5', minWidth: 200 },
+		{ id: 'a5', label: 'Ans5', minWidth: 50 },
+		{ id: 'q6', label: 'Ques6', minWidth: 200 },
+		{ id: 'a6', label: 'Ans6', minWidth: 50 },
+		{ id: 'q7', label: 'Ques7', minWidth: 200 },
+		{ id: 'a7', label: 'Ans7', minWidth: 50 },
+		{ id: 'q8', label: 'Ques8', minWidth: 200 },
+		{ id: 'a8', label: 'Ans8', minWidth: 50 },
+		{ id: 'q9', label: 'Ques9', minWidth: 200 },
+		{ id: 'a9', label: 'Ans9', minWidth: 50 },
+		{ id: 'q10', label: 'Ques10', minWidth: 200 },
+		{ id: 'a10', label: 'Ans10', minWidth: 50 },
+		{ id: 'q11', label: 'Ques11', minWidth: 200 },
+		{ id: 'a11', label: 'Ans11', minWidth: 50 },
+		{ id: 'q12', label: 'Ques12', minWidth: 200 },
+		{ id: 'a12', label: 'Ans12', minWidth: 50 },
+		{ id: 'q13', label: 'Ques13', minWidth: 200 },
+		{ id: 'a13', label: 'Ans13', minWidth: 50 },
+		{ id: 'q14', label: 'Ques14', minWidth: 200 },
+		{ id: 'a14', label: 'Ans14', minWidth: 50 },
+		{ id: 'q15', label: 'Ques15', minWidth: 200 },
+		{ id: 'a15', label: 'Ans15', minWidth: 50 },
 	];
 	function createData(name,email,score,q1,a1,q2,a2,q3,a3,q4,a4,q5,a5,q6,a6,q7,a7,q8,a8,q9,a9,q10,a10,q11,a11,q12,a12,q13,a13,q14,a14,q15,a15) {
 		return {name, email, score, q1, a1, q2, a2, q3, a3, q4, a4, q5, a5, q6, a6, q7, a7, q8, a8, q9, a9, q10, a10, q11, a11, q12, a12, q13, a13, q14, a14, q15, a15}
@@ -118,31 +118,6 @@ function Admin() {
 		setLoading(false);
 	}
 
-	// const getQ = async(qid) => {
-	// 	let token = localStorage.getItem('authToken');
-	// 	let url2 = `https://scholastic-quiz-app.herokuapp.com/questions/${qid}`;
-	// 	let response2 = null;
-
-	// 	try {
-	// 		await axios.get(url2, {
-	// 			headers: {
-	// 				"auth-token": token
-	// 			}
-	// 		}).then(res => {
-	// 			response2 = res;
-	// 		});
-	// 		console.log(response);
-	// 		if(response2.status === 200){
-	// 			var q = response.data.description
-	// 			console.log(response.data.description);
-	// 			return q
-	// 		}
-
-	// 	} catch(error) {
-	// 		console.log(error);
-	// 	}
-	// }
-
 	const getSubmissions = async () => {
 		let token = localStorage.getItem('authToken');
 		let subs = []
@@ -153,19 +128,6 @@ function Admin() {
 
 		let url = `https://scholastic-quiz-app.herokuapp.com/viewSubmissions`;
 		let response = null;
-		// let allQues = null;
-		// let url2 = `https://scholastic-quiz-app.herokuapp.com/questions`;
-		// try {
-		// 	await axios.get(url2, {
-		// 		headers: {
-		// 			"auth-token": token
-		// 		}
-		// 	}).then(res => {
-		// 		allQues = res;
-		// 	});
-		// } catch(error) {
-		// 	console.log(error);
-		// }
 
 		try {
 			await axios.get(url, {
@@ -184,12 +146,18 @@ function Admin() {
 					var name = response.data[i].name;
 					var email = response.data[i].email;
 					var score = response.data[i].score;
-					// for(j = 0; j < response.data[i].responses.length; j++){
-					// 	for(k = 0; k < allQues.data.length; k++){
-					// 		if(allQues.data[k].)
-					// 	}
-					// 	a[j] = response.data[i].responses[j].option;
-					// }
+					for(j = 0, k = 0; j < response.data[i].responses.length; j++, k++){
+						q[j] = response.data[i].responses[j].questionText;
+						a[j] = response.data[i].responses[j].selectedOption;
+					}
+					for(; k < 15; k++){
+						q[k] = "Not Assigned";
+						a[k] = "N.A.";
+					}
+					for(j = 0; j < response.data[i].responses.length; j++){
+						q[j] = response.data[i].responses[j].questionText;
+						a[j] = response.data[i].responses[j].selectedOption;
+					}
 					subs = [...subs,createData(name,email,score,q[0],a[0],q[1],a[1],q[2],a[2],q[3],a[3],q[4],a[4],q[5],a[5],q[6],a[6],q[7],a[7],q[8],a[8],q[9],a[9],q[10],a[10],q[11],a[11],q[12],a[12],q[13],a[13],q[14],a[14])];
 				}
 				setRows([...rows,...subs]);
@@ -339,7 +307,8 @@ function Admin() {
 				} catch(error) {
 					console.log(error);
 				}
-				setTimeout(() => {setOpen(false);}, 800);
+				setSubmit('');
+				setTimeout(() => {setOpen(false);setSubmit('');}, 800);
 		}
 	};
 
@@ -432,13 +401,13 @@ function Admin() {
 							onChange={handle4change}
 						/>
 						<FormControl component="fieldset">
-							<FormLabel style={{ color: '#ffa400', paddingTop: 20 }} component="legend">Correct Option</FormLabel>
+							<FormLabel style={{ color: '#ffa2000', paddingTop: 20 }} component="legend">Correct Option</FormLabel>
 							<p style={{color: '#f44336', fontSize: 14, margin: 0}}>{valueError}</p>
 							<RadioGroup aria-label="correct-choice" value={value} onChange={handleChange} >
-								<FormControlLabel value="op1" control={<Radio style={{color: '#ffa400'}} />} label="Option 1" />
-								<FormControlLabel value="op2" control={<Radio style={{color: '#ffa400'}} />} label="Option 2" />
-								<FormControlLabel value="op3" control={<Radio style={{color: '#ffa400'}} />} label="Option 3" />
-								<FormControlLabel value="op4" control={<Radio style={{color: '#ffa400'}} />} label="Option 4" />
+								<FormControlLabel value="op1" control={<Radio style={{color: '#ffa2000'}} />} label="Option 1" />
+								<FormControlLabel value="op2" control={<Radio style={{color: '#ffa2000'}} />} label="Option 2" />
+								<FormControlLabel value="op3" control={<Radio style={{color: '#ffa2000'}} />} label="Option 3" />
+								<FormControlLabel value="op4" control={<Radio style={{color: '#ffa2000'}} />} label="Option 4" />
 							</RadioGroup>
 						</FormControl>
 						<p style={{color: '#0f0', fontSize: 14, margin: 0}}>{submitResponse}</p>

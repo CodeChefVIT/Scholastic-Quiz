@@ -17,7 +17,7 @@ function LoginPage() {
 	const [password, changePassword] = useState("");
 	const [passwordError, setPasswordError] = useState("");
 	const [passwordChanged, setPasswordChanged] = useState(false);
-	const [didLogin, setDidLogin] = useState(false);
+	const [didLogin, setDidLogin] = useState(null);
 	const [redirect, setRedirect] = useState(false);
 
 	const [isLoading, setLoading] = useState(false);
@@ -82,7 +82,6 @@ function LoginPage() {
 				if(response.status === 200) {
 					changeName(response.data.name);
 					setLoggedIn(true);
-					setDidLogin(true);
 					setAuthToken(response.data.authToken);
 
 					if(response.data.isAdmin === true) {
@@ -93,10 +92,13 @@ function LoginPage() {
 					localStorage.setItem('name', response.data.name);
 					localStorage.setItem("authToken", response.data.authToken);
 
-					setTimeout(() => setRedirect(true),1500);
-				}
+					setRedirect(true);
+				}else{
+					setDidLogin(false);
+				} 
 			} catch(error) {
 				console.log(error);
+				setDidLogin(false);
 			}
 		}
 		setLoading(false);
@@ -111,7 +113,7 @@ function LoginPage() {
 		<Container className="login-page">
 			<div className="login-form">
 				<Typography variant="h3" color="primary" className="login-head">Login Now!</Typography><br />
-				{didLogin === true? <Alert severity="success" color="warning">Succesfully Logged In! Redirecting...</Alert>: null}
+				{didLogin === false? <Alert severity="error">Error Logging In! Try again....</Alert>: null}
 				<form className="form">
 					<TextInput
 						error={emailChanged? (emailError.length === 0? false: true): false}

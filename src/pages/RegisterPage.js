@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './RegisterPage.css';
 import { Container, Typography, Button, Checkbox, FormControlLabel } from "@material-ui/core";
 import {Alert} from "@material-ui/lab";
+import {Redirect} from "react-router-dom";
 import TextInput from "../components/TextInput";
 import * as EmailValidator from "email-validator";
 import axios from 'axios';
@@ -17,6 +18,7 @@ function RegisterPage() {
 	const [password, changePassword] = useState("");
 	const [passwordError, setPasswordError] = useState("");
 	const [passwordChanged, setPasswordChanged] = useState(false);
+	const [redirect, setRedirect] = useState(false);
 
 	const [signedUp, setSignedUp] = useState(false);
 	const [isLoading, setLoading] = useState(false);
@@ -97,6 +99,7 @@ function RegisterPage() {
 					changePassword("");
 					setPasswordChanged(false);
 					setSignedUp(true);
+					setRedirect(true);
 				} 
 			} catch(error) {
 				console.log(error);
@@ -104,7 +107,9 @@ function RegisterPage() {
 		}
 		setLoading(false);
 	}
-
+	if(redirect === true){
+		return <Redirect to='/login' />
+	}
 	return (
 		isLoading? <Loading />
 		:
@@ -112,7 +117,7 @@ function RegisterPage() {
 			<div className="login-form">
 				<img src="hg-pin.png" className="signup-img" alt="Mokingjay Pin"></img>
 				<Typography variant="h3" color="primary" className="login-head signup-text">Join the force!</Typography><br />
-				{signedUp === true? <Alert severity="success" color="warning">Succesfully Signed Up!</Alert>: null}
+				{signedUp === true? <Alert severity="success" color="warning">Succesfully Signed Up! Redirecting...</Alert>: null}
 				<form className="form">
 					<TextInput
 						error={nameChanged? (nameError.length === 0? false: true): false}
