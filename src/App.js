@@ -11,7 +11,7 @@ import ErrorPage from './pages/ErrorPage';
 import AdminRegister from './pages/AdminRegister';
 import InfoContext from './context/InfoContext';
 import ForgotPassword from './pages/ForgotPassword';
-import Result from './pages/Result';
+import MarksPage from './pages/MarksPage';
 
 function App() {
 	const [authToken, setAuthToken] = useState(null);
@@ -34,7 +34,7 @@ function App() {
 	return (
 		<InfoContext.Provider value={info}>
 			<Router>
-				<Navbar isLoggedIn={info.isLoggedIn}/>
+				<Navbar loggedIn={info.isLoggedIn}/>
 				<Switch>
 					<Route exact path="/">
 						<Welcome />
@@ -48,8 +48,8 @@ function App() {
 					<Route exact path="/quiz">
 						<Quiz />
 					</Route>
-					<Route exact path="/result">
-						<Result />
+					<Route exact path="/marks">
+						<MarksPage />
 					</Route>
 					<Route exact path="/adminRegister">
 						<AdminRegister />

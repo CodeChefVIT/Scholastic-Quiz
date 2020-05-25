@@ -59,6 +59,8 @@ function PlayMenuBar() {
 						<Typography variant="h6" className="modal-text">3) This quiz can be given only once.</Typography>
 						<Typography variant="h6" className="modal-text">4) You will get 15 MCQs, with only one correct option.</Typography>
 						<Typography variant="h6" className="modal-text">5) After submitting the quiz, you will be able to see your marks.</Typography>
+						<Typography variant="h5" className="modal-text bold">6) IMPORTANT: IF YOU LEAVE THE QUIZ PAGE WITHOUT HITTING THE SUBMIT BUTTON,
+												YOUR ATTEMP WILL NOT COUNT AND YOU WILL NOT BE ABLE TO TAKE THE QUIZ AGAIN!!!</Typography>
 						<Link to="/quiz" className="link">
 							<Button className="quiz-modal-btn">Let's Go!</Button>
 						</Link>

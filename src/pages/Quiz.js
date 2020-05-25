@@ -20,12 +20,19 @@ function Quiz() {
 	const [allChosenAns, setAllAns] = useState(null);
 	const [redirect, setRedirect] = useState(false);
 
+	const [testCompleted, setTestCompleted] = useState(false);
+	const [resultData, setResultData] = useState(null);
+
 	let seconds = 1200; //20 min === 1200 seconds  Total time in seconds
 
 	const submitQuiz = async () => {
 		setLoading(true);
 		let url = `https://scholastic-quiz-app.herokuapp.com/answer`;
 		let token = localStorage.getItem('authToken');
+
+		if(token === null) {
+			setRedirect(true);
+		}
 
 		let data = {
 			"questions": allChosenAns,
@@ -36,18 +43,22 @@ function Quiz() {
 				headers: {
 					"auth-token": token,
 				}
-			}).then(res => console.log(res));
+			}).then(res => {
+				console.log(res);
+				setResultData(res);
+			});
 		} catch(error) {
 			console.log(error);
 		}
 		setLoading(false);
+		setTestCompleted(true);
 	}
 
 	const handleSubmit = (event) => {
 		submitQuiz();
 	}
 	const timesUp = () => {
-		settimes(true);
+		submitQuiz();
 	}
 	const _next = () => {
 		let currQues = currentQuestion + 1;
@@ -124,8 +135,6 @@ function Quiz() {
 		newState[currentQuestion].option = event.target.value;
 
 		setAllAns(newState);
-
-		console.log(allChosenAns);
 	}
 
 	const getQuestions = async () => {
@@ -157,7 +166,7 @@ function Quiz() {
 					answerData.push(ansObj);
 				})
 			});
-
+			
 			setQuestions(questionsData);
 			setAllAns(answerData);
 		} catch (error) {
@@ -179,7 +188,13 @@ function Quiz() {
 		return (
 			<Redirect to="/" />
 		)
-	} else {
+	}
+	else if(testCompleted) {
+		return (
+			<Redirect to="/marks"/>
+		)
+	} 
+	else {
 		return (
 			loading ? <Loading />
 				:
