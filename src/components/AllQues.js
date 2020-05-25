@@ -42,144 +42,6 @@ export default function AllQues(){
 	}
 	const [rows, setRows] = React.useState([]);
 
-	const handleChange = (event) => {
-		setValue(event.target.value);
-		setValueError('');
-	};
-	const handleClickOpen = () => {
-		setOpen(true);
-	};
-	const handleClose = () => {
-		setOpen(false);
-	};
-
-	const handleQchange = (event) => {
-		var s = event.target.value;
-		setQues(s);
-		if(s.length === 0){
-			setQuesError(errorText);
-		}else{
-			setQuesError('');
-		}
-	};
-	const handle1change = (event) => {
-		var s = event.target.value;
-		setOp1(s);
-		if(s.length === 0){
-			setOp1Error(errorText);
-		}else{
-			setOp1Error('');
-		}
-	};
-	const handle2change = (event) => {
-		var s = event.target.value;
-		setOp2(s);
-		if(s.length === 0){
-			setOp2Error(errorText);
-		}else{
-			setOp2Error('');
-		}
-	};
-	const handle3change = (event) => {
-		var s = event.target.value;
-		setOp3(s);
-		if(s.length === 0){
-			setOp3Error(errorText);
-		}else{
-			setOp3Error('');
-		}
-	};
-	const handle4change = (event) => {
-		var s = event.target.value;
-		setOp4(s);
-		if(s.length === 0){
-			setOp4Error(errorText);
-		}else{
-			setOp4Error('');
-		}
-	};
-
-	const handleSubmit = async() => {
-		let error = false;
-		let val = "none";
-		if(ques.length === 0){
-			setQuesError(errorText);
-			error = true;
-		}
-		if(op1.length === 0){
-			setOp1Error(errorText);
-			error = true;
-		}
-		if(op2.length === 0){
-			setOp2Error(errorText);
-			error = true;
-		}
-		if(op3.length === 0){
-			setOp3Error(errorText);
-			error = true;
-		}
-		if(op4.length === 0){
-			setOp4Error(errorText);
-			error = true;
-		}
-		if(value === 'none'){
-			setValueError(errorText);
-			error = true;
-		}else if(value === 'op1'){
-			val = op1;
-		}else if(value === 'op2'){
-			val = op2;
-		}else if(value === 'op3'){
-			val = op3;
-		}else if(value === 'op4'){
-			val = op4;
-		}
-		if(op1 === op2 || op1=== op3 || op1 === op4 || op2 === op3 || op2 === op4 || op3 === op4){
-			setValueError('Multiple same options');
-			error = true;
-		}
-		if(!error){
-				let token = localStorage.getItem('authToken');
-				let url = `https://scholastic-quiz-app.herokuapp.com/questions`
-				let data = {
-					"description" : ques,
-					"correct_answer" : val,
-					"alternatives" : [
-						{
-							"text" : op1
-						},
-						{
-							"text" : op2
-						},
-						{
-							"text" : op3
-						},
-						{
-							"text" : op4
-						}
-					] 
-				}
-				let response = null;
-				try {
-					await axios.post(url,data,{
-						headers: {
-							"auth-token" : token
-						}}).then(res => {
-						response = res;
-					});
-					if(response.status === 201) {
-						setSubmit('Succesfully Submitted..')
-					}else{
-						setSubmit('Cannot Submit. Server error. Try later..')
-					}
-				} catch(error) {
-					console.log(error);
-				}
-				setSubmit('');
-				setTimeout(() => {setOpen(false);setSubmit('');}, 800);
-		}
-	};
-
 	const update = async(ndata, odata) => {
 		console.log(ndata, odata);
 		if(ndata.qid === odata.qid){
@@ -289,7 +151,7 @@ export default function AllQues(){
 		let response = null;
 		let i = 0;
 		let data = [];
-		setRows([]);
+		setRows(null);
 		try {
 			await axios.get(url, {
 				headers: {
@@ -312,7 +174,7 @@ export default function AllQues(){
 					
 					data = [...data, createData(id,ques,o1,o2,o3,o4,correct)]
 				}
-				setRows([...rows, ...data]);
+				setRows(data);
 				console.log(rows);
 			}
 
