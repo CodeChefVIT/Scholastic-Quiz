@@ -212,7 +212,7 @@ router.post('/forgot', (req, res) => {
    // let {resetKey, newPassword} = req.body
     let resetKey=req.query.resetKey
     let newPassword=req.query.newPassword
-    
+
      await User.findOne({passResetKey: resetKey}, (err, userData) => {
           if (!err) {
               console.log(userData.name)
@@ -250,6 +250,7 @@ router.post('/forgot', (req, res) => {
           res.status(400).send(err)
       }
   })
+  
   
 
 
