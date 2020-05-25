@@ -102,9 +102,16 @@ function AdminRegister() {
 			let url = `https://scholastic-quiz-app.herokuapp.com/api/user/register?
 			name=${name}&email=${email}&password=${password}&adminCode=${adminCode}`;
 
+			let data = {
+				name: name,
+				email: email,
+				password: password,
+				adminCode: adminCode,
+			}
+
 			let response = null;
 			try {
-				await axios.post(url).then(res => {
+				await axios.post(url, data).then(res => {
 					response = res;
 				});
 				
