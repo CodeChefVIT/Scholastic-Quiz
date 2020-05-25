@@ -68,12 +68,15 @@ function ForgotPassword() {
 
 		if(!errors && emailError.length === 0) {
 			setLoading(true);
-			let url = `https://scholastic-quiz-app.herokuapp.com/forgot?email=${email}`
+			let url = `https://scholastic-quiz-app.herokuapp.com/forgot`;
 
+			let data = {
+				email: email,
+			}
 			let response = null;
 
 			try {
-				await axios.post(url).then(res => response = res);
+				await axios.post(url, data).then(res => response = res);
 
 				setTokenSent(true);
 			} catch(error) {
@@ -95,12 +98,16 @@ function ForgotPassword() {
 
 		if(!errors) {
 			setLoading(true);
-			let url = `https://scholastic-quiz-app.herokuapp.com/resetpass?
-				resetKey=${resetCode}&newPassword=${password}`;
+			let url = `https://scholastic-quiz-app.herokuapp.com/resetpass`;
+
+			let data = {
+				resetKey: resetCode,
+				newPassword: password,
+			}
 
 			let response = null;
 			try {
-				await axios.post(url).then(res => response = res);
+				await axios.post(url, data).then(res => response = res);
 				
 				setPasswordConfirmed(true);
 			} catch(error) {
