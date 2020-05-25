@@ -150,7 +150,7 @@ function Quiz() {
 					"auth-token": token
 				}
 			}).then(res => {
-				res.data.map((question) => {
+				res.data["questions"].map((question) => {
 					let questionObj = {
 						q_id: question._id,
 						text: question.description,
