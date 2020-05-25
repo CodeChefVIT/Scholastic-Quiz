@@ -70,12 +70,16 @@ function LoginPage() {
 
 		if(!errors && emailError.length === 0 && passwordError.length === 0) {
 			setLoading(true);
-			let url = `https://scholastic-quiz-app.herokuapp.com/api/user/login?
-						email=${email}&password=${password}`;
+			let url = `https://scholastic-quiz-app.herokuapp.com/api/user/login`;
+
+			let data = {
+				"email": email,
+				"password": password
+			}
 			
 			let response = null;
 			try {
-				await axios.post(url).then(res => {
+				await axios.post(url, data).then(res => {
 					response = res;
 				});
 
@@ -87,9 +91,9 @@ function LoginPage() {
 					if(response.data.isAdmin === true) {
 						setAdmin(true);
 					} 
-					
+					console.log(response);
 					localStorage.setItem('userLoggedIn', true);
-					localStorage.setItem('name', response.data.name);
+					localStorage.setItem('name', response.data.user.name);
 					localStorage.setItem("authToken", response.data.authToken);
 
 					setRedirect(true);

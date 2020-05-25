@@ -5,8 +5,9 @@ import './Navbar.css';
 import InfoContext from '../context/InfoContext';
 
 function Navbar() {
-	const [navLoggedIn, setNavLoggedIn] = useState(false);
 	const {isLoggedIn, setLoggedIn, name} = useContext(InfoContext);
+	const [navLoggedIn, setNavLoggedIn] = useState(false);
+	const [navName, setNavName] = useState(null);
 
 	const handleLogout = () => {
 		localStorage.clear();
@@ -14,8 +15,16 @@ function Navbar() {
 	}
 
 	useEffect(() => {
-		setNavLoggedIn(isLoggedIn);
+		let loggedin = localStorage.getItem("userLoggedIn");
+		if(loggedin === "true") {
+			setNavLoggedIn(true);
+			setNavName(localStorage.getItem("name"));
+		} else {
+			setNavLoggedIn(isLoggedIn);
+			setNavName(name);
+		}	
 	})
+
 
 	return (
 			<div className="root">
@@ -26,7 +35,7 @@ function Navbar() {
 						{navLoggedIn === false?
 							<Link className="link" to="/login"><Button color="inherit" className="login">Login</Button></Link>
 							:
-							<Typography variant="h6" className="nav-user">Welcome, {name}</Typography>
+							<Typography variant="h6" className="nav-user">Welcome, {navName}</Typography>
 							
 						}
 						{navLoggedIn? <Button className="logout-btn" onClick={handleLogout}>Logout</Button>: null}

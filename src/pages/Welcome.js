@@ -31,7 +31,6 @@ function Welcome() {
 			localStorage.clear()
 			setLoggedIn(false);
 		}
-
 		setLoading(false);
 	}
 
