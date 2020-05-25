@@ -18,7 +18,7 @@ function App() {
 	const [isLoggedIn, setLoggedIn] = useState(false);
 	const [name, changeName] = useState(null);
 	const [isAdmin, setAdmin] = useState(false);
-
+	const [testGiven, setTestGiven] = useState(false);
 
 	let info = {
 		name:name,
@@ -29,6 +29,8 @@ function App() {
 		setLoggedIn: setLoggedIn,
 		isAdmin: isAdmin,
 		setAdmin: setAdmin,
+		testGiven: testGiven,
+		setTestGiven: setTestGiven,
 	}
  
 	return (

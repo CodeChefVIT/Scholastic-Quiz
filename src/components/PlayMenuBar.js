@@ -5,8 +5,7 @@ import './PlayMenuBar.css';
 import InfoContext from '../context/InfoContext';
 
 function PlayMenuBar() {
-	const {isLoggedIn, isAdmin} = useContext(InfoContext);
-
+	const {isLoggedIn, isAdmin, testGiven} = useContext(InfoContext);
 	const[modalOpen, setModalOpen] = useState(false);
 
 	const onCloseHandle = () => {
@@ -34,7 +33,24 @@ function PlayMenuBar() {
 				</Grid>
 			</Grid>
 		);
-	} else if(isLoggedIn) {
+	} else if(testGiven) {
+		return (
+			<div className="thanks">
+				<Grid container spacing={0}>
+					<Grid item xs={12} md={6}>
+						<div className="play-menu">
+							<Typography variant="h5" className="onetime-warning thank-text">Thanks for giving the test!</Typography>
+							<Link to="/marks" className="link">
+								<Button size="medium" className="view-marks-button"><p className="marks-btn-text">View Marks</p></Button>
+							</Link>
+						</div>
+					</Grid>
+				</Grid>
+
+			</div>
+		)
+	} 
+	else if(isLoggedIn) {
 		return (
 			<div>
 				<Grid container spacing={0}>

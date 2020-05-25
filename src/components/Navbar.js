@@ -54,7 +54,7 @@ function Navbar() {
 
 				<Dialog open={open} onClose={onCloseHandle} aria-labelledby="form-dialog-title"
 					PaperProps={{ style: { backgroundColor: '#2d2d2d', color: '#cfcfcf', minWidth: '10%' } }}>
-					<DialogTitle>Are you sure?</DialogTitle>
+					<DialogTitle>Are you sure you want to logout?</DialogTitle>
 					<div className="btn-div">
 						<Button className="logout-btn m-right" onClick={handleLogout}>Yes</Button>
 						<Button className="cancel-btn m-left" onClick={onCloseHandle}>No</Button>

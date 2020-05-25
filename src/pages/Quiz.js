@@ -172,6 +172,7 @@ function Quiz() {
 			console.log(error);
 		}
 		setLoading(false);
+		setInterval(() => tick(), 1000);
 	}
 
 	useEffect(() => {
@@ -180,7 +181,6 @@ function Quiz() {
 			setRedirect(true);
 		}
 		getQuestions();
-		setInterval(() => tick(), 1000);
 	}, [])
 
 	if(redirect) {
