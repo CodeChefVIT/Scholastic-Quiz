@@ -15,6 +15,19 @@ router.get('/questions',verify, async (req, res) => {
     try {
         const questions = await Question.find()
         console.log(req.user)
+        
+        console.log(req.user.user)
+        return res.status(200).json(questions)
+    } catch (error) {
+        return res.status(500).json({"error":error})
+    }
+})
+
+//get fifteen random questions
+router.get('/questionsFifteen',verify, async (req, res) => {
+    try {
+        const questions = await Question.aggregate([{ $sample: { size: 15} }])
+        console.log(req.user.user.testGiven)
         await User.updateOne({_id:req.user.user._id},{$set:{testStarted:true}})
         console.log(req.user.user)
         return res.status(200).json(questions)
@@ -23,6 +36,8 @@ router.get('/questions',verify, async (req, res) => {
     }
 })
 
+
+//view all the submissions by the user
 router.get('/viewSubmissions',verify,adminAccess, async (req, res) => {
     try {
         const array =await User.find({testGiven:true})
@@ -250,7 +265,7 @@ router.post('/forgot', (req, res) => {
           res.status(400).send(err)
       }
   })
-  
+
   
 
 
