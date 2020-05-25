@@ -4,6 +4,7 @@ import { Grid, Snackbar, FormControl, FormLabel, RadioGroup, FormControlLabel, R
 import './Quiz.css';
 import Loading from "./Loading";
 import axios from "axios";
+import {Redirect} from "react-router-dom";
 
 function Quiz() {
 	const [currentStep, setStep] = useState(1);
@@ -18,11 +19,32 @@ function Quiz() {
 	const [currentAns, setCurrentAns] = useState(null);
 
 	const [allChosenAns, setAllAns] = useState(null);
+	const [redirect, setRedirect] = useState(false);
 
 	let seconds = 1200; //20 min === 1200 seconds  Total time in seconds
 
-	const handleSubmit = event => {
+	const submitQuiz = async () => {
+		let url = `https://scholastic-quiz-app.herokuapp.com/answer`;
+		let token = localStorage.getItem('authToken');
+
+		let data = {
+			"questions": allChosenAns,
+		}
+
+		try {
+			await axios.put(url, data, {
+				headers: {
+					"auth-token": token,
+				}
+			}).then(res => console.log(res));
+		} catch(error) {
+			console.log(error);
+		}
+	}
+
+	const handleSubmit = (event) => {
 		setsubmit(true);
+		submitQuiz();
 	}
 	const timesUp = () => {
 		settimes(true);
@@ -145,46 +167,56 @@ function Quiz() {
 	}
 
 	useEffect(() => {
+		let token = localStorage.getItem('authToken');
+		if(token === null) {
+			setRedirect(true);
+		}
 		getQuestions();
 	}, [])
 
-	return (
-		loading ? <Loading />
-			:
-			<div className="quiz-page">
-				<Grid container xs={12} spacing={5} className="quiz-container">
-					<Grid item xs={10} md={8} lg={7} className="q-count" >
-						<h2 style={{ margin: 0 }}>Question {currentStep}</h2>
-					</Grid>
-					<Grid item xs={10} md={8} lg={7} className="timer">
-						<p>Time Remaining <h2>{min}:{sec}</h2></p>
-					</Grid>
-					<Grid item xs={10} md={8} lg={7} style={{ margin: 0, padding: '2%', backgroundColor: '#111', borderBottom: '5px solid #222', minHeight: '50vh' }}>
-						<FormControl style={{ margin: 'auto', width: "100%" }} component="fieldset">
-							<FormLabel className="label" component="legend">{allQuestions[currentQuestion].text}</FormLabel>
-							<RadioGroup aria-label="correct-choice" value={currentAns} onChange={handleOptionChange}>
-								{allQuestions[currentQuestion].options.map((option) => {
-									return (
-										<FormControlLabel key={option._id} value={option.text} control={<Radio className="radio" />} label={option.text} style={{ margin: 0 }} />
-									)
-								})}
-							</RadioGroup>
-						</FormControl>
-					</Grid>
-					<Grid item xs={10} md={8} lg={7} className="button" >
-						<Grid item xs={6} className="button">
-							{previousButton()}
+	if(redirect) {
+		return (
+			<Redirect to="/" />
+		)
+	} else {
+		return (
+			loading ? <Loading />
+				:
+				<div className="quiz-page">
+					<Grid container xs={12} spacing={5} className="quiz-container">
+						<Grid item xs={10} md={8} lg={7} className="q-count" >
+							<h2 style={{ margin: 0 }}>Question {currentStep}</h2>
 						</Grid>
-						<Grid item xs={6} className="button">
-							{nextButton()}
+						<Grid item xs={10} md={8} lg={7} className="timer">
+							<p>Time Remaining <h2>{min}:{sec}</h2></p>
+						</Grid>
+						<Grid item xs={10} md={8} lg={7} style={{ margin: 0, padding: '2%', backgroundColor: '#111', borderBottom: '5px solid #222', minHeight: '50vh' }}>
+							<FormControl style={{ margin: 'auto', width: "100%" }} component="fieldset">
+								<FormLabel className="label" component="legend">{allQuestions[currentQuestion].text}</FormLabel>
+								<RadioGroup aria-label="correct-choice" value={currentAns} onChange={handleOptionChange}>
+									{allQuestions[currentQuestion].options.map((option) => {
+										return (
+											<FormControlLabel key={option._id} value={option.text} control={<Radio className="radio" />} label={option.text} style={{ margin: 0 }} />
+										)
+									})}
+								</RadioGroup>
+							</FormControl>
+						</Grid>
+						<Grid item xs={10} md={8} lg={7} className="button" >
+							<Grid item xs={6} className="button">
+								{previousButton()}
+							</Grid>
+							<Grid item xs={6} className="button">
+								{nextButton()}
+							</Grid>
 						</Grid>
 					</Grid>
-				</Grid>
-				<Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center', }} open={submit} message="Submitting.." />
-				<Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center', }} open={times} message="TimesUp.. Submitting.." />
+					<Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center', }} open={submit} message="Submitting.." />
+					<Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center', }} open={times} message="TimesUp.. Submitting.." />
 
-			</div>
-	)
+				</div>
+		)
+	}
 }
 
 export default Quiz;
