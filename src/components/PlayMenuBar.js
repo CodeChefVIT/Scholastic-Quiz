@@ -54,8 +54,10 @@ function PlayMenuBar() {
 					<DialogTitle><p className="modal-head">Important Information</p></DialogTitle>
 					<div className="modal-info">
 						<Typography variant="h6" className="modal-text">1) You will be given 20 minutes for the whole quiz.</Typography>
-						<Typography variant="h6" className="modal-text">2) After starting the quiz, please do not refresh or close the website.
+						<Typography variant="h6" className="modal-text bold">2) After starting the quiz, please do not refresh or close the website.
 												You won't be able to give the quiz again!</Typography>
+						<Typography variant="h6" className="modal-text">3) This quiz can be given only once.</Typography>
+						<Typography variant="h6" className="modal-text">4) After submitting the quiz, you will be able to see your marks.</Typography>
 					</div>
 				</Dialog>
 			</div>

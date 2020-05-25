@@ -92,7 +92,7 @@
 	text-decoration: underline;
 }
 
-@media screen and (max-width: 820px) {
+@media screen and (max-width: 850px) {
 	.register-link {
 		font-size: 0.85rem;
 	}

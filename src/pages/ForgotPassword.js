@@ -5,6 +5,7 @@ import EmailValidator from "email-validator";
 import './ForgotPassword.css';
 import axios from "axios";
 import Loading from "./Loading";
+import { Alert } from "@material-ui/lab";
 
 function ForgotPassword() {
 	const [email, changeEmail] = useState("");
@@ -23,7 +24,7 @@ function ForgotPassword() {
 
 
 	const [tokenSent, setTokenSent] = useState(false);
-	const [tokenCorrect, setTokenCorrect] = useState(false);
+	const [passwordConfirmed, setPasswordConfirmed] = useState(false);
 	const [loading, setLoading] = useState(false);
 
 	const handleEmailChange = (event) => {
@@ -73,12 +74,12 @@ function ForgotPassword() {
 
 			try {
 				await axios.post(url).then(res => response = res);
-				console.log(response);
+
+				setTokenSent(true);
 			} catch(error) {
 				console.log(error);
 			}
 		}
-		setTokenSent(true);
 		setLoading(false);
 	}
 
@@ -95,15 +96,22 @@ function ForgotPassword() {
 		if(!errors) {
 			setLoading(true);
 			let url = `https://scholastic-quiz-app.herokuapp.com/resetpass?
-				resetKey=${resetCode}p&newPassword=${password}`;
+				resetKey=${resetCode}&newPassword=${password}`;
 
 			let response = null;
 			try {
 				await axios.post(url).then(res => response = res);
-				console.log(response);
+				
+				setPasswordConfirmed(true);
 			} catch(error) {
 				console.log(error);
 			}
+
+			changePassword("");
+			setConfirmedPassword("");
+			setResetCode("");
+			setPasswordChanged(false);
+			setResetCodeChanged(false);
 		}
 		setLoading(false);
 	}
@@ -118,6 +126,7 @@ function ForgotPassword() {
 		if(resetCode.length === 0) setResetCodeError(resetCodeErrorText);
 		else setResetCodeError("");
 	}, [email, password, resetCode]);
+
 
 	if(loading) return <Loading />
 	else if(!tokenSent) {
@@ -147,6 +156,7 @@ function ForgotPassword() {
 			<Container className="login-page">
 					<div className="login-form">
 						<Typography variant="h3" color="primary" className="login-head forgot-head">Forgot Password</Typography><br />
+						{passwordConfirmed? <Alert severity="success" color="warning">Password reset successful!</Alert>: null}
 						<form className="form">
 							<TextInput
 								error={resetCodeChanged? (resetCodeError.length === 0? false: true): false}
@@ -179,7 +189,7 @@ function ForgotPassword() {
 								value={confirmPassword}
 								onChange={handleConfirmPasswordChange}></TextInput>
 						</form>
-						<Button className="login-btn" onClick={handleSubmit}>Reset Password</Button>
+						<Button className="login-btn" onClick={handleSubmit} className="reset-btn">Reset Password</Button>
 					</div>
 				</Container>
 		)

@@ -96,3 +96,7 @@
 .modal-text {
 	font-size: 1.1rem !important;
 }
+
+.bold {
+	font-weight: bolder !important;
+}
