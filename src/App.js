@@ -34,7 +34,7 @@ function App() {
 	return (
 		<InfoContext.Provider value={info}>
 			<Router>
-				<Navbar />
+				<Navbar isLoggedIn={info.isLoggedIn}/>
 				<Switch>
 					<Route exact path="/">
 						<Welcome />

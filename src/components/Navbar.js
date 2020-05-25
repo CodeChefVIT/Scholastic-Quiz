@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import './Navbar.css';
 import InfoContext from '../context/InfoContext';
 
-function Navbar() {
-	const {isLoggedIn, setLoggedIn, name} = useContext(InfoContext);
+function Navbar({isLoggedIn}) {
+	const {setLoggedIn, name} = useContext(InfoContext);
 
 	const handleLogout = () => {
 		localStorage.clear();

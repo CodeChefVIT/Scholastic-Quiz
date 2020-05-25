@@ -8,7 +8,6 @@ import {Redirect} from "react-router-dom";
 
 function Quiz() {
 	const [currentStep, setStep] = useState(1);
-	const [submit, setsubmit] = useState(false);
 	const [times, settimes] = useState(false);
 	const [min, setMin] = useState('20');
 	const [sec, setSec] = useState('00');
@@ -24,6 +23,7 @@ function Quiz() {
 	let seconds = 1200; //20 min === 1200 seconds  Total time in seconds
 
 	const submitQuiz = async () => {
+		setLoading(true);
 		let url = `https://scholastic-quiz-app.herokuapp.com/answer`;
 		let token = localStorage.getItem('authToken');
 
@@ -40,10 +40,10 @@ function Quiz() {
 		} catch(error) {
 			console.log(error);
 		}
+		setLoading(false);
 	}
 
 	const handleSubmit = (event) => {
-		setsubmit(true);
 		submitQuiz();
 	}
 	const timesUp = () => {
@@ -172,6 +172,7 @@ function Quiz() {
 			setRedirect(true);
 		}
 		getQuestions();
+		setInterval(() => tick(), 1000);
 	}, [])
 
 	if(redirect) {
@@ -211,20 +212,9 @@ function Quiz() {
 							</Grid>
 						</Grid>
 					</Grid>
-					<Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center', }} open={submit} message="Submitting.." />
-					<Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center', }} open={times} message="TimesUp.. Submitting.." />
-
 				</div>
 		)
 	}
 }
 
 export default Quiz;
-
-function Step(props) {
-	let qid = "Hello"
-	//Random Question Id code
-	return (
-		<Question id={qid} />
-	);
-}
