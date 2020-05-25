@@ -13,7 +13,8 @@ app.enable('trust proxy')
 var limiter = new rateLimit({
     windowMs:15*60*1000,
     max:100,
-    delayMs:0
+    delayMs:0,
+    message:"Too many requests created from this IP, please try again after an hour"
 })
 
 app.use(limiter)
