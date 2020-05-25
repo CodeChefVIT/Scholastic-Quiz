@@ -41,11 +41,17 @@
 	.nav-head {
 		display: none;
 	}
-
 	.nav-logo {
 		width: 100%;
 	}
+	.logout-btn {
+		font-size: 0.7rem !important;
+	}
+	.login {
+		font-size: 0.7rem !important;
+	}
 }
+
 
 .login {
 	background-color: orange !important;
@@ -94,12 +100,20 @@
 		font-size: 1rem !important;
 		margin-right: 5% !important;
 	}
-
 	.nav-head {
 		font-size: 0.8rem !important;
 	}
-
 	.nav-user {
 		font-size: 0.8rem !important;
+	}
+}
+
+
+@media screen and (max-width: 280px) {
+	.nav-user {
+		display: none;
+	}
+	.nav-logo {
+		font-size: 0.7rem !important;
 	}
 }

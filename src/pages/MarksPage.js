@@ -3,6 +3,7 @@ import { Container, Typography } from "@material-ui/core";
 import { Redirect } from "react-router";
 import Loading from "./Loading";
 import axios from "axios";
+import "./MarksPage.css"
 
 function MarksPage(props) {
 	const [loading, setLoading] = useState(true);
@@ -27,9 +28,7 @@ function MarksPage(props) {
 					"auth-token": token
 				}
 			}).then(res => {
-				console.log(res);
 				if (res.data.testStarted === false) {
-					console.log("HI");
 					setRedirect(true);
 					return;
 				} else {
@@ -59,10 +58,12 @@ function MarksPage(props) {
 	}
 	else {
 		return (
-			<Container>
-				<Typography variant="h3">Marks Page</Typography>
-				<Typography varaint="h6">Your marks are: {marks}</Typography>
-			</Container>
+			<div className="marks-page">
+				<Container>
+					<Typography variant="h2" className="congo">You have successfully submitted the quiz</Typography>
+					<Typography varaint="h2" className="marks">Your marks are: <p className="value">{marks}</p></Typography>
+				</Container>
+			</div>
 		)
 	}
 }
