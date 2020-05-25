@@ -29,6 +29,7 @@ function MarksPage(props) {
 			}).then(res => {
 				console.log(res);
 				if (res.data.testStarted === false) {
+					console.log("HI");
 					setRedirect(true);
 					return;
 				} else {

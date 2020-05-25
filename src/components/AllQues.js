@@ -312,7 +312,7 @@ export default function AllQues(){
 					
 					data = [...data, createData(id,ques,o1,o2,o3,o4,correct)]
 				}
-				setRows([...rows,...data]);
+				setRows([...rows, ...data]);
 				console.log(rows);
 			}
 
