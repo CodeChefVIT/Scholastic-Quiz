@@ -16,7 +16,7 @@ var limiter = new rateLimit({
     delayMs:0
 })
 
-app.user(limiter)
+app.use(limiter)
 app.use(cors()) 
 app.use(express.json()) 
 app.use(Questionrouter) 
