@@ -4,9 +4,19 @@ const mongoose = require('mongoose')
 const Questionrouter = require('./routers/questions') 
 const Authrouter =require('./routers/auth')
 const cors = require('cors') 
-
+const rateLimit = require('express-rate-limit')
 require('dotenv').config()
 
+
+app.enable('trust proxy')
+
+var limiter = new rateLimit({
+    windowMs:15*60*1000,
+    max:100,
+    delayMs:0
+})
+
+app.user(limiter)
 app.use(cors()) 
 app.use(express.json()) 
 app.use(Questionrouter) 
@@ -16,6 +26,8 @@ mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTo
 const db = mongoose.connection
 db.on('error', (error) => console.error(error))
 db.once('open', () => console.log('database connected'))
+
+
 
 
 
