@@ -212,8 +212,6 @@ router.post('/forgot', (req, res) => {
    // let {resetKey, newPassword} = req.body
     let resetKey=req.query.resetKey
     let newPassword=req.query.newPassword
-    console.log(resetKey)
-    console.log(newPassword)
      await User.findOne({passResetKey: resetKey}, (err, userData) => {
           if (!err) {
               console.log(userData.name)
