@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import {AppBar, Typography, Toolbar, Button} from "@material-ui/core";
+import {AppBar, Typography, Toolbar, Button, Dialog, DialogTitle} from "@material-ui/core";
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import InfoContext from '../context/InfoContext';
@@ -9,9 +9,19 @@ function Navbar() {
 	const [navLoggedIn, setNavLoggedIn] = useState(false);
 	const [navName, setNavName] = useState(null);
 
+	const [open, setOpen] = useState(false);
+
+	const onCloseHandle = () => {
+		setOpen(false);
+	}
+	const handleLogoutBtn = () => {
+		setOpen(true);
+	}
+
 	const handleLogout = () => {
 		localStorage.clear();
 		setLoggedIn(false);
+		setOpen(false);
 	}
 
 	useEffect(() => {
@@ -38,9 +48,18 @@ function Navbar() {
 							<Typography variant="h6" className="nav-user">Welcome, {navName}</Typography>
 							
 						}
-						{navLoggedIn? <Button className="logout-btn" onClick={handleLogout}>Logout</Button>: null}
+						{navLoggedIn? <Button className="logout-btn" onClick={handleLogoutBtn}>Logout</Button>: null}
 					</Toolbar>
 				</AppBar>
+
+				<Dialog open={open} onClose={onCloseHandle} aria-labelledby="form-dialog-title"
+					PaperProps={{ style: { backgroundColor: '#2d2d2d', color: '#cfcfcf', minWidth: '10%' } }}>
+					<DialogTitle>Are you sure?</DialogTitle>
+					<div className="btn-div">
+						<Button className="logout-btn m-right" onClick={handleLogout}>Yes</Button>
+						<Button className="cancel-btn m-left" onClick={onCloseHandle}>No</Button>
+					</div>
+				</Dialog>
 			</div>
 	);
 }

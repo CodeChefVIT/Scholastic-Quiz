@@ -44,7 +44,6 @@ function Quiz() {
 					"auth-token": token,
 				}
 			}).then(res => {
-				console.log(res);
 				setResultData(res);
 			});
 		} catch(error) {

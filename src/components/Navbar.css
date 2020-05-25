@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
 
+.m-right {
+	margin-right: 5% !important;
+	margin-bottom: 5% !important;
+}
+
+.m-left {
+	margin-left: 5% !important;
+	margin-bottom: 5% !important;
+}
+
 .root {
 	width: 100%;
 	flex-grow: 1;
@@ -46,6 +56,12 @@
 	background-color: rgb(201, 130, 0) !important;
 }
 
+.btn-div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .logout-btn {
 	background-color: maroon !important;
 	color: white !important;
@@ -55,6 +71,11 @@
 
 .logout-btn:hover {
 	background-color: rgb(95, 0, 0) !important;
+}
+
+.cancel-btn {
+	background-color: orange !important;
+	color: white !important;
 }
 
 .link {
