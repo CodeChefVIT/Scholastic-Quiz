@@ -115,18 +115,21 @@ router.delete('/questions/:id',verify,adminAccess, async (req, res) => {
 router.put('/answer',verify,async (req,res)=>{
     
         const gg = req.body.questions
+        
         var user = req.user.user
         console.log(user.testGiven)
         console.log(user.score)
         for(i=0;i<gg.length;i++){
             var question = await  Question.findOne({_id:gg[i].q_id})
-            await User.updateOne({_id:user._id},{$push:{"responses" : gg[i]}})
-            if(question.correct_answer==gg[i].option){
+            const questionText = question.description
+            const selectedOption = gg[i].option
+            await User.updateOne({_id:user._id},{$push:{"responses" : {questionText,selectedOption}}})
+            if(question.correct_answer==selectedOption){
                 user.score+=1
             }
         }
         
-        
+        console.log(user.score)
         await User.updateOne({_id:user._id},{$set:{score:user.score,testGiven:true}})
         try{
             const newUser = await User.findOne({_id:user._id})
