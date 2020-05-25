@@ -160,7 +160,7 @@ router.put('/answer',verify,async (req,res)=>{
 
 router.post('/forgot', (req, res) => {
    // let {email} = req.body; // same as let email = req.body.email
-    var email=req.query.email;
+    var email=req.body.email;
     User.findOne({email: email}, (err, userData) => {
       if (!err && userData!=null) {
         userData.passResetKey = shortid.generate();
@@ -215,8 +215,8 @@ router.post('/forgot', (req, res) => {
 
   router.post('/resetpass', async (req, res) => {
    // let {resetKey, newPassword} = req.body
-    let resetKey=req.query.resetKey
-    let newPassword=req.query.newPassword
+    let resetKey=req.body.resetKey
+    let newPassword=req.body.newPassword
 
      await User.findOne({passResetKey: resetKey}, (err, userData) => {
           if (!err) {
