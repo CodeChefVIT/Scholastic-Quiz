@@ -189,7 +189,7 @@ function ForgotPassword() {
 								value={confirmPassword}
 								onChange={handleConfirmPasswordChange}></TextInput>
 						</form>
-						<Button className="login-btn" onClick={handleSubmit} className="reset-btn">Reset Password</Button>
+						<Button className="login-btn" onClick={handleSubmit}>Reset Password</Button>
 					</div>
 				</Container>
 		)
