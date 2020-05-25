@@ -26,11 +26,11 @@ router.get('/questions',verify, async (req, res) => {
 //get fifteen random questions
 router.get('/questionsFifteen',verify, async (req, res) => {
     try {
-        const questions = await Question.aggregate([{ $sample: { size: 15} }])
+        const questions = await Question.aggregate([{ $sample: { size: 15} },{$project:{correct_answer:0}}])
         console.log(req.user.user.testGiven)
         await User.updateOne({_id:req.user.user._id},{$set:{testStarted:true}})
         console.log(req.user.user)
-        return res.status(200).json(questions)
+        return res.status(200).send({questions})
     } catch (error) {
         return res.status(500).json({"error":error})
     }
@@ -152,17 +152,7 @@ router.put('/answer',verify,async (req,res)=>{
             res.status(200).send(newUser)
         }catch(err){
             res.status(400).send(err)
-        }
-    //     console.log(user.score)
-    //     let question  = await Question.findOne({_id})
-        
-    // for(i=0;i<15;i++){
-    //     if(question.correct_answer==option){
-    //         user.score +=1
-    //     }
-    // }
-    //     console.log(user.score)
-         
+        } 
 })
 
 
@@ -258,8 +248,10 @@ router.post('/forgot', (req, res) => {
 //pushing
   router.get('/checkAuth',verify,async (req,res)=>{
       const user  = await req.user.user
+      _id = user._id
       try{
-          res.send(user)
+          const user1 = await User.findOne({_id})
+          res.send(user1)
 
       }catch(err){
           res.status(400).send(err)
