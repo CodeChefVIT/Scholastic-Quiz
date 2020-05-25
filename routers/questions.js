@@ -239,7 +239,7 @@ router.post('/forgot', (req, res) => {
       })
   })
 
-
+//pushing
   router.get('/checkAuth',verify,async (req,res)=>{
       const user  = await req.user.user
       try{
