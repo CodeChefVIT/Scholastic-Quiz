@@ -162,7 +162,6 @@ function Quiz() {
 			}).then(res => {
 				if(res.status === 201) {
 					setRedirect(true);
-					setLoading(false);
 					return;
 				} else {
 					res.data["questions"].map((question) => {
@@ -196,6 +195,7 @@ function Quiz() {
 		let token = localStorage.getItem('authToken');
 		if (token === null) {
 			setRedirect(true);
+			return;
 		}
 		getQuestions();
 	}, [])

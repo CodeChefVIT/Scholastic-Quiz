@@ -55,3 +55,15 @@
         min-height: calc(100vh - 56px);
     }
 }
+
+.material-icons {
+	color: white !important;
+}
+
+.MuiInputBase-input {
+	color: white !important;
+}
+
+.MuiTablePagination-selectIcon {
+	color: white !important;
+}

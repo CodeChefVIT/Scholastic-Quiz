@@ -19,7 +19,7 @@
 	transform: skew(-30deg);
 }
 
-.quiz-page{
+.quiz-page {
 	display: flex !important; 
 	justify-content: center !important;
 	overflow: hidden !important;
