@@ -91,7 +91,7 @@ function LoginPage() {
 					if(response.data.isAdmin === true) {
 						setAdmin(true);
 					} 
-					console.log(response);
+
 					localStorage.setItem('userLoggedIn', true);
 					localStorage.setItem('name', response.data.user.name);
 					localStorage.setItem("authToken", response.data.authToken);

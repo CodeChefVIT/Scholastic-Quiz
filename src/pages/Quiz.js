@@ -160,21 +160,27 @@ function Quiz() {
 					"auth-token": token
 				}
 			}).then(res => {
-				res.data["questions"].map((question) => {
-					let questionObj = {
-						q_id: question._id,
-						text: question.description,
-						options: question.alternatives,
-					}
-					questionsData.push(questionObj);
-
-					let ansObj = {
-						q_id: question._id,
-						option: null,
-					}
-
-					answerData.push(ansObj);
-				})
+				if(res.status === 201) {
+					setRedirect(true);
+					setLoading(false);
+					return;
+				} else {
+					res.data["questions"].map((question) => {
+						let questionObj = {
+							q_id: question._id,
+							text: question.description,
+							options: question.alternatives,
+						}
+						questionsData.push(questionObj);
+	
+						let ansObj = {
+							q_id: question._id,
+							option: null,
+						}
+	
+						answerData.push(ansObj);
+					});
+				}
 			});
 
 			setQuestions(questionsData);
@@ -211,7 +217,7 @@ function Quiz() {
 				<div className="quiz-page">
 					<Grid container xs={12} spacing={5} className="quiz-container">
 						<Grid item xs={10} md={8} lg={7} className="q-count" >
-							<h2 style={{ margin: 0 }}>Question {currentStep}</h2>
+							<h2 style={{ padding: 0 }}>Question {currentStep}</h2>
 						</Grid>
 						<Grid item xs={10} md={8} lg={7} className="timer">
 							<p style={{margin: 0}}>Time Remaining <h2>{min}:{sec}</h2></p>

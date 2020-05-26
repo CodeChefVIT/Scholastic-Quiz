@@ -119,3 +119,9 @@
 		font-size: 0.7rem !important;
 	}
 }
+
+@media screen and (max-width: 460px) {
+	.cancel-btn {
+		font-size: 0.7rem !important;
+	}
+}
