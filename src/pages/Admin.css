@@ -68,10 +68,14 @@
 	color: white !important;
 }
 
-.MuiTypography-root, .MuiTableSortLabel-root  {
+.MuiTypography-caption, .MuiTableSortLabel-root  {
 	color: white !important;
 }
 
-.MuiFormLabel-root, .MuiRadio-root {
+.MuiRadio-root {
 	color: orange !important;
+}
+
+.correct-head {
+	color: white !important;
 }
