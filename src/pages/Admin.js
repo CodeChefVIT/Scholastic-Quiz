@@ -321,7 +321,7 @@ function Admin() {
 							onChange={handle4change}
 						/>
 						<FormControl component="fieldset">
-							<FormLabel style={{ color: '#ffa2000', paddingTop: 20 }} component="legend">Correct Option</FormLabel>
+							<FormLabel style={{ color: '#ffa2000', paddingTop: 20 }} component="legend"><p className="correct-head">Correct Option</p></FormLabel>
 							<p style={{color: '#f44336', fontSize: 14, margin: 0}}>{valueError}</p>
 							<RadioGroup aria-label="correct-choice" value={value} onChange={handleChange} >
 								<FormControlLabel value="op1" control={<Radio style={{color: '#ffa2000'}} />} label="Option 1" />
