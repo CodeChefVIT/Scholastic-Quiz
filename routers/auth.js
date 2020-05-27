@@ -19,7 +19,7 @@ router.post('/register',async (req,res)=>{
     //check for  existing user
     const emailExist =await User.findOne({email:req.body.email})
     if(emailExist){
-        return res.status(400).send('Email Exists')
+        return res.status(401).send('Email Exists')
     }
 
     //hash the password

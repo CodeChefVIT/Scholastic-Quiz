@@ -48,7 +48,11 @@ const userSchema =new mongoose.Schema({
     },
     responses:[
 
-    ]
+    ],
+    timeLeft:{
+        type: Number,
+        default:20
+    }
 })
 
 

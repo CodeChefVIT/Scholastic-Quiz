@@ -28,6 +28,11 @@ router.get('/questionsFifteen',verify, async (req, res) => {
     try {
         const questions = await Question.aggregate([{ $sample: { size: 15} },{$project:{correct_answer:0}}])
         console.log(req.user.user.testGiven)
+        const user = await User.findOne({_id:req.user.user._id})
+        if(user.testGiven==true){
+            res.status(201).send({message:"you've already given the test"})
+        }
+
         await User.updateOne({_id:req.user.user._id},{$set:{testStarted:true}})
         console.log(req.user.user)
         return res.status(200).send({questions})
@@ -130,25 +135,25 @@ router.delete('/questions/:id',verify,adminAccess, async (req, res) => {
 router.put('/answer',verify,async (req,res)=>{
     
         const gg = req.body.questions
-        
+        const timeLeft = req.body.timeLeft
         var user = req.user.user
-        console.log(user.testGiven)
-        console.log(user.score)
+        
         for(i=0;i<gg.length;i++){
             var question = await  Question.findOne({_id:gg[i].q_id})
             const questionText = question.description
             const selectedOption = gg[i].option
             await User.updateOne({_id:user._id},{$push:{"responses" : {questionText,selectedOption}}})
             if(question.correct_answer==selectedOption){
+                
                 user.score+=1
             }
         }
         
-        console.log(user.score)
-        await User.updateOne({_id:user._id},{$set:{score:user.score,testGiven:true}})
+        
+        await User.updateOne({_id:user._id},{$set:{score:user.score,testGiven:true,timeLeft}})
         try{
             const newUser = await User.findOne({_id:user._id})
-            console.log(newUser)
+            
             res.status(200).send(newUser)
         }catch(err){
             res.status(400).send(err)
@@ -160,7 +165,7 @@ router.put('/answer',verify,async (req,res)=>{
 
 router.post('/forgot', (req, res) => {
    // let {email} = req.body; // same as let email = req.body.email
-    var email=req.query.email;
+    var email=req.body.email;
     User.findOne({email: email}, (err, userData) => {
       if (!err && userData!=null) {
         userData.passResetKey = shortid.generate();
@@ -215,8 +220,8 @@ router.post('/forgot', (req, res) => {
 
   router.post('/resetpass', async (req, res) => {
    // let {resetKey, newPassword} = req.body
-    let resetKey=req.query.resetKey
-    let newPassword=req.query.newPassword
+    let resetKey=req.body.resetKey
+    let newPassword=req.body.newPassword
 
      await User.findOne({passResetKey: resetKey}, (err, userData) => {
           if (!err) {
