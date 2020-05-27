@@ -91,9 +91,9 @@ router.post('/questions',verify,adminAccess, async (req, res) => {
 router.put('/resetUser',verify,adminAccess,async (req,res)=>{
 
     try{
-        const _id = req.body._id
-        await User.updateOne({_id},{$set:{responses:[],testGiven:false,testStarted:false,timeLeft:600}})
-        const user = await User.findOne({_id})
+        const email = req.body.email
+        await User.updateOne({email},{$set:{responses:[],testGiven:false,testStarted:false,timeLeft:600}})
+        const user = await User.findOne({email})
         res.send(user)
     }catch(err){
         res.status(404).send(err)
