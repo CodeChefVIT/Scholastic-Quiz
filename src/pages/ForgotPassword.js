@@ -49,13 +49,23 @@ function ForgotPassword() {
 		setResetCode(event.target.value);
 	}
 
+	const keyPress = (event) => {
+		if (event.key === "Enter") {
+			if(tokenSent){
+				handleSubmit();
+			}else {
+				handleReset();
+			}
+		}
+	}
+
 	const mailErrorText = "Email cannot be empty!";
 	const resetCodeErrorText = "Enter the reset code.";
 	const passwordErrorText = "Password cannot be empty!";
 	const confirmPasswordErrorText = "Does not match the password!";
 
 	const handleReset = async (event) => {
-		event.preventDefault();
+		// event.preventDefault();
 
 		setEmailChanged(true);
 
@@ -92,7 +102,7 @@ function ForgotPassword() {
 	}
 
 	const handleSubmit = async (event) => {
-		event.preventDefault();
+		// event.preventDefault();
 
 		let errors = false;
 
@@ -160,7 +170,8 @@ function ForgotPassword() {
 								className="form-input"
 								variant="outlined"
 								value={email}
-								onChange={handleEmailChange}></TextInput>
+								onChange={handleEmailChange}
+								onKeyPress={keyPress}></TextInput>
 						</form>
 						<Button className="login-btn" onClick={handleReset}>Send mail</Button>
 					</div>
@@ -185,7 +196,8 @@ function ForgotPassword() {
 								className="form-input"
 								variant="outlined"
 								value={resetCode}
-								onChange={handleResetCodeChange}></TextInput>
+								onChange={handleResetCodeChange}
+								onKeyPress={keyPress}></TextInput>
 							<TextInput
 								error={passwordChanged? (passwordError.length === 0? false: true): false}
 								helperText={passwordChanged? (passwordError.length === 0? null: passwordError): null}
@@ -195,7 +207,8 @@ function ForgotPassword() {
 								className="form-input"
 								variant="outlined"
 								value={password}
-								onChange={handlePasswordChange}></TextInput>
+								onChange={handlePasswordChange}
+								onKeyPress={keyPress}></TextInput>
 							<TextInput
 								error={confirmPasswordError.length === 0? false: true}
 								helperText={confirmPasswordError}
@@ -205,7 +218,8 @@ function ForgotPassword() {
 								className="form-input"
 								variant="outlined"
 								value={confirmPassword}
-								onChange={handleConfirmPasswordChange}></TextInput>
+								onChange={handleConfirmPasswordChange}
+								onKeyPress={keyPress}></TextInput>
 						</form>
 						<Button className="login-btn" onClick={handleSubmit}>Reset Password</Button>
 					</div>

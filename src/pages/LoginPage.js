@@ -38,6 +38,12 @@ function LoginPage() {
 		changePassword(event.target.value);
 	}
 
+	const keyPress = (event) => {
+		if (event.key === "Enter") {
+			handleSubmit();
+		}
+	}
+
 	useEffect(() => {
 		if(email.length === 0) setEmailError(mailErrorText);
 		else setEmailError("");
@@ -47,7 +53,7 @@ function LoginPage() {
 	}, [email, password]);
 
 	const handleSubmit = async (event) => {
-		event.preventDefault();
+		// event.preventDefault();
 
 		setEmailChanged(true);
 		setPasswordChanged(true);
@@ -136,7 +142,8 @@ function LoginPage() {
 						className="form-input"
 						variant="outlined"
 						value={email}
-						onChange={handleEmailChange}></TextInput>
+						onChange={handleEmailChange}
+						onKeyPress={keyPress}></TextInput>
 					<br />
 					<TextInput
 						error={passwordChanged? (passwordError.length === 0? false: true): false}
@@ -147,7 +154,8 @@ function LoginPage() {
 						className="form-input"
 						variant="outlined"
 						value={password}
-						onChange={handlePasswordChange}></TextInput>
+						onChange={handlePasswordChange}
+						onKeyPress={keyPress}></TextInput>
 				</form>
 				<div className="forgot-section">
 					<Link to="/forgotPassword" className="link forgot-pass">Forgot your password?</Link>

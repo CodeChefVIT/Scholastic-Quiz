@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './RegisterPage.css';
-import { Container, Typography, Button, Checkbox, FormControlLabel } from "@material-ui/core";
+import { Container, Typography, Button } from "@material-ui/core";
 import {Alert} from "@material-ui/lab";
 import TextInput from "../components/TextInput";
 import * as EmailValidator from "email-validator";
@@ -48,6 +48,12 @@ function AdminRegister() {
 		setAdminCode(event.target.value);
 	}
 
+	const keyPress = (event) => {
+		if (event.key === "Enter") {
+			handleSubmit();
+		}
+	}
+
 	useEffect(() => {
 		if (name.length === 0) setNameError(emptyText("Name"));
 		else setNameError("");
@@ -64,7 +70,7 @@ function AdminRegister() {
 	}, [name, email, password, adminCode]);
 
 	const handleSubmit = async (event) => {
-		event.preventDefault();
+		// event.preventDefault();
 		setNameChanged(true);
 		setEmailChanged(true);
 		setPasswordChanged(true);
@@ -151,7 +157,8 @@ function AdminRegister() {
 						className="form-input"
 						variant="outlined"
 						value={name}
-						onChange={handleNameChange}></TextInput>
+						onChange={handleNameChange}
+						onKeyPress={keyPress}></TextInput>
 					<TextInput
 						error={emailChanged ? (emailError.length === 0 ? false : true) : false}
 						helperText={emailChanged ? (emailError.length === 0 ? null : emailError) : null}
@@ -161,7 +168,8 @@ function AdminRegister() {
 						className="form-input"
 						variant="outlined"
 						value={email}
-						onChange={handleEmailChange}></TextInput>
+						onChange={handleEmailChange}
+						onKeyPress={keyPress}></TextInput>
 					<br />
 					<TextInput
 						error={passwordChanged ? (passwordError.length === 0 ? false : true) : false}
@@ -172,7 +180,8 @@ function AdminRegister() {
 						className="form-input"
 						variant="outlined"
 						value={password}
-						onChange={handlePasswordChange}></TextInput>
+						onChange={handlePasswordChange}
+						onKeyPress={keyPress}></TextInput>
 					<TextInput
 						error={adminCodeChanged ? (adminCodeError.length === 0 ? false : true) : false}
 						helperText={adminCodeChanged ? (adminCodeError.length === 0 ? null : adminCodeError) : null}
@@ -182,7 +191,8 @@ function AdminRegister() {
 						className="form-input"
 						variant="outlined"
 						value={adminCode}
-						onChange={handleAdminCode}></TextInput>
+						onChange={handleAdminCode}
+						onKeyPress={keyPress}></TextInput>
 				</form>
 				<Button className="login-btn" onClick={handleSubmit}>Sign Up</Button>
 			</div>

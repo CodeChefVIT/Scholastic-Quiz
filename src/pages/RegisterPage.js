@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './RegisterPage.css';
-import { Container, Typography, Button, Checkbox, FormControlLabel } from "@material-ui/core";
+import { Container, Typography, Button } from "@material-ui/core";
 import {Alert} from "@material-ui/lab";
 import {Redirect} from "react-router-dom";
 import TextInput from "../components/TextInput";
@@ -41,6 +41,12 @@ function RegisterPage() {
 		changePassword(event.target.value);
 	}
 
+	const keyPress = (event) => {
+		if (event.key === "Enter") {
+			handleSubmit();
+		}
+	}
+
 	useEffect(() => {
 		if(name.length === 0) setNameError(emptyText("Name"));
 		else setNameError("");
@@ -54,7 +60,7 @@ function RegisterPage() {
 	}, [name, email, password]);
 
 	const handleSubmit = async (event) => {
-		event.preventDefault();
+		// event.preventDefault();
 		setNameChanged(true);
 		setPasswordChanged(true);
 		setEmailChanged(true);
@@ -138,7 +144,8 @@ function RegisterPage() {
 						className="form-input"
 						variant="outlined"
 						value={name}
-						onChange={handleNameChange}></TextInput>
+						onChange={handleNameChange}
+						onKeyPress={keyPress}></TextInput>
 					<TextInput
 						error={emailChanged? (emailError.length === 0? false: true): false}
 						helperText={emailChanged? (emailError.length === 0? null: emailError): null}
@@ -148,7 +155,8 @@ function RegisterPage() {
 						className="form-input"
 						variant="outlined"
 						value={email}
-						onChange={handleEmailChange}></TextInput>
+						onChange={handleEmailChange}
+						onKeyPress={keyPress}></TextInput>
 					<br />
 					<TextInput
 						error={passwordChanged? (passwordError.length === 0? false: true): false}
@@ -159,7 +167,8 @@ function RegisterPage() {
 						className="form-input"
 						variant="outlined"
 						value={password}
-						onChange={handlePasswordChange}></TextInput>
+						onChange={handlePasswordChange}
+						onKeyPress={keyPress}></TextInput>
 				</form>
 				<Button className="login-btn" onClick={handleSubmit}>Sign Up</Button>
 			</div>

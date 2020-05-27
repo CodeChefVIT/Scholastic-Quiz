@@ -9,8 +9,7 @@ import { Redirect } from "react-router-dom";
 
 function Quiz() {
 	const [currentStep, setStep] = useState(1);
-	const [times, settimes] = useState(false);
-	const [min, setMin] = useState('20');
+	const [min, setMin] = useState('10');
 	const [sec, setSec] = useState('00');
 
 	const [loading, setLoading] = useState(true);
@@ -26,7 +25,7 @@ function Quiz() {
 
 	const [confirmModal, setConfirmModal] = useState(false);
 
-	let seconds = 1200; //20 min === 1200 seconds  Total time in seconds
+	let seconds = 600; //10 min === 600 seconds  Total time in seconds
 
 	const submitQuiz = async () => {
 		setLoading(true);
