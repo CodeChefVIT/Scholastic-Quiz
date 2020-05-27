@@ -203,7 +203,7 @@ router.post('/forgot', (req, res) => {
                 });
               } catch (error) {
                 console.log(error);
-                res.status(500).send("could not sent reset code");
+                res.status(500).send("could not send reset code");
               }
             }
           })

@@ -12,28 +12,28 @@ const JWT = require('jsonwebtoken')
 
 
 
-
+//req.body
 router.post('/register',async (req,res)=>{
 
     var admin = false
     //check for  existing user
-    const emailExist =await User.findOne({email:req.query.email})
+    const emailExist =await User.findOne({email:req.body.email})
     if(emailExist){
         return res.status(400).send('Email Exists')
     }
 
     //hash the password
     const salt = await bcrypt.genSalt(10)
-    const hashedPassword = await bcrypt.hash(req.query.password,salt)
+    const hashedPassword = await bcrypt.hash(req.body.password,salt)
     
     //Check Admin Code
-    if(req.query.adminCode===process.env.ADMIN_CODE){
+    if(req.body.adminCode===process.env.ADMIN_CODE){
         admin =true 
     }
 
     const user = new User({
-        name : req.query.name,
-        email : req.query.email,
+        name : req.body.name,
+        email : req.body.email,
         password: hashedPassword,
         isAdmin : admin
     })
@@ -46,15 +46,15 @@ router.post('/register',async (req,res)=>{
 })
 
 
-
+//req.body 
 router.post('/login',async (req,res,next)=>{
     
     //check if user exists
-    const user = await User.findOne({email:req.query.email})
+    const user = await User.findOne({email:req.body.email})
     if(!user) return res.status(404).send('Email or password is incorrect')
 
     //check password
-    const validPass = await bcrypt.compare(req.query.password,user.password)
+    const validPass = await bcrypt.compare(req.body.password,user.password)
     if(!validPass) return res.status(400).send('invalid pass')
    
     //Create and assign JWT
