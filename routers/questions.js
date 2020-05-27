@@ -236,7 +236,7 @@ router.post('/forgot', (req, res) => {
     let newPassword=req.body.newPassword
 
      await User.findOne({passResetKey: resetKey}, (err, userData) => {
-          if (!err) {
+          if (!err && userData!=null) {
               //console.log(userData.name)
               let now = new Date().getTime();
               let keyExpiration =  userData.passKeyExpires;

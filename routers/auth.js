@@ -12,7 +12,7 @@ const JWT = require('jsonwebtoken')
 
 
 
-
+//req.body
 router.post('/register',async (req,res)=>{
 
     var admin = false
@@ -46,7 +46,7 @@ router.post('/register',async (req,res)=>{
 })
 
 
-
+//req.body 
 router.post('/login',async (req,res,next)=>{
     
     //check if user exists
