@@ -14,7 +14,7 @@ module.exports = function (req,res,next){
         
         
         if(req.user.user.isAdmin===true){
-            console.log(req.user)
+            
             next()
         }
         

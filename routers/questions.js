@@ -14,9 +14,9 @@ const bcrypt=require('bcryptjs')
 router.get('/questions',verify, async (req, res) => {
     try {
         const questions = await Question.find()
-        console.log(req.user)
+        //console.log(req.user)
         
-        console.log(req.user.user)
+        //console.log(req.user.user)
         return res.status(200).json(questions)
     } catch (error) {
         return res.status(500).json({"error":error})
@@ -27,14 +27,14 @@ router.get('/questions',verify, async (req, res) => {
 router.get('/questionsFifteen',verify, async (req, res) => {
     try {
         const questions = await Question.aggregate([{ $sample: { size: 15} },{$project:{correct_answer:0}}])
-        console.log(req.user.user.testGiven)
+        //console.log(req.user.user.testGiven)
         const user = await User.findOne({_id:req.user.user._id})
         if(user.testGiven==true){
             res.status(201).send({message:"you've already given the test"})
         }
 
         await User.updateOne({_id:req.user.user._id},{$set:{testStarted:true}})
-        console.log(req.user.user)
+        //console.log(req.user.user)
         return res.status(200).send({questions})
     } catch (error) {
         return res.status(500).json({"error":error})
@@ -46,7 +46,7 @@ router.get('/questionsFifteen',verify, async (req, res) => {
 router.get('/viewSubmissions',verify,adminAccess, async (req, res) => {
     try {
         const array =await User.find({testGiven:true})
-        console.log(array)
+        //console.log(array)
         return res.status(200).json(array)
     } catch (error) {
         return res.status(500).json({"error":error})
@@ -85,6 +85,18 @@ router.post('/questions',verify,adminAccess, async (req, res) => {
         return res.status(201).json(question)
     } catch (error) {
         return res.status(500).json({"error":error})
+    }
+})
+
+router.put('/resetUser',verify,adminAccess,async (req,res)=>{
+
+    try{
+        const _id = req.body._id
+        await User.updateOne({_id},{$set:{responses:[],testGiven:false,testStarted:false,timeLeft:600}})
+        const user = await User.findOne({_id})
+        res.send(user)
+    }catch(err){
+        res.status(404).send(err)
     }
 })
 
@@ -170,12 +182,12 @@ router.post('/forgot', (req, res) => {
       if (!err && userData!=null) {
         userData.passResetKey = shortid.generate();
         userData.passKeyExpires = new Date().getTime() + 20 * 60 * 1000 // pass reset key only valid for 20 minutes
-        console.log(userData.passKeyExpires)
+        //console.log(userData.passKeyExpires)
         userData.save().then(x => {
             if (!err) {
               // configuring smtp transport machanism for password reset email
-              console.log('its britteny bitch')
-              console.log(userData)
+              //console.log('its britteny bitch')
+              //console.log(userData)
               let transporter = nodemailer.createTransport({
                 service: "gmail",
                 port: 465,
@@ -199,15 +211,15 @@ router.post('/forgot', (req, res) => {
               try {
                 transporter.sendMail(mailOptions, (error, response) => {
                   if (error) {
-                    console.log("error:\n", error, "\n");
+                    //console.log("error:\n", error, "\n");
                     res.status(500).send("could not send reset code");
                   } else {
-                    console.log("email sent:\n", response);
+                    //console.log("email sent:\n", response);
                     res.status(200).send("Reset Code sent");
                   }
                 });
               } catch (error) {
-                console.log(error);
+                //console.log(error);
                 res.status(500).send("could not sent reset code");
               }
             }
@@ -225,11 +237,11 @@ router.post('/forgot', (req, res) => {
 
      await User.findOne({passResetKey: resetKey}, (err, userData) => {
           if (!err) {
-              console.log(userData.name)
+              //console.log(userData.name)
               let now = new Date().getTime();
               let keyExpiration =  userData.passKeyExpires;
-              console.log(now);
-              console.log(userData.passKeyExpires);
+              //console.log(now);
+              //console.log(userData.passKeyExpires);
               if (  keyExpiration>now) {
           userData.password = bcrypt.hashSync(newPassword, 5);
                   userData.passResetKey = null; // remove passResetKey from user's records
