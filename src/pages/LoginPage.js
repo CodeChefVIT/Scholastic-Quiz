@@ -18,6 +18,7 @@ function LoginPage() {
 	const [passwordError, setPasswordError] = useState("");
 	const [passwordChanged, setPasswordChanged] = useState(false);
 	const [didLogin, setDidLogin] = useState(null);
+	const [errorText, setErrorText] = useState("Error Logging In! Try again....");
 	const [redirect, setRedirect] = useState(false);
 
 	const [isLoading, setLoading] = useState(false);
@@ -97,11 +98,18 @@ function LoginPage() {
 					localStorage.setItem("authToken", response.data.authToken);
 
 					setRedirect(true);
-				}else{
-					setDidLogin(false);
 				} 
 			} catch(error) {
 				console.log(error);
+				if(error.response.status === 404){
+					setErrorText("Account doesn't exist.. Join the rebellion now!")
+					changeEmail("")
+					changePassword("")
+				}
+				else if(error.response.status === 400){
+					setErrorText("Incorrect Password")
+					changePassword("")
+				}
 				setDidLogin(false);
 			}
 		}
@@ -117,7 +125,7 @@ function LoginPage() {
 		<Container className="login-page">
 			<div className="login-form">
 				<Typography variant="h3" color="primary" className="login-head">Login Now!</Typography><br />
-				{didLogin === false? <Alert severity="error">Error Logging In! Try again....</Alert>: null}
+				{didLogin === false? <Alert severity="error">{errorText}</Alert>: null}
 				<form className="form">
 					<TextInput
 						error={emailChanged? (emailError.length === 0? false: true): false}

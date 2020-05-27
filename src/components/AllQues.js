@@ -11,7 +11,7 @@ export default function AllQues(){
 	const [alertText, setAlertText] = React.useState('');
 	const [loading, setLoading] = React.useState(true);
 	const columns = [
-		{ field: 'qid', title: 'Q_ID', minwidth: 10 },
+		{ field: 'qid', title: 'Q_ID', minwidth: 10, editable: 'never' },
 		{ field: 'ques', title: 'Question', minWidth: 200 }, { field: 'op1', title: 'Option1', minWidth: 50 },
 		{ field: 'op2', title: 'Option2', minWidth: 50 }, { field: 'op3', title: 'Option3', minWidth: 50 },
 		{ field: 'op4', title: 'Option4', minWidth: 50 }, { field: 'correct', title: 'Correct Option', minWidth: 50 },
@@ -182,11 +182,10 @@ export default function AllQues(){
 			 title="Questions List"
 			 columns={columns}
 			 data = {rows}
-			 style={{width:'98%', backgroundColor: '#4d4d4d', color: '#fff'}}
+			 style={{width:'98%', backgroundColor: '#2d2d2d', color: '#cfcfcf'}}
 			 options={{
 				 headerStyle: {
-					backgroundColor: '#353535',
-					color: '#fff'
+					backgroundColor: '#1e1e1e'
 				 },
 				 rowStyle: {
 					 color: '#ccc'

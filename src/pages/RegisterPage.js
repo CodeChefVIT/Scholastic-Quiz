@@ -21,6 +21,7 @@ function RegisterPage() {
 	const [redirect, setRedirect] = useState(false);
 
 	const [signedUp, setSignedUp] = useState(false);
+	const [existEmail, setExistEmail] = useState(false);
 	const [isLoading, setLoading] = useState(false);
 
 	const emptyText = (type) =>  `${type} cannot be empty`;
@@ -108,6 +109,9 @@ function RegisterPage() {
 				} 
 			} catch(error) {
 				console.log(error);
+				if(error.response.status === 401) {
+					setExistEmail(true);
+				}
 			}	
 		}
 		setLoading(false);
@@ -123,6 +127,7 @@ function RegisterPage() {
 				<img src="hg-pin.png" className="signup-img" alt="Mokingjay Pin"></img>
 				<Typography variant="h3" color="primary" className="login-head signup-text">Join the force!</Typography><br />
 				{signedUp === true? <Alert severity="success" color="warning">Succesfully Signed Up! Redirecting...</Alert>: null}
+				{existEmail === true? <Alert severity="warning" color="warning">Email already exist...</Alert>: null}
 				<form className="form">
 					<TextInput
 						error={nameChanged? (nameError.length === 0? false: true): false}

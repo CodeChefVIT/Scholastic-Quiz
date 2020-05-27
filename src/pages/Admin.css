@@ -67,3 +67,11 @@
 .MuiTablePagination-selectIcon {
 	color: white !important;
 }
+
+.MuiTypography-root, .MuiTableSortLabel-root  {
+	color: white !important;
+}
+
+.MuiFormLabel-root, .MuiRadio-root {
+	color: orange !important;
+}

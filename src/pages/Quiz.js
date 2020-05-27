@@ -32,13 +32,14 @@ function Quiz() {
 		setLoading(true);
 		let url = `https://scholastic-quiz-app.herokuapp.com/answer`;
 		let token = localStorage.getItem('authToken');
-
+		let time = seconds;
 		if (token === null) {
 			setRedirect(true);
 		}
 
 		let data = {
 			"questions": allChosenAns,
+			"timeleft": time,
 		}
 
 		try {

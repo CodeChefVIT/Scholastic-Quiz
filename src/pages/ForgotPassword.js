@@ -18,12 +18,15 @@ function ForgotPassword() {
 	const [confirmPassword, setConfirmedPassword] = useState("");
 	const [confirmPasswordError, setConfirmedPasswordError] = useState("");
 
+	const [reset, setReset] =useState(true)
 	const [resetCode, setResetCode] = useState("");
 	const [resetCodeError, setResetCodeError] = useState("");
 	const [resetCodeChanged, setResetCodeChanged] = useState(false);
 
 
 	const [tokenSent, setTokenSent] = useState(false);
+	const [invalidKey, setInvalidKey] = useState(false);
+	const [notSent, setNotSent] = useState(false);
 	const [passwordConfirmed, setPasswordConfirmed] = useState(false);
 	const [loading, setLoading] = useState(false);
 
@@ -77,9 +80,11 @@ function ForgotPassword() {
 
 			try {
 				await axios.post(url, data).then(res => response = res);
-
 				setTokenSent(true);
 			} catch(error) {
+				if(error.response.status === 500){
+					setNotSent(true);
+				}
 				console.log(error);
 			}
 		}
@@ -108,9 +113,12 @@ function ForgotPassword() {
 			let response = null;
 			try {
 				await axios.post(url, data).then(res => response = res);
-				
 				setPasswordConfirmed(true);
 			} catch(error) {
+				if(error.response.status === 400){
+					setInvalidKey(true);
+					setReset(false);
+				}
 				console.log(error);
 			}
 
@@ -141,6 +149,7 @@ function ForgotPassword() {
 				<Container className="login-page">
 					<div className="login-form">
 						<Typography variant="h3" color="primary" className="login-head forgot-head">Forgot Password</Typography><br />
+						{notSent ? <Alert severity="error" color="warning">Couldn't send Reset code</Alert>: null}
 						<form className="form">
 							<TextInput
 								error={emailChanged? (emailError.length === 0? false: true): false}
@@ -163,6 +172,8 @@ function ForgotPassword() {
 			<Container className="login-page">
 					<div className="login-form">
 						<Typography variant="h3" color="primary" className="login-head forgot-head">Forgot Password</Typography><br />
+						{reset ? <Alert severity="info">Reset code sent!</Alert> : null }
+						{invalidKey? <Alert severity="error" color="warning">Invalid reset Code</Alert>: null}
 						{passwordConfirmed? <Alert severity="success" color="warning">Password reset successful!</Alert>: null}
 						<form className="form">
 							<TextInput

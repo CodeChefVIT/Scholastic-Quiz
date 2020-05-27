@@ -247,7 +247,7 @@ function Admin() {
 
 
 				</div>
-				<Dialog PaperProps={{ style: { backgroundColor: '#4d4d4d', color: '#cfcfcf' } }} open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+				<Dialog PaperProps={{ style: { backgroundColor: '#2d2d2d', color: '#cfcfcf', minWidth: '85%'  } }} open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
 					<DialogTitle id="form-dialog-title">View All Questions</DialogTitle>
 					<AllQues />
 					<DialogActions>
@@ -260,7 +260,7 @@ function Admin() {
 					</DialogActions>
 				</Dialog>
 				
-				<Dialog PaperProps={{ style: { backgroundColor: '#2d2d2d', color: '#cfcfcf' } }} open={openAdd} onClose={handleClose} aria-labelledby="form-dialog-title">
+				<Dialog PaperProps={{ style: { backgroundColor: '#2d2d2d', color: '#cfcfcf', minWidth: '60%' } }} open={openAdd} onClose={handleClose} aria-labelledby="form-dialog-title">
 					<DialogTitle id="form-dialog-title">Add Question</DialogTitle>
 					<DialogContent>
 						<TextInput
@@ -343,7 +343,7 @@ function Admin() {
 					
 				</Dialog>
 
-				<Dialog PaperProps={{ style: { backgroundColor: '#2d2d2d', color: '#cfcfcf', minWidth: '60%' } }} open={openSub} onClose={handleClose} aria-labelledby="sub-dialog-title">
+				<Dialog PaperProps={{ style: { backgroundColor: '#2d2d2d', color: '#cfcfcf', minWidth: '85%' } }} open={openSub} onClose={handleClose} aria-labelledby="sub-dialog-title">
 					<DialogTitle id="sub-dialog-title">Submissions</DialogTitle>
 					<DialogContent>
 						<SubTable />
