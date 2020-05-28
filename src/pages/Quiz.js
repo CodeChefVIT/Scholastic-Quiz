@@ -95,14 +95,14 @@ function Quiz() {
 	}
 
 	const nextButton = () => {
-		if (currentStep < 15) {
+		if (currentStep < 25) {
 			return (
 				<button
 					className="quiz-btn next-button" onClick={_next}>
 					<p>Next</p>
 				</button>
 			)
-		} else if (currentStep === 15) {
+		} else if (currentStep === 25) {
 			return (
 				<button
 					className="quiz-btn submit-button" onClick={handleSubmitBtn}>
@@ -149,7 +149,7 @@ function Quiz() {
 
 	const getQuestions = async () => {
 		let token = localStorage.getItem('authToken');
-		let url = `https://scholastic-quiz-app.herokuapp.com/questionsFifteen`;
+		let url = `https://scholastic-quiz-app.herokuapp.com/questionsTwentyFive`;
 
 		let questionsData = [];
 		let answerData = [];
