@@ -19,6 +19,7 @@ function App() {
 	const [name, changeName] = useState(null);
 	const [isAdmin, setAdmin] = useState(false);
 	const [testGiven, setTestGiven] = useState(false);
+	const [blocked, setBlocked] = useState(false);
 
 	let info = {
 		name:name,
@@ -31,6 +32,8 @@ function App() {
 		setAdmin: setAdmin,
 		testGiven: testGiven,
 		setTestGiven: setTestGiven,
+		blocked: blocked,
+		setBlocked: setBlocked
 	}
  
 	return (

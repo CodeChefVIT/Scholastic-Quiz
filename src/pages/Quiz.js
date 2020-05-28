@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import Question from "../components/Question"
+import React, { useState, useEffect, useContext } from "react";
 import { Grid, Snackbar, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Dialog, DialogTitle,
 		Button } from '@material-ui/core'
 import './Quiz.css';
 import Loading from "./Loading";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import InfoContext from "../context/InfoContext";
 
 function Quiz() {
 	const [currentStep, setStep] = useState(1);
@@ -24,6 +24,8 @@ function Quiz() {
 	const [resultData, setResultData] = useState(null);
 
 	const [confirmModal, setConfirmModal] = useState(false);
+
+	const {setBlocked} = useContext(InfoContext);
 
 	let seconds = 600; //10 min === 600 seconds  Total time in seconds
 
@@ -163,7 +165,8 @@ function Quiz() {
 				if(res.status === 201) {
 					setRedirect(true);
 					return;
-				} else {
+				}
+				else {
 					res.data["questions"].map((question) => {
 						let questionObj = {
 							q_id: question._id,
@@ -185,8 +188,13 @@ function Quiz() {
 			setQuestions(questionsData);
 			setAllAns(answerData);
 		} catch (error) {
-			console.log(error);
+			if(error.response.status === 403) {
+				setRedirect(true);
+				setBlocked(true);
+				return;
+			}
 		}
+
 		setLoading(false);
 		setInterval(() => tick(), 1000);
 	}

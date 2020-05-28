@@ -23,7 +23,7 @@ function LoginPage() {
 
 	const [isLoading, setLoading] = useState(false);
 
-	const {setLoggedIn, changeName, setAuthToken, setAdmin, isAdmin} = useContext(InfoContext);
+	const {setLoggedIn, changeName, setAuthToken, setAdmin} = useContext(InfoContext);
 
 	const mailErrorText = "Email cannot be empty";
 	const passwordErrorText = "Password cannot be empty";

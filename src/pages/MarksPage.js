@@ -20,8 +20,6 @@ function MarksPage(props) {
 			return;
 		}
 
-		let response = null;
-
 		try {
 			await axios.get(url, {
 				headers: {

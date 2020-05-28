@@ -5,7 +5,7 @@ import './PlayMenuBar.css';
 import InfoContext from '../context/InfoContext';
 
 function PlayMenuBar() {
-	const { isLoggedIn, isAdmin, testGiven } = useContext(InfoContext);
+	const { isLoggedIn, isAdmin, testGiven, blocked } = useContext(InfoContext);
 	const [modalOpen, setModalOpen] = useState(false);
 
 	const onCloseHandle = () => {
@@ -46,6 +46,23 @@ function PlayMenuBar() {
 							<Link to="/marks" className="link">
 								<Button size="medium" className="view-marks-button"><p className="marks-btn-text">View Marks</p></Button>
 							</Link>
+						</div>
+					</Grid>
+				</Grid>
+
+			</div>
+		)
+	}
+	else if(blocked) {
+		return (
+			<div className="blocked">
+				<Grid container spacing={0}>
+					<Grid item xs={12} md={6}>
+						<div className="play-menu">
+							{isAdmin ? <Link to="/admin" className="link">
+								<Button size="small" className="admin-btn">Admin Panel</Button>
+							</Link> : null}
+							<Typography variant="h5" className="onetime-warning thank-text">You have been blocked for violating our rules!</Typography>
 						</div>
 					</Grid>
 				</Grid>
