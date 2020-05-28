@@ -276,7 +276,7 @@ router.post('/forgot', (req, res) => {
   })
 
   function isBlocked(req,res,next){
-      if(req.user.user.testGiven){
+      if(req.user.user.testStarted){
           req.user.user.noOfRefresh+=1;
       }
       if(req.user.user.noOfRefresh>2){
