@@ -97,6 +97,12 @@
 	font-size: 1.1rem !important;
 }
 
+@media screen and (max-width: 520px) {
+	.modal-text {
+		font-size: 0.8rem !important;
+	}
+}
+
 .bold {
 	font-weight: bolder !important;
 }

@@ -89,14 +89,14 @@ function PlayMenuBar() {
 					style={{ width: '100%' }}>
 					<DialogTitle><p className="modal-head">Important Information</p></DialogTitle>
 					<div className="modal-info">
-						<Typography variant="h6" className="modal-text">1) You will be given 20 minutes for the whole quiz.</Typography>
-						<Typography variant="h6" className="modal-text bold">2) After starting the quiz, please do not refresh or close the website.
-												You won't be able to give the quiz again!</Typography>
-						<Typography variant="h6" className="modal-text">3) This quiz can be given only once.</Typography>
-						<Typography variant="h6" className="modal-text">4) You will get 15 MCQs, with only one correct option.</Typography>
+						<Typography variant="h6" className="modal-text bold">1) AFTER STARTING THE QUIZ, PLEASE DO NOT REFRESH OR CLOSE THE WEBSITE.
+												YOU WILL BE GIVEN TWO CHANCES, AFTER WHICH YOU WILL BE BANNED FROM GIVING THE QUIZ AGAIN.</Typography>
+						<Typography variant="h6" className="modal-text">2) You will be given 10 minutes for the whole quiz.</Typography>
+						<Typography variant="h6" className="modal-text">3) This quiz can be submitted only once.</Typography>
+						<Typography variant="h6" className="modal-text">4) You will get 25 MCQs, with only one correct option.</Typography>
 						<Typography variant="h6" className="modal-text">5) After submitting the quiz, you will be able to see your marks.</Typography>
 						<Typography variant="h5" className="modal-text bold">6) IMPORTANT: IF YOU LEAVE THE QUIZ PAGE WITHOUT HITTING THE SUBMIT BUTTON,
-												YOUR ATTEMP WILL NOT COUNT AND YOU WILL NOT BE ABLE TO TAKE THE QUIZ AGAIN!!!</Typography>
+												YOUR ATTEMP WILL NOT COUNT!</Typography>
 						<Link to="/quiz" className="link">
 							<Button className="quiz-modal-btn">Let's Go!</Button>
 						</Link>
