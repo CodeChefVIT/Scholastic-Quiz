@@ -232,7 +232,7 @@ function Quiz() {
 						</Grid>
 						<Grid item xs={10} md={8} lg={7} style={{ margin: 0, padding: '2%', backgroundColor: '#111', borderBottom: '5px solid #222', minHeight: '40vh' }}>
 							<FormControl style={{ margin: 'auto', width: "100%" }} component="fieldset">
-								<FormLabel className="label" component="legend">{allQuestions[currentQuestion].text}</FormLabel>
+								<FormLabel className="label" component="legend"><p className="question">{allQuestions[currentQuestion].text}</p></FormLabel>
 								<RadioGroup aria-label="correct-choice" value={currentAns} onChange={handleOptionChange}>
 									{allQuestions[currentQuestion].options.map((option) => {
 										return (

@@ -101,5 +101,24 @@
 	}
 }
 
+.question {
+	color: orange !important;
+	font-size: 1.5rem !important;
+	margin-top: 0 !important;
+	margin-bottom: 50px !important;
+}
 
+@media screen and (max-width: 800px) {
+	.question {
+		font-size: 1.3rem !important;
+		margin-bottom: 40px !important;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.question {
+		font-size: 1.3rem !important;
+		margin-bottom: 25px !important;
+	}
+}
 
