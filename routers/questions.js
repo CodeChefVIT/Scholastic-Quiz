@@ -282,13 +282,14 @@ router.post('/forgot', (req, res) => {
     //     console.log(req.user.user._id)
     //     console.log(req.user.user.noOfRefresh)
         const _id=req.user.user._id
-        const user= await User.findOne({_id})
+        var user= await User.findOne({_id})
          var x; 
          x=user.noOfRefresh+1;
        // console.log(x)
     await User.updateOne({_id:user._id},{$set:{"noOfRefresh":x}})
+     user= await User.findOne({_id})
   // console.log(user.noOfRefresh)
-      if(user.noOfRefresh>0){
+      if(user.noOfRefresh>2){
         await User.updateOne({_id:user._id},{$set:{isBlocked:true}})
       }
       if(!user.isBlocked)
