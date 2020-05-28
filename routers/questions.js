@@ -24,9 +24,9 @@ router.get('/questions',verify, async (req, res) => {
 })
 
 //get fifteen random questions
-router.get('/questionsFifteen',verify, async (req, res) => {
+router.get('/questionsTwentyFive',verify, async (req, res) => {
     try {
-        const questions = await Question.aggregate([{ $sample: { size: 15} },{$project:{correct_answer:0}}])
+        const questions = await Question.aggregate([{ $sample: { size: 25} },{$project:{correct_answer:0}}])
         //console.log(req.user.user.testGiven)
         const user = await User.findOne({_id:req.user.user._id})
         if(user.testGiven==true){
