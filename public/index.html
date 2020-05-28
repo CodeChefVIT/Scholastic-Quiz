@@ -16,7 +16,7 @@
 
 </head>
 
-<body oncontextmenu="return false" onkeydown="return false;" onmousedown="return false;">
+<body>
 
   <!-- No Script -->
   <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -26,19 +26,8 @@
 
   <!-- Scripts -->
   <script>
-    $(document).keydown(function (e) {
-      if (e.which === 123) {
-
-        return false;
-
-      }
-
-    });
-
-    $(document).bind("contextmenu", function (e) {
-      e.preventDefault();
-
-    });
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    oncontextmenu="return false";
   </script>
 
 </body>
