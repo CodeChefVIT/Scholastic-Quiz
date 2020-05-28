@@ -287,14 +287,14 @@ router.post('/forgot', (req, res) => {
          x=user.noOfRefresh+1;
        // console.log(x)
     await User.updateOne({_id:user._id},{$set:{"noOfRefresh":x}})
-   console.log(user.noOfRefresh)
-      if(user.noOfRefresh>1){
+  // console.log(user.noOfRefresh)
+      if(user.noOfRefresh>0){
         await User.updateOne({_id:user._id},{$set:{isBlocked:true}})
       }
       if(!user.isBlocked)
             next()
       else{
-          res.status(500).send("You are blocked from taking the quiz")
+          res.status(403).send("You are blocked from taking the quiz")
       }
 
   }
