@@ -24,7 +24,7 @@ router.get('/questions',verify, async (req, res) => {
 })
 
 //get fifteen random questions
-router.get('/questionsTwentyFive',verify, async (req, res) => {
+router.get('/questionsTwentyFive',verify,isBlocked, async (req, res) => {
     try {
         const questions = await Question.aggregate([{ $sample: { size: 25} },{$project:{correct_answer:0}}])
         //console.log(req.user.user.testGiven)
@@ -275,6 +275,20 @@ router.post('/forgot', (req, res) => {
       }
   })
 
+  function isBlocked(req,res,next){
+      if(req.user.user.testGiven){
+          req.user.user.noOfRefresh+=1;
+      }
+      if(req.user.user.noOfRefresh>2){
+          req.user.user.isBlocked=true;
+      }
+      if(!req.user.user.isBlocked)
+            next()
+      else{
+          res.status(500).send("You are blocked from taking the quiz")
+      }
+
+  }
   
 
 

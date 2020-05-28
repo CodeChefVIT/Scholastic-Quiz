@@ -52,6 +52,14 @@ const userSchema =new mongoose.Schema({
     timeLeft:{
         type: Number,
         default:20
+    },
+    noOfRefresh:{
+        type:Number,
+        default:0
+    },
+    isBlocked:{
+        type:Boolean,
+        default:false
     }
 })
 
