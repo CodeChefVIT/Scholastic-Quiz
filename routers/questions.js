@@ -25,7 +25,7 @@ router.get('/questions',verify, async (req, res) => {
 
 //get fifteen random questions
 router.get('/questionsTwentyFive',verify,isBlocked, async (req, res) => {
-    console.log(req.user.user.noOfRefresh)
+   // console.log(req.user.user.noOfRefresh)
     try {
         const questions = await Question.aggregate([{ $sample: { size: 25} },{$project:{correct_answer:0}}])
         //console.log(req.user.user.testGiven)
@@ -278,20 +278,20 @@ router.post('/forgot', (req, res) => {
   
 
  async function isBlocked(req,res,next){
-    var user = req.user.user
-        console.log(req.user.user._id)
-        console.log(req.user.user.noOfRefresh)
-        
+    // var user = req.user.user
+    //     console.log(req.user.user._id)
+    //     console.log(req.user.user.noOfRefresh)
+        const _id=req.user.user._id
+        const user= await User.findOne({_id})
          var x; 
-         x=req.user.user.noOfRefresh+1;
-        console.log(x)
+         x=user.noOfRefresh+1;
+       // console.log(x)
     await User.updateOne({_id:user._id},{$set:{"noOfRefresh":x}})
-   
-          console.log(req.user.user)
-      if(req.user.user.noOfRefresh>2){
+   console.log(user.noOfRefresh)
+      if(user.noOfRefresh>1){
         await User.updateOne({_id:user._id},{$set:{isBlocked:true}})
       }
-      if(!req.user.user.isBlocked)
+      if(!user.isBlocked)
             next()
       else{
           res.status(500).send("You are blocked from taking the quiz")
