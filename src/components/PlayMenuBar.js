@@ -53,7 +53,7 @@ function PlayMenuBar() {
 			</div>
 		)
 	}
-	else if(blocked && !isAdmin) {
+	else if(blocked) {
 		return (
 			<div className="blocked">
 				<Grid container spacing={0}>

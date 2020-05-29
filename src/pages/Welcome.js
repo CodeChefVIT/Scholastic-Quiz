@@ -23,7 +23,6 @@ function Welcome() {
 			}).then(res => {
 				response = res;
 			})
-			console.log(response);
 			changeName(response.data.name);
 			setAdmin(response.data.isAdmin);
 			setTestGiven(response.data.testGiven);

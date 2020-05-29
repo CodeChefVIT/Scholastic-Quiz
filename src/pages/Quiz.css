@@ -61,6 +61,11 @@
 	width: 100%;
 }
 
+.submit-button {
+	background-color: red !important;
+	border-color: rgb(145, 0, 0) !important;
+}
+
 @media only screen and (max-width: 440px){
 	.quiz-btn {
 		width: 85%;
@@ -96,7 +101,7 @@
 	}
 	
 	.submit-button:hover , .submit-button:focus {
-		background-color: orange !important;
+		background-color: rgb(201, 1, 1) !important;
 		transform: scale(1);
 	}
 }
@@ -106,6 +111,7 @@
 	font-size: 1.5rem !important;
 	margin-top: 0 !important;
 	margin-bottom: 50px !important;
+	font-family: "Montserrat", sans-serif !important;
 }
 
 @media screen and (max-width: 800px) {
@@ -117,7 +123,7 @@
 
 @media screen and (max-width: 400px) {
 	.question {
-		font-size: 1.3rem !important;
+		font-size: 1.1rem !important;
 		margin-bottom: 25px !important;
 	}
 }
