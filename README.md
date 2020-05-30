@@ -7,8 +7,8 @@
 > This is a secure website for conducting quiz to create hype for hunger games book release by scholastic. We also offer competetive coding questions.
 
 ---
-[![DOCS](https://documenter.getpostman.com/view/10968840/Szt8cUyo?version=latest)](INSERT_LINK_FOR_DOCS_HERE) 
-  [![UI ](https://hungergames.codechefvit.com/)](INSERT_UI_LINK_HERE)
+[![DOCS](https://img.shields.io/badge/Documentation-see%20docs-green?style=flat-square&logo=appveyor)](https://documenter.getpostman.com/view/10968840/Szt8cUyo?version=latest)
+  [![UI ](https://img.shields.io/badge/User%20Interface-Link%20to%20UI-orange?style=flat-square&logo=appveyor)](https://hungergames.codechefvit.com/)
 
 
 ## Features
