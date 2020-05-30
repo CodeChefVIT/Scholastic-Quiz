@@ -22,7 +22,7 @@ function App() {
 	const [blocked, setBlocked] = useState(false);
 
 	let info = {
-		name:name,
+		name: name,
 		changeName: changeName,
 		authToken: authToken,
 		setAuthToken: setAuthToken,
@@ -35,11 +35,11 @@ function App() {
 		blocked: blocked,
 		setBlocked: setBlocked
 	}
- 
+
 	return (
 		<InfoContext.Provider value={info}>
 			<Router>
-				<Navbar loggedIn={info.isLoggedIn}/>
+				<Navbar loggedIn={info.isLoggedIn} />
 				<Switch>
 					<Route exact path="/">
 						<Welcome />
