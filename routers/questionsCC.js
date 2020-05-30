@@ -17,7 +17,7 @@ router.post('/questionsCC',verify,adminAccess, async (req, res) => {
         const {correct_answer} = req.body
         const {questionType} = req.body
 
-        const question = await Question.create({
+        const question = await QuestionCC.create({
             description,
             alternatives,
             correct_answer,
