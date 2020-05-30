@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import Admin from './pages/Admin';
 import Quiz from './pages/Quiz';
+import QuizCC from './pages/QuizCC';
 import ErrorPage from './pages/ErrorPage';
 import AdminRegister from './pages/AdminRegister';
 import InfoContext from './context/InfoContext';
@@ -52,6 +53,9 @@ function App() {
 					</Route>
 					<Route exact path="/quiz">
 						<Quiz />
+					</Route>
+					<Route exact path="/ccquiz">
+						<QuizCC />
 					</Route>
 					<Route exact path="/marks">
 						<MarksPage />

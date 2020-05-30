@@ -7,7 +7,7 @@ import axios from "axios";
 import { Redirect } from "react-router-dom";
 import InfoContext from "../context/InfoContext";
 
-function Quiz() {
+function QuizCC() {
 	const [currentStep, setStep] = useState(1);
 	const [min, setMin] = useState('10');
 	const [sec, setSec] = useState('00');
@@ -31,7 +31,7 @@ function Quiz() {
 
 	const submitQuiz = async () => {
 		setLoading(true);
-		let url = `https://scholastic-quiz-app.herokuapp.com/answer`;
+		let url = `https://scholastic-quiz-app.herokuapp.com/answerCC`;
 		let token = localStorage.getItem('authToken');
 		let time = seconds;
 		if (token === null) {
@@ -40,7 +40,7 @@ function Quiz() {
 
 		let data = {
 			"questions": allChosenAns,
-			"timeleft": time,
+			"timeleftCC": time,
 		}
 
 		try {
@@ -97,14 +97,14 @@ function Quiz() {
 	}
 
 	const nextButton = () => {
-		if (currentStep < 25) {
+		if (currentStep < 10) {
 			return (
 				<button
 					className="quiz-btn next-button" onClick={_next}>
 					<p>Next</p>
 				</button>
 			)
-		} else if (currentStep === 25) {
+		} else if (currentStep === 10) {
 			return (
 				<button
 					className="quiz-btn submit-button" onClick={handleSubmitBtn}>
@@ -151,7 +151,7 @@ function Quiz() {
 
 	const getQuestions = async () => {
 		let token = localStorage.getItem('authToken');
-		let url = `https://scholastic-quiz-app.herokuapp.com/questionsTwentyFive`;
+		let url = `https://scholastic-quiz-app.herokuapp.com/getCC`;
 
 		let questionsData = [];
 		let answerData = [];
@@ -167,7 +167,7 @@ function Quiz() {
 					return;
 				}
 				else {
-					res.data["questions"].map((question) => {
+					res.data["mainquestions"].map((question) => {
 						let questionObj = {
 							q_id: question._id,
 							text: question.description,
@@ -215,7 +215,7 @@ function Quiz() {
 	}
 	else if (testCompleted) {
 		return (
-			<Redirect to="/ccquiz" />
+			<Redirect to="/marks" />
 		)
 	}
 	else {
@@ -265,4 +265,4 @@ function Quiz() {
 	}
 }
 
-export default Quiz;
+export default QuizCC;
