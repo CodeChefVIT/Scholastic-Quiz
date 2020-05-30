@@ -93,7 +93,7 @@ router.put('/resetUser',verify,adminAccess,async (req,res)=>{
 
     try{
         const email = req.body.email
-        await User.updateOne({email},{$set:{responses:[],testGiven:false,testStarted:false,timeLeft:600}})
+        await User.updateOne({email},{$set:{responses:[],testGiven:false,testStarted:false,timeLeft:600,score:0,scoreCC:0,timeLeftCC:600}})
         const user = await User.findOne({email})
         res.send(user)
     }catch(err){
@@ -163,7 +163,7 @@ router.put('/answer',verify,async (req,res)=>{
         }
         
         
-        await User.updateOne({_id:user._id},{$set:{score:user.score,testGiven:true,timeLeft}})
+        await User.updateOne({_id:user._id},{$set:{score:user.score,timeLeft}})
         try{
             const newUser = await User.findOne({_id:user._id})
             
@@ -300,28 +300,6 @@ router.post('/forgot', (req, res) => {
 
   }
   
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-                                    //CC
-  router.get('/getCC',verify,isBlocked, async (req, res) => {
-   // console.log(req.user.user.noOfRefresh)
-    try {
-        const questions = await Question.aggregate([{ $sample: { size: 25} },{$project:{correct_answer:0}}])
-        //console.log(req.user.user.testGiven)
-        const user = await User.findOne({_id:req.user.user._id})
-        if(user.testGiven==true){
-            res.status(201).send({message:"you've already given the test"})
-        }
-
-        await User.updateOne({_id:req.user.user._id},{$set:{testStarted:true}})
-        //console.log(req.user.user)
-        return res.status(200).send({questions})
-    } catch (error) {
-        return res.status(500).json({"error":error})
-    }
-})
-                                  
-
-
 
 
 module.exports = router

@@ -24,6 +24,10 @@ const userSchema =new mongoose.Schema({
         type:Number,
         default:0
     },
+    scoreCC:{
+        type:Number,
+        default:0
+    },
     testStarted:{
         type : Boolean,
         default :false
@@ -49,7 +53,14 @@ const userSchema =new mongoose.Schema({
     responses:[
 
     ],
+    responsesCC:[
+
+    ],
     timeLeft:{
+        type: Number,
+        default:20
+    },
+    timeLeftCC:{
         type: Number,
         default:20
     },
