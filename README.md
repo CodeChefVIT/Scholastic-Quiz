@@ -1,35 +1,24 @@
 <p align="center"><a href="http://www.codechefvit.com" target="_blank"><img src="https://s3.amazonaws.com/codechef_shared/sites/all/themes/abessive/logo-3.png" title="CodeChef-VIT" alt="Codechef-VIT"></a>
 </p>
 
-# Project Title
+# Scholastic Quiz Website
 
 > <Subtitle>
-> Include project description here.
+> This is a secure website for conducting quiz to create hype for hunger games book release by scholastic. We also offer competetive coding questions.
 
 ---
-[![DOCS](https://img.shields.io/badge/Documentation-see%20docs-green?style=flat-square&logo=appveyor)](INSERT_LINK_FOR_DOCS_HERE) 
-  [![UI ](https://img.shields.io/badge/User%20Interface-Link%20to%20UI-orange?style=flat-square&logo=appveyor)](INSERT_UI_LINK_HERE)
-
-
+[![DOCS](https://documenter.getpostman.com/view/10968840/Szt8cUyo?version=latest)](INSERT_LINK_FOR_DOCS_HERE) 
+  [![UI ](https://hungergames.codechefvit.com/)](INSERT_UI_LINK_HERE)
 
 
 ## Features
-- Insert list of features here
-
-
+- A secure quiz portal in which there are little to know chances of cheating.
 
 
 ## Screenshots
-<img src="https://github.com/akshatvg/common-entry-test/raw/master/static/img/header.png" alt="Project Screenshots">
-
-## Instructions to run
-
-```
-$ git clone https://github.com/CodeChefVIT/<Project>
-$ cd <Project>
-$ pip3 install -r requirements.txt
-$ python3 manage.py runserver
-```
+<img src="https://github.com/CodeChefVIT/Scholastic-Quiz/blob/master/public/ss/cc%20(1).png" alt="Project Screenshots">
+<img src="https://github.com/CodeChefVIT/Scholastic-Quiz/blob/master/public/ss/cc%20(2).png" alt="Project Screenshots">
+<img src="https://github.com/CodeChefVIT/Scholastic-Quiz/blob/master/public/ss/cc%20(3).png" alt="Project Screenshots">
 
 ## Contributors
 - <a href="https://github.com/gvinayakgupta">Vinayak Gupta</a>
