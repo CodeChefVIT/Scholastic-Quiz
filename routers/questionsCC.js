@@ -10,6 +10,26 @@ const nodemailer=require('nodemailer')
 const bcrypt=require('bcryptjs')
 var mongoose=require('mongoose')
 
+router.post('/questionsCC',verify,adminAccess, async (req, res) => {
+    try {
+        const { description } = req.body
+        const { alternatives } = req.body
+        const {correct_answer} = req.body
+        const {questionType} = req.body
+
+        const question = await Question.create({
+            description,
+            alternatives,
+            correct_answer,
+            questionType
+        })
+
+        return res.status(201).json(question)
+    } catch (error) {
+        return res.status(500).json({"error":error})
+    }
+})
+
 router.get('/getCC',verify, async (req, res) => {
     // console.log(req.user.user.noOfRefresh)
     var mainQuestions= []
