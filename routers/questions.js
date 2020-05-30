@@ -9,7 +9,7 @@ const adminAccess = require('./adminMiddleware')
 const shortid=require('shortid')
 const nodemailer=require('nodemailer')
 const bcrypt=require('bcryptjs')
-const QuestionCC = require("../models/questionCC")
+
 // get all quiz questions
 router.get('/questions',verify, async (req, res) => {
     try {
@@ -33,7 +33,7 @@ router.get('/questionsTwentyFive',verify,isBlocked, async (req, res) => {
         if(user.testGiven==true){
             res.status(201).send({message:"you've already given the test"})
         }
-
+        console.log(questions.length)
         await User.updateOne({_id:req.user.user._id},{$set:{testStarted:true}})
         //console.log(req.user.user)
         return res.status(200).send({questions})

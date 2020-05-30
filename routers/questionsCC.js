@@ -1,4 +1,4 @@
-const QuestionCC = require("../models/questionCC")
+const QuestionCC = require("../models/quectionCC")
 const express = require('express')
 const router = express.Router()
 const Question = require("../models/questions")
@@ -10,19 +10,31 @@ const nodemailer=require('nodemailer')
 const bcrypt=require('bcryptjs')
 var mongoose=require('mongoose')
 
-router.get('/getCC',verify,isBlocked, async (req, res) => {
+router.get('/getCC',verify, async (req, res) => {
     // console.log(req.user.user.noOfRefresh)
+    var mainQuestions= []
+    for(i=0;i<10;i++){
+        const question  = await QuestionCC.find({questionType:i})
+        var random = Math.floor(Math.random()*question.length)
+        console.log(random)
+        mainQuestions.push(question[random])
+    }
+    
+    
+
+
+
      try {
-         const questions = await Question.aggregate([{ $sample: { size: 25} },{$project:{correct_answer:0}}])
+         
          //console.log(req.user.user.testGiven)
          const user = await User.findOne({_id:req.user.user._id})
-         if(user.testGiven==true){
-             res.status(201).send({message:"you've already given the test"})
-         }
+        //  if(user.testGiven==true){
+        //      res.status(201).send({message:"you've already given the test"})
+        //  }
  
-         await User.updateOne({_id:req.user.user._id},{$set:{testStarted:true}})
+         
          //console.log(req.user.user)
-         return res.status(200).send({questions})
+         return res.status(200).send({mainQuestions})
      } catch (error) {
          return res.status(500).json({"error":error})
      }
@@ -55,4 +67,4 @@ router.get('/getCC',verify,isBlocked, async (req, res) => {
     } 
 })
 
-
+module.exports = router

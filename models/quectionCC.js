@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
 const questionCCSchema = new mongoose.Schema({
+    
     description:{
         type: String,
         required:true
@@ -18,7 +19,7 @@ const questionCCSchema = new mongoose.Schema({
         required:true
     },
     questionType:{
-        type:number
+        type:Number
     }
     
 })
