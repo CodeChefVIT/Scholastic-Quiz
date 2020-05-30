@@ -42,5 +42,5 @@ $ python3 manage.py runserver
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
 <p align="center">
-	With :heart: by <a href="http://www.codechefvit.com" target="_blank">Codechef-VIT</a>
+	With :heart: by <a href="http://www.codechefvit.com" target="_blank">CodeChef-VIT</a>
 </p>
