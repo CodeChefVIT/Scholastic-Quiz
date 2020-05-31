@@ -4,15 +4,7 @@ const Joi = require('@hapi/joi')
 const bcrypt =require('bcryptjs')
 const JWT = require('jsonwebtoken')
 
-// const schema = Joi.object({
-//     name:Joi.string().min(6).required(),
-//     email:Joi.string().min(6).required().email(),
-//     password:Joi.string().min(6).required(),
-// })
 
-
-
-//req.body
 router.post('/register',async (req,res)=>{
 
     var admin = false

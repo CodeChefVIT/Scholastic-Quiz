@@ -4,7 +4,6 @@ const JWT = require('jsonwebtoken')
 module.exports = function (req,res,next){
     const token = req.header('auth-token')
     if(!token) return res.status(400).send("Access Denied!")
-    // if(req.user.isAdmin!=true) return res.status(400).send('not an admin')
     
 
 
