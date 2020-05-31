@@ -64,7 +64,7 @@
 	color: white !important;
 }
 
-.MuiTablePagination-selectIcon {
+.MuiTablePagination-selectIcon, .MuiTypography-root {
 	color: white !important;
 }
 
