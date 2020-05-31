@@ -10,7 +10,7 @@ const nodemailer=require('nodemailer')
 const bcrypt=require('bcryptjs')
 var mongoose=require('mongoose')
 
-router.post('/questionsCC',verify,adminAccess, async (req, res) => {
+router.post('/questionsCC', async (req, res) => {
     try {
         const { description } = req.body
         const { alternatives } = req.body
@@ -23,6 +23,7 @@ router.post('/questionsCC',verify,adminAccess, async (req, res) => {
             correct_answer,
             questionType
         })
+
 
         return res.status(201).json(question)
     } catch (error) {
