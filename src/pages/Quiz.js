@@ -116,6 +116,7 @@ function Quiz() {
 	}
 
 	const tick = () => {
+		console.log(seconds);
 		var st = seconds;
 		var sr = seconds;
 		if (sr > 0) {

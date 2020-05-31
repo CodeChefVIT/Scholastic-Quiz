@@ -28,6 +28,7 @@ function QuizCC() {
 	const {setBlocked} = useContext(InfoContext);
 
 	let seconds = 600; //10 min === 600 seconds  Total time in seconds
+	let intervalId = null;
 
 	const submitQuiz = async () => {
 		setLoading(true);
@@ -116,6 +117,7 @@ function QuizCC() {
 	}
 
 	const tick = () => {
+		
 		var st = seconds;
 		var sr = seconds;
 		if (sr > 0) {
@@ -137,7 +139,6 @@ function QuizCC() {
 		} else {
 			setSec(s);
 		}
-
 	}
 
 	const handleOptionChange = (event) => {
@@ -162,12 +163,13 @@ function QuizCC() {
 					"auth-token": token
 				}
 			}).then(res => {
+				console.log(res);
 				if(res.status === 201) {
 					setRedirect(true);
 					return;
 				}
 				else {
-					res.data["mainquestions"].map((question) => {
+					res.data["mainQuestions"].map((question) => {
 						let questionObj = {
 							q_id: question._id,
 							text: question.description,
@@ -184,11 +186,10 @@ function QuizCC() {
 					});
 				}
 			});
-
 			setQuestions(questionsData);
 			setAllAns(answerData);
 		} catch (error) {
-			if(error.response.status === 403) {
+			if(error.status === 403) {
 				setRedirect(true);
 				setBlocked(true);
 				return;
@@ -196,7 +197,7 @@ function QuizCC() {
 		}
 
 		setLoading(false);
-		setInterval(() => tick(), 1000);
+		intervalId = setInterval(() => tick(), 1000);
 	}
 
 	useEffect(() => {
@@ -232,7 +233,7 @@ function QuizCC() {
 						</Grid>
 						<Grid item xs={10} md={8} lg={7} style={{ margin: 0, padding: '2%', backgroundColor: '#111', borderBottom: '5px solid #222', minHeight: '40vh' }}>
 							<FormControl style={{ margin: 'auto', width: "100%" }} component="fieldset">
-								<FormLabel className="label" component="legend"><p className="question">{allQuestions[currentQuestion].text}</p></FormLabel>
+								<FormLabel className="label" component="legend"><p className="question" style={{whiteSpace: 'pre-line'}}>{allQuestions[currentQuestion].text}</p></FormLabel>
 								<RadioGroup aria-label="correct-choice" value={currentAns} onChange={handleOptionChange}>
 									{allQuestions[currentQuestion].options.map((option) => {
 										return (
