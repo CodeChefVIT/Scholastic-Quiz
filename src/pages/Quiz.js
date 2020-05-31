@@ -28,8 +28,10 @@ function Quiz() {
 	const {setBlocked} = useContext(InfoContext);
 
 	let seconds = 600; //10 min === 600 seconds  Total time in seconds
+	let intervalId = null;
 
 	const submitQuiz = async () => {
+		clearInterval(intervalId);
 		setLoading(true);
 		let url = `https://scholastic-quiz-app.herokuapp.com/answer`;
 		let token = localStorage.getItem('authToken');
@@ -116,7 +118,6 @@ function Quiz() {
 	}
 
 	const tick = () => {
-		console.log(seconds);
 		var st = seconds;
 		var sr = seconds;
 		if (sr > 0) {
@@ -197,7 +198,7 @@ function Quiz() {
 		}
 
 		setLoading(false);
-		setInterval(() => tick(), 1000);
+		intervalId = setInterval(() => tick(), 1000);
 	}
 
 	useEffect(() => {
@@ -207,6 +208,10 @@ function Quiz() {
 			return;
 		}
 		getQuestions();
+
+		return () => {
+			clearInterval(intervalId);
+		}
 	}, [])
 
 	if (redirect) {

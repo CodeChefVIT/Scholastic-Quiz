@@ -189,7 +189,7 @@ function QuizCC() {
 			setQuestions(questionsData);
 			setAllAns(answerData);
 		} catch (error) {
-			if(error.status === 403) {
+			if(error.response.status === 403) {
 				setRedirect(true);
 				setBlocked(true);
 				return;
@@ -207,6 +207,10 @@ function QuizCC() {
 			return;
 		}
 		getQuestions();
+
+		return () => {
+			clearInterval(intervalId);
+		}
 	}, [])
 
 	if (redirect) {

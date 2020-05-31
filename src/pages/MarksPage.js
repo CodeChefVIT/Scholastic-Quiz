@@ -26,10 +26,11 @@ function MarksPage(props) {
 					"auth-token": token
 				}
 			}).then(res => {
-				if (res.data.testStarted === false) {
+				if (res.data.testGiven === false) {
 					setRedirect(true);
 					return;
-				} else {
+				}
+				else {
 					setMarks(res.data.score);
 				}
 			})
