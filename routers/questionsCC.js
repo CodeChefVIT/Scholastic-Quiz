@@ -32,6 +32,7 @@ router.post('/questionsCC',verify,adminAccess, async (req, res) => {
 
 router.get('/getCC',verify,isBlocked, async (req, res) => {
     // console.log(req.user.user.noOfRefresh)
+    await User.updateOne({_id:req.user.user._id},{$set:{ccStarted:true}})
     var mainQuestions= []
     for(i=0;i<10;i++){
         const question  = await QuestionCC.find({questionType:i})
@@ -101,7 +102,7 @@ async function isBlocked(req,res,next){
     await User.updateOne({_id:user._id},{$set:{"noOfRefresh":x}})
      user= await User.findOne({_id})
   // console.log(user.noOfRefresh)
-      if(user.noOfRefresh>1){
+      if(user.noOfRefresh>1 & user.ccStarted==true){
         await User.updateOne({_id:user._id},{$set:{isBlocked:true}})
       }
       if(!user.isBlocked)
