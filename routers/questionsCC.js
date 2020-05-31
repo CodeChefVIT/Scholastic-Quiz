@@ -102,7 +102,7 @@ async function isBlocked(req,res,next){
     await User.updateOne({_id:user._id},{$set:{"noOfRefresh":x}})
      user= await User.findOne({_id})
   // console.log(user.noOfRefresh)
-      if(user.noOfRefresh>1 & user.ccStarted==true){
+      if(user.noOfRefresh>2 & user.ccStarted==true){
         await User.updateOne({_id:user._id},{$set:{isBlocked:true}})
       }
       if(!user.isBlocked)
