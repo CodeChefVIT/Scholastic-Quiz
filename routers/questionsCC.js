@@ -60,6 +60,7 @@ router.get('/getCC',verify,isBlocked, async (req, res) => {
      } catch (error) {
          return res.status(500).json({"error":error})
      }
+     await User.updateOne({_id:req.user.user._id},{$set:{testGiven:true}})
  })
  router.put('/answerCC',verify,async (req,res)=>{
     
