@@ -93,7 +93,7 @@ async function isBlocked(req,res,next){
     // var user = req.user.user
     //     console.log(req.user.user._id)
     //     console.log(req.user.user.noOfRefresh)
-    console.log(req.user.user)
+    
         const _id=req.user.user._id
         var user= await User.findOne({_id})
          var x; 
@@ -101,6 +101,7 @@ async function isBlocked(req,res,next){
        // console.log(x)
     await User.updateOne({_id:user._id},{$set:{"noOfRefresh":x}})
      user= await User.findOne({_id})
+     console.log(user)
   // console.log(user.noOfRefresh)
       if(user.noOfRefresh>2 & user.ccStarted==true){
         await User.updateOne({_id:user._id},{$set:{isBlocked:true}})
