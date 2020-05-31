@@ -5,7 +5,7 @@ import './PlayMenuBar.css';
 import InfoContext from '../context/InfoContext';
 
 function PlayMenuBar() {
-	const { isLoggedIn, isAdmin, testGiven, blocked } = useContext(InfoContext);
+	const { isLoggedIn, isAdmin, testGiven, blocked, ccStarted } = useContext(InfoContext);
 	const [modalOpen, setModalOpen] = useState(false);
 
 	const onCloseHandle = () => {
@@ -53,7 +53,7 @@ function PlayMenuBar() {
 			</div>
 		)
 	}
-	else if(blocked) {
+	else if (blocked) {
 		return (
 			<div className="blocked">
 				<Grid container spacing={0}>
@@ -97,9 +97,14 @@ function PlayMenuBar() {
 						<Typography variant="h6" className="modal-text">5) After submitting the quiz, you will be able to see your marks.</Typography>
 						<Typography variant="h5" className="modal-text bold">6) IMPORTANT: IF YOU LEAVE THE QUIZ PAGE WITHOUT HITTING THE SUBMIT BUTTON,
 												YOUR ATTEMPT WILL NOT COUNT!</Typography>
-						<Link to="/quiz" className="link">
+						{!ccStarted ? (<Link to="/quiz" className="link">
 							<Button className="quiz-modal-btn">Let's Go!</Button>
-						</Link>
+						</Link>)
+						: (
+							<Link to="/ccquiz" className="link">
+								<Button className="quiz-modal-btn">Let's Go!</Button>
+							</Link>
+						)}
 					</div>
 				</Dialog>
 			</div>

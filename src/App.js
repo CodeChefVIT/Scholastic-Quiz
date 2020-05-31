@@ -21,6 +21,7 @@ function App() {
 	const [isAdmin, setAdmin] = useState(false);
 	const [testGiven, setTestGiven] = useState(false);
 	const [blocked, setBlocked] = useState(false);
+	const [ccStarted, setCCStarted] = useState(false);
 
 	let info = {
 		name: name,
@@ -34,7 +35,9 @@ function App() {
 		testGiven: testGiven,
 		setTestGiven: setTestGiven,
 		blocked: blocked,
-		setBlocked: setBlocked
+		setBlocked: setBlocked,
+		ccStarted: ccStarted,
+		setCCStarted: setCCStarted,
 	}
 
 	return (

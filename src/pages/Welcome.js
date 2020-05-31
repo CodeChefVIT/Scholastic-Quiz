@@ -8,7 +8,7 @@ import Loading from "./Loading";
 
 function Welcome() {
 	const [loading, setLoading] = useState(true);
-	const {setLoggedIn, changeName, setAdmin, setTestGiven, setBlocked} = useContext(InfoContext);
+	const {setLoggedIn, changeName, setAdmin, setTestGiven, setBlocked, setCCStarted} = useContext(InfoContext);
 
 	const authenticate = async () => {
 		let token = localStorage.getItem('authToken');
@@ -28,6 +28,7 @@ function Welcome() {
 			setAdmin(response.data.isAdmin);
 			setTestGiven(response.data.testGiven);
 			setBlocked(response.data.isBlocked);
+			setCCStarted(response.data.ccStarted);
 			setLoggedIn(true);
 		} catch(error) {
 			localStorage.clear()
