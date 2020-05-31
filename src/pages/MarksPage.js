@@ -8,6 +8,7 @@ import "./MarksPage.css"
 function MarksPage(props) {
 	const [loading, setLoading] = useState(true);
 	const [marks, setMarks] = useState(null);
+	const [CCmarks, setCCMarks] = useState(null);
 
 	const [redirect, setRedirect] = useState(false);
 
@@ -31,6 +32,7 @@ function MarksPage(props) {
 					return;
 				} else {
 					setMarks(res.data.score);
+					setCCMarks(res.data.scoreCC);
 				}
 			})
 		} catch (error) {
@@ -58,8 +60,10 @@ function MarksPage(props) {
 		return (
 			<div className="marks-page">
 				<Container>
-					<Typography variant="h2" className="congo">You have successfully submitted the quiz</Typography>
-					<Typography varaint="h2" className="marks">Your marks are: <p className="value">{marks}</p></Typography>
+					<Typography variant="h2" className="congo">You have successfully submitted the quiz</Typography><br />
+					<Typography variant="h2" className="congo">You Scored</Typography>
+					<Typography varaint="h2" className="marks">Hunger games: <p className="value">{marks}</p></Typography>
+					<Typography varaint="h2" className="marks">Competetive coding: <p className="value">{CCmarks}</p></Typography>
 				</Container>
 			</div>
 		)
