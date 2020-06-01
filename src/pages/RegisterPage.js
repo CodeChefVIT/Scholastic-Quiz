@@ -17,12 +17,18 @@ function RegisterPage() {
 	const [regError, setRegError] = useState("");
 	const [regChanged, setRegChanged] = useState(false);
 
+	const [phoneNumber, setPhoneNumber] = useState("");
+	const [phoneNumberError, setPhoneNumberError] = useState("");
+	const [phoneNumberChanged, setPhoneNumberChanged] = useState(false);
+
 	const [email, changeEmail] = useState("");
 	const [emailError, setEmailError] = useState("");
 	const [emailChanged, setEmailChanged] = useState(false);
+
 	const [password, changePassword] = useState("");
 	const [passwordError, setPasswordError] = useState("");
 	const [passwordChanged, setPasswordChanged] = useState(false);
+	
 	const [redirect, setRedirect] = useState(false);
 
 	const [signedUp, setSignedUp] = useState(false);
@@ -39,6 +45,11 @@ function RegisterPage() {
 	const handleRegChange = (event) => {
 		setRegChanged(true);
 		setRegNo(event.target.value);
+	}
+	
+	const handlePhoneChange = (event) => {
+		setPhoneNumberChanged(true);
+		setPhoneNumber(event.target.value);
 	}
 
 	const handleEmailChange = (event) => {
@@ -69,8 +80,11 @@ function RegisterPage() {
 		
 		if(regNo.length === 0) setRegError(emptyText("Registration Number"));
 		else setRegError("");
+		
+		if(phoneNumber.length === 0) setPhoneNumberError(emptyText("Phone Number"));
+		else setPhoneNumberError("");
 
-	}, [name, email, password, regNo]);
+	}, [name, email, password, regNo, phoneNumber]);
 
 	const handleSubmit = async (event) => {
 		// event.preventDefault();
@@ -78,6 +92,7 @@ function RegisterPage() {
 		setPasswordChanged(true);
 		setEmailChanged(true);
 		setRegChanged(true);
+		setPhoneNumberChanged(true);
 
 		let errors = false;
 
@@ -106,6 +121,14 @@ function RegisterPage() {
 			errors = true;
 		}
 
+		if(phoneNumber === "") {
+			setPhoneNumberError(emptyText("Phone Number"));
+			errors = true;
+		} else if(phoneNumber.length !== 10) {
+			setPhoneNumberError("Invalid phone number");
+			errors = true;
+		}
+
 		if(!errors && emailError.length === 0 && passwordError.length === 0) {
 			setLoading(true);
 			let url = `https://scholastic-quiz-app.herokuapp.com/api/user/register`;
@@ -115,6 +138,7 @@ function RegisterPage() {
 				email: email,
 				password: password,
 				registrationNumber: regNo,
+				phoneNumber: phoneNumber,
 			}
 
 			let response = null;
@@ -124,12 +148,6 @@ function RegisterPage() {
 				});
 
 				if(response.status === 200) {
-					changeEmail("");
-					setEmailChanged(false);
-					changeName("");
-					setNameChanged(false);
-					changePassword("");
-					setPasswordChanged(false);
 					setSignedUp(true);
 					setRedirect(true);
 				} 
@@ -138,6 +156,8 @@ function RegisterPage() {
 					setExistEmail(true);
 				} else {
 					console.log(error);
+					changePassword("");
+					setPasswordChanged(false);
 				}
 			}	
 		}
@@ -170,13 +190,24 @@ function RegisterPage() {
 					<TextInput
 						error={regChanged? (regError.length === 0? false: true): false}
 						helperText={regChanged? (regError.length === 0? null: regError): null}
-						id="regNo"
+						id="reg-no"
 						label="Registration Number (NA for externals)"
 						type="text"
 						className="form-input"
 						variant="outlined"
 						value={regNo}
 						onChange={handleRegChange}
+						onKeyPress={keyPress}></TextInput>
+					<TextInput
+						error={phoneNumberChanged? (phoneNumberError.length === 0? false: true): false}
+						helperText={phoneNumberChanged? (phoneNumberError.length === 0? null: phoneNumberError): null}
+						id="phone-number"
+						label="Phone Number"
+						type="text"
+						className="form-input"
+						variant="outlined"
+						value={phoneNumber}
+						onChange={handlePhoneChange}
 						onKeyPress={keyPress}></TextInput>
 					<TextInput
 						error={emailChanged? (emailError.length === 0? false: true): false}
