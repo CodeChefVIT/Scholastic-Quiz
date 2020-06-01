@@ -10,7 +10,11 @@ router.post('/register', async (req, res) => {
 	const emailExist = await User.findOne({ email: req.body.email });
 	if (emailExist) {
 		return res.status(401).send('Email Exists');
-	}
+    }
+    const regnoExists = await User.findOne({registrationNumber:req.body.registrationNumber})
+    if(regnoExists){
+        return res.status(401).send('Reg number exists')
+    }
 
 	//hash the password
 	const salt = await bcrypt.genSalt(10);
@@ -30,7 +34,11 @@ router.post('/register', async (req, res) => {
 	});
 	try {
 		const savedUser = await user.save();
-		res.send({ user, isAdmin: user.isAdmin });
+		res.status(201).json({
+            name: savedUser.name,
+            email: savedUser.email,
+            registrationNumber: savedUser.registrationNumber
+        })
 	} catch (err) {
 		res.status(400).send(err);
 	}
@@ -51,7 +59,12 @@ router.post('/login', async (req, res, next) => {
 	const token = JWT.sign({ user }, process.env.JWT_TOKEN, { expiresIn: '1d' });
 	res.header('auth-token', token);
 
-	res.send({ user, authToken: token });
+	res.status(201).json({
+        name: user.name,
+        email: user.email,
+        registrationNumber: user.registrationNumber,
+        authToken:token
+    })
 });
 
 module.exports = router;

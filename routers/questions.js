@@ -254,7 +254,7 @@ router.post('/forgot', (req, res) => {
       const user  = await req.user.user
       _id = user._id
       try{
-          const user1 = await User.findOne({_id})
+          const user1 = await User.findOne({_id}).select('-password')
           res.send(user1)
 
       }catch(err){
