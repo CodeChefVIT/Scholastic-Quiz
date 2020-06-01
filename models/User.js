@@ -75,6 +75,10 @@ const userSchema =new mongoose.Schema({
     ccStarted:{
         type:Boolean,
         default:false
+    },
+    registrationNumber:{
+        type:String,
+        required:true
     }
 })
 
