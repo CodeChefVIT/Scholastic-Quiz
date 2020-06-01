@@ -62,7 +62,6 @@ function Welcome() {
 					</Hidden>
 				</Grid>
 				<PlayMenuBar />
-
 			</div>
 		</Container>
 	)

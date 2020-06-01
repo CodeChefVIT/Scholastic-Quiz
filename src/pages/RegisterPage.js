@@ -122,7 +122,7 @@ function RegisterPage() {
 				await axios.post(url, data).then(res => {
 					response = res;
 				});
-				
+
 				if(response.status === 200) {
 					changeEmail("");
 					setEmailChanged(false);

@@ -18,24 +18,26 @@ function PlayMenuBar() {
 
 	if (!isLoggedIn) {
 		return (
-			<Grid container spacing={0}>
-				<Grid item xs={12} md={6} className="not-logged-menu">
-					<Typography variant="h4" className="login-msg">You are not logged in!</Typography>
-					<Typography variant="h6" className="login-msg">Login/Signup to continue!</Typography>
-					<div className="button-bar">
-						<Link to="/login" className="link">
-							<Button size="large" className="action-button login-button">Login</Button>
-						</Link>
-						<Link to="/register" className="link">
-							<Button size="large" className="action-button signup-button">SignUp</Button>
-						</Link>
-					</div>
+			<div className="play-container">
+				<Grid container spacing={0}>
+					<Grid item xs={12} md={6} className="not-logged-menu">
+						<Typography variant="h4" className="login-msg">You are not logged in!</Typography>
+						<Typography variant="h6" className="login-msg">Login/Signup to continue!</Typography>
+						<div className="button-bar">
+							<Link to="/login" className="link">
+								<Button size="large" className="action-button login-button">Login</Button>
+							</Link>
+							<Link to="/register" className="link">
+								<Button size="large" className="action-button signup-button">SignUp</Button>
+							</Link>
+						</div>
+					</Grid>
 				</Grid>
-			</Grid>
+			</div>
 		);
 	} else if (testGiven) {
 		return (
-			<div className="thanks">
+			<div className="thanks play-container">
 				<Grid container spacing={0}>
 					<Grid item xs={12} md={6}>
 						<div className="play-menu">
@@ -55,7 +57,7 @@ function PlayMenuBar() {
 	}
 	else if (blocked) {
 		return (
-			<div className="blocked">
+			<div className="blocked play-container">
 				<Grid container spacing={0}>
 					<Grid item xs={12} md={6}>
 						<div className="play-menu">
@@ -72,7 +74,7 @@ function PlayMenuBar() {
 	}
 	else if (isLoggedIn) {
 		return (
-			<div>
+			<div className="play-container">
 				<Grid container spacing={0}>
 					<Grid item xs={12} md={6}>
 						<div className="play-menu">
