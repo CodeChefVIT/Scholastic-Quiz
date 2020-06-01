@@ -34,10 +34,11 @@ router.post('/register', async (req, res) => {
 	});
 	try {
 		const savedUser = await user.save();
-		res.status(201).json({
+		res.status(201).json({user:{
             name: savedUser.name,
             email: savedUser.email,
             registrationNumber: savedUser.registrationNumber
+        }
         })
 	} catch (err) {
 		res.status(400).send(err);
@@ -59,10 +60,11 @@ router.post('/login', async (req, res, next) => {
 	const token = JWT.sign({ user }, process.env.JWT_TOKEN, { expiresIn: '1d' });
 	res.header('auth-token', token);
 
-	res.status(201).json({
-        name: user.name,
-        email: user.email,
-        registrationNumber: user.registrationNumber,
+	res.status(201).json({user:{
+            name: savedUser.name,
+            email: savedUser.email,
+            registrationNumber: savedUser.registrationNumber
+        },
         authToken:token
     })
 });
