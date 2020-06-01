@@ -13,7 +13,6 @@ import AdminRegister from './pages/AdminRegister';
 import InfoContext from './context/InfoContext';
 import ForgotPassword from './pages/ForgotPassword';
 import MarksPage from './pages/MarksPage';
-import SubmitLoading from './pages/SubmitLoading';
 
 function App() {
 	const [authToken, setAuthToken] = useState(null);
@@ -72,9 +71,6 @@ function App() {
 					</Route>
 					<Route exact path="/forgotPassword">
 						<ForgotPassword />
-					</Route>
-					<Route exact path="/loading">
-						<SubmitLoading />
 					</Route>
 					<Route path='*'>
 						<ErrorPage />
