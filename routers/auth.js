@@ -26,10 +26,10 @@ router.post('/register', async (req, res) => {
 	}
 
 	const user = new User({
-		name: req.body.name.trim(),
-		email: req.body.email.trim(),
+		name: req.body.name,
+		email: req.body.email,
         password: hashedPassword,
-        phoneNumber: req.body.phoneNumber.trim(),
+        phoneNumber: req.body.phoneNumber,
 		registrationNumber: req.body.registrationNumber.toUpperCase(),
 		isAdmin: admin,
 	});
