@@ -12,10 +12,10 @@ router.post('/register', async (req, res) => {
 		return res.status(401).send('Email Exists');
     }
     const regnoExists = await User.findOne({registrationNumber:req.body.registrationNumber})
-    if(regnoExists){
+    if(regnoExists && req.body.registrationNumber.toUpperCase() !== "NA"){
         return res.status(401).send('Reg number exists')
     }
-
+    
 	//hash the password
 	const salt = await bcrypt.genSalt(10);
 	const hashedPassword = await bcrypt.hash(req.body.password, salt);
@@ -34,7 +34,7 @@ router.post('/register', async (req, res) => {
 	});
 	try {
 		const savedUser = await user.save();
-		res.status(201).json({user:{
+		res.status(200).send({user:{
             name: savedUser.name,
             email: savedUser.email,
             registrationNumber: savedUser.registrationNumber
@@ -60,7 +60,7 @@ router.post('/login', async (req, res, next) => {
 	const token = JWT.sign({ user }, process.env.JWT_TOKEN, { expiresIn: '1d' });
 	res.header('auth-token', token);
 
-	res.status(201).json({user:{
+	res.status(200).send({user:{
             name: savedUser.name,
             email: savedUser.email,
             registrationNumber: savedUser.registrationNumber
