@@ -6,6 +6,7 @@ import Loading from "./Loading";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import InfoContext from "../context/InfoContext";
+import SubmitLoading from './SubmitLoading';
 
 function QuizCC() {
 	const [currentStep, setStep] = useState(1);
@@ -23,6 +24,8 @@ function QuizCC() {
 	const [testCompleted, setTestCompleted] = useState(false);
 	const [resultData, setResultData] = useState(null);
 
+	const [submitLoading, setSubmitLoading] = useState(false);
+
 	const [confirmModal, setConfirmModal] = useState(false);
 
 	const {setBlocked} = useContext(InfoContext);
@@ -31,7 +34,7 @@ function QuizCC() {
 	let intervalId = null;
 
 	const submitQuiz = async () => {
-		setLoading(true);
+		setSubmitLoading(true);
 		let url = `https://scholastic-quiz-app.herokuapp.com/answerCC`;
 		let token = localStorage.getItem('authToken');
 		let time = seconds;
@@ -55,7 +58,7 @@ function QuizCC() {
 		} catch (error) {
 			console.log(error);
 		}
-		setLoading(false);
+		setSubmitLoading(false);
 		setTestCompleted(true);
 	}
 
@@ -220,6 +223,10 @@ function QuizCC() {
 	else if (testCompleted) {
 		return (
 			<Redirect to="/marks" />
+		)
+	} else if(submitLoading) {
+		return (
+			<SubmitLoading />
 		)
 	}
 	else {
