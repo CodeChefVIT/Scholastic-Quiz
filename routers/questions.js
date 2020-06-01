@@ -281,9 +281,6 @@ router.post('/forgot', (req, res) => {
 
   }
   
-  router.get('/ip', function(req, res, next) {
-    console.log('ip', req.ip)
-    res.send({})
-});
+
 
 module.exports = router

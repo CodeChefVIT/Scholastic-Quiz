@@ -7,14 +7,10 @@ const Authrouter =require('./routers/auth')
 const cors = require('cors') 
 const rateLimit = require('express-rate-limit')
 require('dotenv').config()
-const ipfilter = require('express-ipfilter').IpFilter
- 
-// Whitelist the following IPs
-const ips = ['0.0.0.0','127.0.0.1','ffff:127.0.0.1','::1','104.24.123.191','104.24.122.191','172.67.176.16']
+
  
 // Create the server
-app.use(ipfilter(ips, { mode: 'allow' }))
-module.exports=app
+
 
 app.enable('trust proxy')
 
