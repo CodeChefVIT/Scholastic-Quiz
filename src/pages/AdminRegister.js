@@ -12,12 +12,19 @@ function AdminRegister() {
 	const [name, changeName] = useState("");
 	const [nameError, setNameError] = useState("");
 	const [nameChanged, setNameChanged] = useState(false);
+
+	const [phoneNumber, setPhoneNumber] = useState("");
+	const [phoneNumberError, setPhoneNumberError] = useState("");
+	const [phoneNumberChanged, setPhoneNumberChanged] = useState(false);
+
 	const [email, changeEmail] = useState("");
 	const [emailError, setEmailError] = useState("");
 	const [emailChanged, setEmailChanged] = useState(false);
+
 	const [password, changePassword] = useState("");
 	const [passwordError, setPasswordError] = useState("");
 	const [passwordChanged, setPasswordChanged] = useState(false);
+
 	const [adminCode, setAdminCode] = useState("");
 	const [adminCodeError, setAdminCodeError] = useState("");
 	const [adminCodeChanged, setAdminCodeChanged] = useState(false);
@@ -31,6 +38,11 @@ function AdminRegister() {
 	const handleNameChange = (event) => {
 		setNameChanged(true);
 		changeName(event.target.value);
+	}
+
+	const handlePhoneChange = (event) => {
+		setPhoneNumberChanged(true);
+		setPhoneNumber(event.target.value);
 	}
 
 	const handleEmailChange = (event) => {
@@ -67,7 +79,10 @@ function AdminRegister() {
 		if (adminCode.length === 0) setAdminCodeError(emptyText("Admin code"));
 		else setAdminCodeError("");
 
-	}, [name, email, password, adminCode]);
+		if(phoneNumber.length === 0) setPhoneNumberError(emptyText("Phone Number"));
+		else setPhoneNumberError("");
+
+	}, [name, email, password, adminCode, phoneNumber]);
 
 	const handleSubmit = async (event) => {
 		// event.preventDefault();
@@ -75,6 +90,7 @@ function AdminRegister() {
 		setEmailChanged(true);
 		setPasswordChanged(true);
 		setAdminCodeChanged(true);
+		setPhoneNumberChanged(true);
 
 		let errors = false;
 
@@ -103,16 +119,25 @@ function AdminRegister() {
 			errors = true;
 		}
 
+		if(phoneNumber === "") {
+			setPhoneNumberError(emptyText("Phone Number"));
+			errors = true;
+		} else if(phoneNumber.length !== 10) {
+			setPhoneNumberError("Invalid phone number");
+			errors = true;
+		}
+
 		if (!errors && emailError.length === 0 && passwordError.length === 0) {
 			setLoading(true);
-			let url = `https://scholastic-quiz-app.herokuapp.com/api/user/register?
-			name=${name}&email=${email}&password=${password}&adminCode=${adminCode}`;
+			let url = `https://scholastic-quiz-app.herokuapp.com/api/user/register`;
 
 			let data = {
 				name: name,
 				email: email,
 				password: password,
 				adminCode: adminCode,
+				phoneNumber: phoneNumber,
+				registrationNumber: "NA",
 			}
 
 			let response = null;
@@ -122,18 +147,14 @@ function AdminRegister() {
 				});
 				
 				if (response.status === 200) {
-					changeEmail("");
-					setEmailChanged(false);
-					changeName("");
-					setNameChanged(false);
-					changePassword("");
-					setPasswordChanged(false);
-					setAdminCode("");
-					setAdminCodeChanged(false);
 					setSignedUp(true);
 				}
 			} catch(error) {
 				console.log(error);
+				changePassword("");
+				setPasswordChanged(false);
+				setAdminCode("");
+				setAdminCodeChanged(false);
 			}
 		}
 		setLoading(false);
@@ -158,6 +179,17 @@ function AdminRegister() {
 						variant="outlined"
 						value={name}
 						onChange={handleNameChange}
+						onKeyPress={keyPress}></TextInput>
+					<TextInput
+						error={phoneNumberChanged? (phoneNumberError.length === 0? false: true): false}
+						helperText={phoneNumberChanged? (phoneNumberError.length === 0? null: phoneNumberError): null}
+						id="phone-number"
+						label="Phone Number"
+						type="text"
+						className="form-input"
+						variant="outlined"
+						value={phoneNumber}
+						onChange={handlePhoneChange}
 						onKeyPress={keyPress}></TextInput>
 					<TextInput
 						error={emailChanged ? (emailError.length === 0 ? false : true) : false}

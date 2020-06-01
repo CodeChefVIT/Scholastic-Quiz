@@ -28,7 +28,7 @@ function RegisterPage() {
 	const [password, changePassword] = useState("");
 	const [passwordError, setPasswordError] = useState("");
 	const [passwordChanged, setPasswordChanged] = useState(false);
-	
+
 	const [redirect, setRedirect] = useState(false);
 
 	const [signedUp, setSignedUp] = useState(false);
@@ -137,7 +137,7 @@ function RegisterPage() {
 				name: name,
 				email: email,
 				password: password,
-				registrationNumber: regNo,
+				registrationNumber: regNo.trim(),
 				phoneNumber: phoneNumber,
 			}
 
