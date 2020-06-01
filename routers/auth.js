@@ -29,7 +29,7 @@ router.post('/register', async (req, res) => {
 		name: req.body.name.trim(),
 		email: req.body.email.trim(),
         password: hashedPassword,
-        phoneNumber = req.body.phoneNumber.trim(),
+        phoneNumber: req.body.phoneNumber.trim(),
 		registrationNumber: req.body.registrationNumber.toUpperCase(),
 		isAdmin: admin,
 	});
