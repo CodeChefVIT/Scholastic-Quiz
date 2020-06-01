@@ -10,7 +10,7 @@ const nodemailer=require('nodemailer')
 const bcrypt=require('bcryptjs')
 var mongoose=require('mongoose')
 
-router.post('/questionsCC', async (req, res) => {
+router.post('/questionsCC',verify,adminAccess, async (req, res) => {
     try {
         const { description } = req.body
         const { alternatives } = req.body
@@ -32,7 +32,7 @@ router.post('/questionsCC', async (req, res) => {
 })
 
 router.get('/getCC',verify,isBlocked, async (req, res) => {
-    // console.log(req.user.user.noOfRefresh)
+    
     await User.updateOne({_id:req.user.user._id},{$set:{ccStarted:true}})
     var mainQuestions= []
     for(i=0;i<10;i++){
@@ -48,14 +48,8 @@ router.get('/getCC',verify,isBlocked, async (req, res) => {
 
      try {
          
-         //console.log(req.user.user.testGiven)
-         const user = await User.findOne({_id:req.user.user._id})
-        //  if(user.testGiven==true){
-        //      res.status(201).send({message:"you've already given the test"})
-        //  }
- 
          
-         //console.log(req.user.user)
+         const user = await User.findOne({_id:req.user.user._id})
          return res.status(200).send({mainQuestions})
      } catch (error) {
          return res.status(500).json({"error":error})
@@ -92,19 +86,17 @@ router.get('/getCC',verify,isBlocked, async (req, res) => {
 
 
 async function isBlocked(req,res,next){
-    // var user = req.user.user
-    //     console.log(req.user.user._id)
-    //     console.log(req.user.user.noOfRefresh)
+    
     
         const _id=req.user.user._id
         var user= await User.findOne({_id})
          var x; 
          x=user.noOfRefresh+1;
-       // console.log(x)
+       
     await User.updateOne({_id:user._id},{$set:{"noOfRefresh":x}})
      user= await User.findOne({_id})
      console.log(user)
-  // console.log(user.noOfRefresh)
+  
       if(user.noOfRefresh>2 & user.ccStarted==true){
         await User.updateOne({_id:user._id},{$set:{isBlocked:true}})
       }

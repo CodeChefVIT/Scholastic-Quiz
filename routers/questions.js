@@ -14,9 +14,7 @@ const bcrypt=require('bcryptjs')
 router.get('/questions',verify, async (req, res) => {
     try {
         const questions = await Question.find()
-        //console.log(req.user)
         
-        //console.log(req.user.user)
         return res.status(200).json(questions)
     } catch (error) {
         return res.status(500).json({"error":error})
@@ -25,10 +23,8 @@ router.get('/questions',verify, async (req, res) => {
 
 //get fifteen random questions
 router.get('/questionsTwentyFive',verify,isBlocked, async (req, res) => {
-   // console.log(req.user.user.noOfRefresh)
     try {
         const questions = await Question.aggregate([{ $sample: { size: 25} },{$project:{correct_answer:0}}])
-        //console.log(req.user.user.testGiven)
         const user = await User.findOne({_id:req.user.user._id})
         if(user.testGiven==true){
             res.status(201).send({message:"you've already given the test"})
@@ -38,7 +34,6 @@ router.get('/questionsTwentyFive',verify,isBlocked, async (req, res) => {
         }
         console.log(questions.length)
         await User.updateOne({_id:req.user.user._id},{$set:{testStarted:true}})
-        //console.log(req.user.user)
         return res.status(200).send({questions})
     } catch (error) {
         return res.status(500).json({"error":error})
@@ -50,7 +45,6 @@ router.get('/questionsTwentyFive',verify,isBlocked, async (req, res) => {
 router.get('/viewSubmissions',verify,adminAccess, async (req, res) => {
     try {
         const array =await User.find({testGiven:true})
-        //console.log(array)
         return res.status(200).json(array)
     } catch (error) {
         return res.status(500).json({"error":error})
@@ -180,18 +174,13 @@ router.put('/answer',verify,async (req,res)=>{
 
 
 router.post('/forgot', (req, res) => {
-   // let {email} = req.body; // same as let email = req.body.email
     var email=req.body.email;
     User.findOne({email: email}, (err, userData) => {
       if (!err && userData!=null) {
         userData.passResetKey = shortid.generate();
         userData.passKeyExpires = new Date().getTime() + 20 * 60 * 1000 // pass reset key only valid for 20 minutes
-        //console.log(userData.passKeyExpires)
         userData.save().then(x => {
             if (!err) {
-              // configuring smtp transport machanism for password reset email
-              //console.log('its britteny bitch')
-              //console.log(userData)
               let transporter = nodemailer.createTransport({
                 service: "gmail",
                 port: 465,
@@ -215,15 +204,12 @@ router.post('/forgot', (req, res) => {
               try {
                 transporter.sendMail(mailOptions, (error, response) => {
                   if (error) {
-                    //console.log("error:\n", error, "\n");
                     res.status(500).send("could not send reset code");
                   } else {
-                    //console.log("email sent:\n", response);
                     res.status(200).send("Reset Code sent");
                   }
                 });
               } catch (error) {
-                //console.log(error);
                 res.status(500).send("could not sent reset code");
               }
             }
@@ -235,17 +221,13 @@ router.post('/forgot', (req, res) => {
   });
 
   router.post('/resetpass', async (req, res) => {
-   // let {resetKey, newPassword} = req.body
     let resetKey=req.body.resetKey
     let newPassword=req.body.newPassword
 
      await User.findOne({passResetKey: resetKey}, (err, userData) => {
           if (!err && userData!=null) {
-              //console.log(userData.name)
               let now = new Date().getTime();
               let keyExpiration =  userData.passKeyExpires;
-              //console.log(now);
-              //console.log(userData.passKeyExpires);
               if (  keyExpiration>now) {
           userData.password = bcrypt.hashSync(newPassword, 5);
                   userData.passResetKey = null; // remove passResetKey from user's records
@@ -281,17 +263,12 @@ router.post('/forgot', (req, res) => {
   
 
  async function isBlocked(req,res,next){
-    // var user = req.user.user
-    //     console.log(req.user.user._id)
-    //     console.log(req.user.user.noOfRefresh)
         const _id=req.user.user._id
         var user= await User.findOne({_id})
          var x; 
          x=user.noOfRefresh+1;
-       // console.log(x)
     await User.updateOne({_id:user._id},{$set:{"noOfRefresh":x}})
      user= await User.findOne({_id})
-  // console.log(user.noOfRefresh)
       if(user.noOfRefresh>2){
         await User.updateOne({_id:user._id},{$set:{isBlocked:true}})
       }
