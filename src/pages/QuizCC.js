@@ -163,7 +163,6 @@ function QuizCC() {
 					"auth-token": token
 				}
 			}).then(res => {
-				console.log(res);
 				if(res.status === 201) {
 					setRedirect(true);
 					return;

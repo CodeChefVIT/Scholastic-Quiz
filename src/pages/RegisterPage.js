@@ -114,9 +114,10 @@ function RegisterPage() {
 					setRedirect(true);
 				} 
 			} catch(error) {
-				console.log(error);
 				if(error.response.status === 401) {
 					setExistEmail(true);
+				} else {
+					console.log(error);
 				}
 			}	
 		}

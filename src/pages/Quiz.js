@@ -194,6 +194,8 @@ function Quiz() {
 				setRedirect(true);
 				setBlocked(true);
 				return;
+			} else {
+				console.log(error);
 			}
 		}
 

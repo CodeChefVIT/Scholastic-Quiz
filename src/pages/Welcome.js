@@ -21,7 +21,6 @@ function Welcome() {
 					"auth-token": token
 				}
 			}).then(res => {
-				console.log(res);
 				response = res;
 			})
 			changeName(response.data.name);
