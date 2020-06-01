@@ -12,6 +12,11 @@ function RegisterPage() {
 	const [name, changeName] = useState("");
 	const [nameError, setNameError] = useState("");
 	const [nameChanged, setNameChanged] = useState(false);
+
+	const [regNo, setRegNo] = useState("");
+	const [regError, setRegError] = useState("");
+	const [regChanged, setRegChanged] = useState(false);
+
 	const [email, changeEmail] = useState("");
 	const [emailError, setEmailError] = useState("");
 	const [emailChanged, setEmailChanged] = useState(false);
@@ -29,6 +34,11 @@ function RegisterPage() {
 	const handleNameChange = (event) => {
 		setNameChanged(true);
 		changeName(event.target.value);
+	}
+	
+	const handleRegChange = (event) => {
+		setRegChanged(true);
+		setRegNo(event.target.value);
 	}
 
 	const handleEmailChange = (event) => {
@@ -56,14 +66,18 @@ function RegisterPage() {
 
 		if(password.length === 0) setPasswordError(emptyText("Password"));
 		else setPasswordError("");
+		
+		if(regNo.length === 0) setRegError(emptyText("Registration Number"));
+		else setRegError("");
 
-	}, [name, email, password]);
+	}, [name, email, password, regNo]);
 
 	const handleSubmit = async (event) => {
 		// event.preventDefault();
 		setNameChanged(true);
 		setPasswordChanged(true);
 		setEmailChanged(true);
+		setRegChanged(true);
 
 		let errors = false;
 
@@ -87,6 +101,11 @@ function RegisterPage() {
 			errors = true;
 		}
 
+		if(regNo === "") {
+			setRegError(emptyText("Registration Number"));
+			errors = true;
+		}
+
 		if(!errors && emailError.length === 0 && passwordError.length === 0) {
 			setLoading(true);
 			let url = `https://scholastic-quiz-app.herokuapp.com/api/user/register`;
@@ -94,7 +113,8 @@ function RegisterPage() {
 			let data = {
 				name: name,
 				email: email,
-				password: password
+				password: password,
+				registrationNumber: regNo,
 			}
 
 			let response = null;
@@ -146,6 +166,17 @@ function RegisterPage() {
 						variant="outlined"
 						value={name}
 						onChange={handleNameChange}
+						onKeyPress={keyPress}></TextInput>
+					<TextInput
+						error={regChanged? (regError.length === 0? false: true): false}
+						helperText={regChanged? (regError.length === 0? null: regError): null}
+						id="regNo"
+						label="Registration Number (NA for externals)"
+						type="text"
+						className="form-input"
+						variant="outlined"
+						value={regNo}
+						onChange={handleRegChange}
 						onKeyPress={keyPress}></TextInput>
 					<TextInput
 						error={emailChanged? (emailError.length === 0? false: true): false}

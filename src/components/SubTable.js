@@ -149,7 +149,8 @@ export default function SubTable(){
 				 },
 				 rowStyle: {
 					 color: '#ccc'
-				 }
+				 },
+				 pageSize: 10
 			 }}
 			 editable={{
 				onRowDelete: (oldData) =>
