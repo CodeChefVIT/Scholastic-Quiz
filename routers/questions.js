@@ -11,6 +11,7 @@ const nodemailer=require('nodemailer')
 const bcrypt=require('bcryptjs')
 
 // get all quiz questions
+
 router.get('/questions',verify, async (req, res) => {
     try {
         const questions = await Question.find()
@@ -23,7 +24,7 @@ router.get('/questions',verify, async (req, res) => {
 
 //get fifteen random questions
 router.get('/questionsTwentyFive',verify,isBlocked, async (req, res) => {
-    try {
+        try {
         const questions = await Question.aggregate([{ $sample: { size: 25} },{$project:{correct_answer:0}}])
         const user = await User.findOne({_id:req.user.user._id})
         if(user.testGiven==true){
@@ -280,6 +281,9 @@ router.post('/forgot', (req, res) => {
 
   }
   
-
+  router.get('/ip', function(req, res, next) {
+    console.log('ip', req.ip)
+    res.send({})
+});
 
 module.exports = router
