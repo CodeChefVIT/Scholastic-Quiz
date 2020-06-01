@@ -260,7 +260,7 @@ function Quiz() {
 
 					<Dialog open={confirmModal} onClose={onCloseHandle} aria-labelledby="form-dialog-title"
 						PaperProps={{ style: { backgroundColor: '#2d2d2d', color: '#cfcfcf', minWidth: '10%' } }}>
-						<DialogTitle>Are you sure you want to submit the quiz?</DialogTitle>
+						<DialogTitle>Are you sure you want to submit the Hunger Games quiz and move on to the Competitive coding section?</DialogTitle>
 						<div className="btn-div">
 							<Button className="logout-btn m-right" onClick={handleSubmit}>Yes</Button>
 							<Button className="cancel-btn m-left" onClick={onCloseHandle}>No</Button>
