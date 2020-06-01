@@ -11,6 +11,7 @@ const nodemailer=require('nodemailer')
 const bcrypt=require('bcryptjs')
 
 // get all quiz questions
+
 router.get('/questions',verify, async (req, res) => {
     try {
         const questions = await Question.find()
@@ -23,14 +24,14 @@ router.get('/questions',verify, async (req, res) => {
 
 //get fifteen random questions
 router.get('/questionsTwentyFive',verify,isBlocked, async (req, res) => {
-    try {
+        try {
         const questions = await Question.aggregate([{ $sample: { size: 25} },{$project:{correct_answer:0}}])
         const user = await User.findOne({_id:req.user.user._id})
         if(user.testGiven==true){
             res.status(201).send({message:"you've already given the test"})
         }
         else if(user.ccStarted==true){
-            res.status(403).send({message:"you cannot give the test again!"})
+            res.status(420).send({message:"you cannot give the test again!"})
         }
         console.log(questions.length)
         await User.updateOne({_id:req.user.user._id},{$set:{testStarted:true}})
