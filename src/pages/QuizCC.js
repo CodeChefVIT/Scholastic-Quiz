@@ -30,10 +30,12 @@ function QuizCC() {
 
 	const {setBlocked} = useContext(InfoContext);
 
+	const [final, setFinal] = useState(600);
 	let seconds = 600; //10 min === 600 seconds  Total time in seconds
 	let intervalId = null;
 
 	const submitQuiz = async () => {
+		clearInterval(intervalId);
 		setSubmitLoading(true);
 		let url = `https://scholastic-quiz-app.herokuapp.com/answerCC`;
 		let token = localStorage.getItem('authToken');
@@ -44,7 +46,7 @@ function QuizCC() {
 
 		let data = {
 			"questions": allChosenAns,
-			"timeleftCC": time,
+			"timeLeftCC": final,
 		}
 
 		try {
@@ -130,6 +132,7 @@ function QuizCC() {
 			timesUp();
 		}
 		seconds = st;
+		setFinal(st);
 		var m = Math.floor(st / 60);
 		var s = st - (m * 60);
 		if (m < 10) {

@@ -30,8 +30,9 @@ function Quiz() {
 
 	const {setBlocked} = useContext(InfoContext);
 
-	let seconds = 600; //10 min === 600 seconds  Total time in seconds
+	const [final, setFinal] = useState(600); //10 min === 600 seconds  Total time in seconds
 	let intervalId = null;
+	let seconds = 600;
 
 	const submitQuiz = async () => {
 		clearInterval(intervalId);
@@ -45,7 +46,7 @@ function Quiz() {
 
 		let data = {
 			"questions": allChosenAns,
-			"timeleft": time,
+			"timeLeft": final,
 		}
 
 		try {
@@ -121,8 +122,8 @@ function Quiz() {
 	}
 
 	const tick = () => {
-		var st = seconds;
-		var sr = seconds;
+		let st = seconds;
+		let sr = seconds;
 		if (sr > 0) {
 			st--;
 		}
@@ -130,6 +131,7 @@ function Quiz() {
 			timesUp();
 		}
 		seconds = st;
+		setFinal(st);
 		var m = Math.floor(st / 60);
 		var s = st - (m * 60);
 		if (m < 10) {
