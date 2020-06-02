@@ -28,7 +28,7 @@ function QuizCC() {
 
 	const [confirmModal, setConfirmModal] = useState(false);
 
-	const {setBlocked} = useContext(InfoContext);
+	const {setBlocked, closed} = useContext(InfoContext);
 
 	const [final, setFinal] = useState(600);
 	let seconds = 600; //10 min === 600 seconds  Total time in seconds
@@ -206,6 +206,10 @@ function QuizCC() {
 	}
 
 	useEffect(() => {
+		if(closed) {
+			setRedirect(true);
+			return;
+		}
 		let token = localStorage.getItem('authToken');
 		if (token === null) {
 			setRedirect(true);

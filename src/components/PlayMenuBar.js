@@ -5,7 +5,7 @@ import './PlayMenuBar.css';
 import InfoContext from '../context/InfoContext';
 
 function PlayMenuBar() {
-	const { isLoggedIn, isAdmin, testGiven, blocked, ccStarted } = useContext(InfoContext);
+	const { isLoggedIn, isAdmin, testGiven, blocked, ccStarted, closed } = useContext(InfoContext);
 	const [modalOpen, setModalOpen] = useState(false);
 
 	const onCloseHandle = () => {
@@ -16,7 +16,24 @@ function PlayMenuBar() {
 		setModalOpen(true);
 	}
 
-	if (!isLoggedIn) {
+	if (closed) {
+		return (
+			<div className="play-container">
+				<Grid container spacing={0}>
+					<Grid item xs={12} md={6} className="not-logged-menu">
+						<Typography variant="h4" className="login-msg">The quiz submission has been closed.</Typography>
+						<Typography variant="h6" className="login-msg">Thanks for attending!</Typography>
+						<div className="button-bar">
+							<Link to="/leaderboard" className="link">
+								<Button size="large" className="view-marks-button"><p className="marks-btn-text">View Leaderboard</p></Button>
+							</Link>
+						</div>
+					</Grid>
+				</Grid>
+			</div>
+		);
+	}
+	else if (!isLoggedIn) {
 		return (
 			<div className="play-container">
 				<Grid container spacing={0}>
@@ -104,11 +121,11 @@ function PlayMenuBar() {
 						{!ccStarted ? (<Link to="/quiz" className="link">
 							<Button className="quiz-modal-btn">Let's Go!</Button>
 						</Link>)
-						: (
-							<Link to="/ccquiz" className="link">
-								<Button className="quiz-modal-btn">Let's Go!</Button>
-							</Link>
-						)}
+							: (
+								<Link to="/ccquiz" className="link">
+									<Button className="quiz-modal-btn">Let's Go!</Button>
+								</Link>
+							)}
 					</div>
 				</Dialog>
 			</div>

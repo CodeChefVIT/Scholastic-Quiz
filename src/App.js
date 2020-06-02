@@ -23,6 +23,8 @@ function App() {
 	const [blocked, setBlocked] = useState(false);
 	const [ccStarted, setCCStarted] = useState(false);
 
+	const [closed, setClosed] = useState(false);
+
 	let info = {
 		name: name,
 		changeName: changeName,
@@ -38,6 +40,7 @@ function App() {
 		setBlocked: setBlocked,
 		ccStarted: ccStarted,
 		setCCStarted: setCCStarted,
+		closed: closed,
 	}
 
 	return (
