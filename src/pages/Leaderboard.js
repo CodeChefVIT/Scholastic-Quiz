@@ -19,9 +19,10 @@ function Leaderboard() {
 		<div className="error-section">
 			<Grid container spacing={3}>
 				<Grid item xs={12}>
-					<Typography variant="h4" style={{color: 'orange'}}>Leaderboard</Typography>
+					<Typography variant="h3" style={{color: 'orange', marginBottom: '5%'}}>Leaderboard</Typography>
+					<Typography variant="h4" style={{color: 'white'}}>Evaluating Leaderboard</Typography>
 				</Grid>
-				<Grid item xs={12} style={{display: 'flex', justifyContent: 'center'}}>
+				{/* <Grid item xs={12} style={{display: 'flex', justifyContent: 'center'}}>
 					<MaterialTable
 						columns={columns}
 						data={rows}
@@ -37,7 +38,7 @@ function Leaderboard() {
 							toolbar: false,
 						}}
 					/>	
-				</Grid>
+				</Grid> */}
 			</Grid>
 			
 		</div>

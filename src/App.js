@@ -24,7 +24,7 @@ function App() {
 	const [blocked, setBlocked] = useState(false);
 	const [ccStarted, setCCStarted] = useState(false);
 
-	const [closed, setClosed] = useState(false);
+	const [closed, setClosed] = useState(true);
 
 	let info = {
 		name: name,
@@ -76,9 +76,9 @@ function App() {
 					<Route exact path="/forgotPassword">
 						<ForgotPassword />
 					</Route>
-					{/* <Route exact path="/leaderboard">
+					<Route exact path="/leaderboard">
 						<Leaderboard />
-					</Route> */}
+					</Route>
 					<Route path='*'>
 						<ErrorPage />
 					</Route>
