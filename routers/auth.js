@@ -12,7 +12,7 @@ router.post('/register', async (req, res) => {
 		return res.status(401).send('Email Exists');
     }
     const regnoExists = await User.findOne({registrationNumber:req.body.registrationNumber})
-    if(regnoExists && req.body.registrationNumber.toUpperCase !== "NA"){
+    if(regnoExists && req.body.registrationNumber.toUpperCase() !== "NA"){
         return res.status(401).send('Reg number exists')
     }
 
