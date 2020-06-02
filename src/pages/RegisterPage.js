@@ -34,6 +34,8 @@ function RegisterPage() {
 	const [signedUp, setSignedUp] = useState(false);
 	const [existEmail, setExistEmail] = useState(false);
 	const [isLoading, setLoading] = useState(false);
+	const [error, setError] = useState(false);
+	const [errorText, setErrorText] = useState("");
 
 	const emptyText = (type) =>  `${type} cannot be empty`;
 
@@ -137,7 +139,7 @@ function RegisterPage() {
 				name: name,
 				email: email,
 				password: password,
-				registrationNumber: regNo.trim(),
+				registrationNumber: regNo.trim().toUpperCase(),
 				phoneNumber: phoneNumber,
 			}
 
@@ -153,12 +155,18 @@ function RegisterPage() {
 				} 
 			} catch(error) {
 				if(error.response.status === 401) {
-					setExistEmail(true);
-				} else {
+					setError(true);
+					setErrorText("Email already exists");
+				} else if(error.response.status === 402) {
+					setError(true);
+					setErrorText("Registration number already exists!");
+				} 
+				else {
 					console.log(error);
-					changePassword("");
 					setPasswordChanged(false);
 				}
+				changePassword("");
+				setPasswordChanged(false);
 			}	
 		}
 		setLoading(false);
@@ -174,7 +182,7 @@ function RegisterPage() {
 				<img src="hg-pin.png" className="signup-img" alt="Mokingjay Pin"></img>
 				<Typography variant="h3" color="primary" className="login-head signup-text">Join the force!</Typography><br />
 				{signedUp === true? <Alert severity="success" color="warning">Succesfully Signed Up! Redirecting...</Alert>: null}
-				{existEmail === true? <Alert severity="warning" color="warning">Email already exist...</Alert>: null}
+				{error === true? <Alert severity="warning" color="warning">{errorText}</Alert>: null}
 				<form className="form">
 					<TextInput
 						error={nameChanged? (nameError.length === 0? false: true): false}

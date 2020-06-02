@@ -243,7 +243,7 @@ function QuizCC() {
 						</Grid>
 						<Grid item xs={10} md={8} lg={7} style={{ margin: 0, padding: '2%', backgroundColor: '#111', borderBottom: '5px solid #222', minHeight: '40vh' }}>
 							<FormControl style={{ margin: 'auto', width: "100%" }} component="fieldset">
-								<FormLabel className="label" component="legend"><p className="question" style={{whiteSpace: 'pre-line'}}>{allQuestions[currentQuestion].text}</p></FormLabel>
+								<FormLabel className="label" component="legend"><p className="question" style={{whiteSpace: 'pre-wrap'}}>{allQuestions[currentQuestion].text}</p></FormLabel>
 								<RadioGroup aria-label="correct-choice" value={currentAns} onChange={handleOptionChange}>
 									{allQuestions[currentQuestion].options.map((option) => {
 										return (
