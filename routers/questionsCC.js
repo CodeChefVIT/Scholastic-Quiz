@@ -38,7 +38,7 @@ router.get('/getCC',verify,isBlocked, async (req, res) => {
     for(i=0;i<10;i++){
         const question  = await QuestionCC.find({questionType:i})
         var random = Math.floor(Math.random()*question.length)
-        console.log(random)
+        //console.log(random)
         mainQuestions.push(question[random])
     }
     
@@ -95,7 +95,7 @@ async function isBlocked(req,res,next){
        
     await User.updateOne({_id:user._id},{$set:{"noOfRefresh":x}})
      user= await User.findOne({_id})
-     console.log(user)
+     //console.log(user)
   
       if(user.noOfRefresh>2 & user.ccStarted==true){
         await User.updateOne({_id:user._id},{$set:{isBlocked:true}})

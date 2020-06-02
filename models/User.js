@@ -80,11 +80,9 @@ const userSchema =new mongoose.Schema({
     },
     registrationNumber:{
         type:String,
-        required:true
     },
     phoneNumber:{
         type:String,
-        required:true
     }
 })
 
