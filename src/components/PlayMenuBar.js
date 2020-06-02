@@ -21,7 +21,7 @@ function PlayMenuBar() {
 			<div className="play-container">
 				<Grid container spacing={0}>
 					<Grid item xs={12} md={6} className="not-logged-menu">
-						<Typography variant="h4" className="login-msg">The quiz submission has been closed.</Typography>
+						<Typography variant="h4" className="login-msg closed-msg">The quiz submission has been closed.</Typography>
 						<Typography variant="h6" className="login-msg">Thanks for attending!</Typography>
 						<div className="button-bar">
 							<Link to="/leaderboard" className="link">
