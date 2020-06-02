@@ -23,7 +23,8 @@ router.post('/register', async (req, res) => {
 	//Check Admin Code
 	if (req.body.adminCode === process.env.ADMIN_CODE) {
 		admin = true;
-	}
+    }
+    
 
 	const user = new User({
 		name: req.body.name,
