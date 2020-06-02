@@ -11,9 +11,9 @@ router.post('/register', async (req, res) => {
 	if (emailExist) {
 		return res.status(401).send('Email Exists');
     }
-    const regnoExists = await User.findOne({registrationNumber:req.body.registrationNumber})
+    const regnoExists = await User.findOne({registrationNumber:req.body.registrationNumber.toUpperCase()})
     if(regnoExists && req.body.registrationNumber.toUpperCase() !== "NA"){
-        return res.status(401).send('Reg number exists')
+        return res.status(402).send('Reg number exists')
     }
 
 	//hash the password
