@@ -64,7 +64,7 @@ function MarksPage(props) {
 					<Typography variant="h2" className="congo">You have successfully submitted the quiz</Typography><br />
 					<Typography variant="h2" className="congo">You Scored</Typography>
 					<Typography varaint="h2" className="marks">Hunger games: <p className="value">{marks}</p></Typography>
-					<Typography varaint="h2" className="marks">Competetive coding: <p className="value">{CCmarks}</p></Typography>
+					<Typography varaint="h2" className="marks">Competitive coding: <p className="value">{CCmarks}</p></Typography>
 				</Container>
 			</div>
 		)

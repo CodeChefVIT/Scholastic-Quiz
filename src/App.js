@@ -9,6 +9,7 @@ import Admin from './pages/Admin';
 import Quiz from './pages/Quiz';
 import QuizCC from './pages/QuizCC';
 import ErrorPage from './pages/ErrorPage';
+import Leaderboard from './pages/Leaderboard';
 import AdminRegister from './pages/AdminRegister';
 import InfoContext from './context/InfoContext';
 import ForgotPassword from './pages/ForgotPassword';
@@ -75,6 +76,9 @@ function App() {
 					<Route exact path="/forgotPassword">
 						<ForgotPassword />
 					</Route>
+					{/* <Route exact path="/leaderboard">
+						<Leaderboard />
+					</Route> */}
 					<Route path='*'>
 						<ErrorPage />
 					</Route>
