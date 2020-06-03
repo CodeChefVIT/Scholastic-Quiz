@@ -24,7 +24,7 @@ function App() {
 	const [blocked, setBlocked] = useState(false);
 	const [ccStarted, setCCStarted] = useState(false);
 
-	const [closed, setClosed] = useState(false);
+	const [closed, setClosed] = useState(true);
 
 	let info = {
 		name: name,

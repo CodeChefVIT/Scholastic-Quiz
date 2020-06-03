@@ -11,9 +11,6 @@ function Leaderboard() {
 		{ field: 'reg', title: 'Reg. No.'},
 		{ field: 'email', title: 'Email'}
 	];
-	function createData(n, s) {
-		return { name: n, score: s }
-	}
 	const [rows, setRows] = React.useState([
 		{
 			name: "Shambhavi Singh",
@@ -49,10 +46,11 @@ function Leaderboard() {
 					{/* <Typography variant="h4" style={{color: 'white'}}>Evaluating Leaderboard</Typography> */}
 				</Grid>
 				<Grid item xs={12} style={{display: 'flex', justifyContent: 'center'}}>
+					<div className="table">
 					<MaterialTable
 						columns={columns}
 						data={rows}
-						style={{ width: '98%', height: '100%', backgroundColor: '#2d2d2d', color: '#cfcfcf' }}
+						style={{ height: '100%', backgroundColor: '#2d2d2d', color: '#cfcfcf' }}
 						options={{
 							headerStyle: {
 								backgroundColor: 'orange',
@@ -68,6 +66,8 @@ function Leaderboard() {
 							sorting: false,
 						}}
 					/>	
+					</div>
+					
 				</Grid>
 			</Grid>
 			
