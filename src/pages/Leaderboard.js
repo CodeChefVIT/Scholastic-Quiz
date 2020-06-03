@@ -8,37 +8,67 @@ function Leaderboard() {
 
 	const columns = [
 		{ field: 'name', title: 'Name'},
-		{ field: 'score', title: 'Score'}
+		{ field: 'reg', title: 'Reg. No.'},
+		{ field: 'email', title: 'Email'}
 	];
 	function createData(n, s) {
 		return { name: n, score: s }
 	}
-	const [rows, setRows] = React.useState([]);
+	const [rows, setRows] = React.useState([
+		{
+			name: "Shambhavi Singh",
+			email: "shambhavi.singh2019@vitstudent.ac.in",
+			reg: "19BCE0749"
+		},
+		{
+			name: "Shivam Singhal",
+			email: "shivamsinghal494@gmail.com",
+			reg: "External"
+		},
+		{
+			name: "Mahima Sharma",
+			email: "mahimasharma051998@gmail.com",
+			reg: "External"
+		},
+		{
+			name: "Swayam Aggarwal",
+			email: "swayamagarwal2114@gmail.com",
+			reg: "External"
+		},{
+			name: "Aarthi",
+			email: "aarthi0403@gmail.com",
+			reg: "15MIS1010"
+		}
+	]);
 
 	return (
 		<div className="error-section">
 			<Grid container spacing={3}>
 				<Grid item xs={12}>
 					<Typography variant="h3" style={{color: 'orange', marginBottom: '5%'}}>Leaderboard</Typography>
-					<Typography variant="h4" style={{color: 'white'}}>Evaluating Leaderboard</Typography>
+					{/* <Typography variant="h4" style={{color: 'white'}}>Evaluating Leaderboard</Typography> */}
 				</Grid>
-				{/* <Grid item xs={12} style={{display: 'flex', justifyContent: 'center'}}>
+				<Grid item xs={12} style={{display: 'flex', justifyContent: 'center'}}>
 					<MaterialTable
 						columns={columns}
 						data={rows}
-						style={{ width: '95%', height: '100%', backgroundColor: '#2d2d2d', color: '#cfcfcf' }}
+						style={{ width: '98%', height: '100%', backgroundColor: '#2d2d2d', color: '#cfcfcf' }}
 						options={{
 							headerStyle: {
-								backgroundColor: 'orange'
+								backgroundColor: 'orange',
+								fontWeight: 'bolder',
+								color: 'white'
 							},
 							rowStyle: {
-								color: 'orange'
+								color: 'orange', 
+								fontWeight: 'bold'
 							},
 							paging: false,
 							toolbar: false,
+							sorting: false,
 						}}
 					/>	
-				</Grid> */}
+				</Grid>
 			</Grid>
 			
 		</div>
