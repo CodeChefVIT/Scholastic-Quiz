@@ -46,13 +46,13 @@ function Navbar() {
 				<Toolbar>
 					<Typography variant="h6" className="nav-logo"> <Link className="link" to="/">SCHOLASTIC | </Link></Typography>
 					<Typography varirant="h6" className="nav-head">The Hunger Games Quiz</Typography>
-					{/* {navLoggedIn === false?
+					{navLoggedIn === false?
 						<Link className="link" to="/login"><Button color="inherit" className="login">Login</Button></Link>
 						:
 						<Typography variant="h6" className="nav-user">Welcome, {navName}</Typography>
 						
 					}
-					{navLoggedIn? <Button className="logout-btn" onClick={handleLogoutBtn}>Logout</Button>: null} */}
+					{navLoggedIn? <Button className="logout-btn" onClick={handleLogoutBtn}>Logout</Button>: null}
 				</Toolbar>
 			</AppBar>
 
