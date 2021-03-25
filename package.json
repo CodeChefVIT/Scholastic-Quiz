@@ -17,7 +17,7 @@
     "react-router-dom": "^5.2.0",
     "react-router-sitemap": "^1.2.0",
     "react-scripts": "4.0.0",
-    "snyk": "^1.437.2"
+    "snyk": "^1.465.0"
   },
   "scripts": {
     "start": "react-scripts start",
